@@ -488,6 +488,52 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   .mat-grid{grid-template-columns:1fr}
   .prod-grid{grid-template-columns:1fr}
 }
+
+/* ══ PRODUCT MODAL ══ */
+.pm-overlay{position:fixed;inset:0;z-index:500;background:rgba(26,29,46,.7);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .35s}
+.pm-overlay.on{opacity:1;pointer-events:all}
+.pm-box{position:fixed;inset:0;z-index:501;overflow-y:auto;padding:2rem;display:flex;align-items:flex-start;justify-content:center;opacity:0;pointer-events:none;transform:translateY(20px);transition:opacity .35s,transform .35s}
+.pm-box.on{opacity:1;pointer-events:all;transform:none}
+.pm-inner{background:var(--white);border-radius:6px;max-width:960px;width:100%;margin:3rem auto;box-shadow:0 24px 80px rgba(0,0,0,.25);overflow:hidden;animation:fadeup .4s both}
+.pm-close{position:absolute;top:1rem;right:1rem;z-index:10;width:36px;height:36px;border-radius:50%;background:var(--white);border:1px solid var(--borde);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--ink2);cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.pm-close:hover{background:var(--esm);color:var(--white);border-color:var(--esm)}
+.pm-grid{display:grid;grid-template-columns:1fr 1fr}
+.pm-img{position:relative;background:var(--cream2);display:flex;align-items:center;justify-content:center;min-height:400px}
+.pm-img img{width:100%;height:100%;object-fit:cover}
+.pm-img-badge{position:absolute;top:1rem;left:1rem;font-size:.52rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;background:var(--esm);color:var(--white);padding:.3rem .7rem;border-radius:2px}
+.pm-info{padding:2.5rem;position:relative}
+.pm-cat{font-size:.6rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--esm);margin-bottom:.4rem}
+.pm-name{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:.5rem}
+.pm-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--ink2);line-height:1.7;margin-bottom:1.5rem}
+.pm-price-row{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--borde)}
+.pm-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--azul)}
+.pm-ship{font-size:.62rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--esm)}
+.pm-specs{margin-bottom:1.5rem}
+.pm-specs-title{font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:.7rem}
+.pm-spec{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--borde);font-size:.84rem}
+.pm-spec:last-child{border-bottom:none}
+.pm-spec-k{color:var(--ink3);font-weight:400}
+.pm-spec-v{color:var(--ink);font-weight:500;text-align:right}
+.pm-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.pm-wa-btn{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:var(--white);padding:.78rem 1.6rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:none;transition:opacity .2s}
+.pm-wa-btn:hover{opacity:.88}
+.pm-wa-btn svg{width:18px;height:18px;fill:white}
+.pm-reviews{border-top:1px solid var(--borde);padding-top:1.5rem}
+.pm-reviews-title{font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.pm-reviews-title span{font-size:.8rem;color:var(--esm);letter-spacing:.05em}
+.pm-review{padding:.9rem 0;border-bottom:1px solid var(--borde)}
+.pm-review:last-child{border-bottom:none}
+.pm-review-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem}
+.pm-review-av{width:28px;height:28px;border-radius:50%;background:var(--azul);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.6rem;color:var(--white);flex-shrink:0}
+.pm-review-name{font-size:.78rem;font-weight:500;color:var(--ink)}
+.pm-review-stars{font-size:.65rem;color:var(--esm);margin-left:auto}
+.pm-review-text{font-size:.82rem;font-weight:300;color:var(--ink2);line-height:1.7}
+@media(max-width:768px){
+  .pm-grid{grid-template-columns:1fr}
+  .pm-img{min-height:280px}
+  .pm-inner{margin:1rem auto}
+  .pm-box{padding:1rem}
+}
 </style>
 </head>
 <body>
@@ -1058,6 +1104,32 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 </div><!-- /contacto -->
 
 
+<!-- ══ PRODUCT MODAL ══ -->
+<div class="pm-overlay" id="pm-overlay"></div>
+<div class="pm-box" id="pm-box">
+  <div class="pm-inner" id="pm-inner">
+    <button class="pm-close" id="pm-close">✕</button>
+    <div class="pm-grid">
+      <div class="pm-img" id="pm-img"></div>
+      <div class="pm-info">
+        <p class="pm-cat" id="pm-cat"></p>
+        <h2 class="pm-name" id="pm-name"></h2>
+        <p class="pm-desc" id="pm-desc"></p>
+        <div class="pm-price-row"><span class="pm-price" id="pm-price"></span><span class="pm-ship">✓ Envío gratis +$3,000</span></div>
+        <div class="pm-specs">
+          <p class="pm-specs-title">Especificaciones</p>
+          <div id="pm-specs-list"></div>
+        </div>
+        <div class="pm-actions" id="pm-actions"></div>
+        <div class="pm-reviews">
+          <p class="pm-reviews-title">Opiniones de clientas <span id="pm-stars"></span></p>
+          <div id="pm-reviews-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ── ROUTING ── */
 function go(page){
@@ -1142,6 +1214,67 @@ if(nlb) nlb.addEventListener('click',function(){
   this.textContent='¡Suscrita! ✓';
   this.style.background='#3B5469';
   setTimeout(function(){nlb.textContent='Suscribirme';nlb.style.background=''},3000);
+});
+/* ── PRODUCT DATA ── */
+var products=[
+{id:'ring_constelacion',name:'Anillo Constelación',cat:'Anillos · Colección Cielo',price:'$4,800 MXN',img:'img/ring_constelacion.png',badge:'Nuevo',desc:'Zafiros azules dispuestos en el patrón de la constelación de Orión, engastados en plata .925 esterlina. Una pieza que captura el cielo nocturno en tu dedo.',specs:[['Material','Plata .925 esterlina'],['Piedra','Zafiro natural certificado'],['Peso aprox.','5.2 g'],['Tallas','6 / 7 / 8 US'],['Acabado','Pulido brillante'],['Entrega','5–10 días hábiles']],reviews:[{name:'Mariana A.',init:'MA',stars:'★★★★★',text:'Increíble calidad. Los zafiros brillan precioso y la plata se siente muy bien.'},{name:'Sofía L.',init:'SL',stars:'★★★★★',text:'Se lo regalé a mi mamá y lloró de la emoción. Empaque hermoso también.'}]},
+{id:'ring_aurora',name:'Anillo Aurora',cat:'Anillos · Colección Cielo',price:'$3,200 MXN',img:'img/ring_aurora.png',badge:'',desc:'Banda elegante en plata .925 con turmalina rosa natural engastada al centro. Ideal para uso diario con un toque de color.',specs:[['Material','Plata .925 esterlina'],['Piedra','Turmalina rosa natural'],['Peso aprox.','4.1 g'],['Tallas','5 / 6 / 7 / 8 US'],['Acabado','Satinado mate'],['Entrega','5–10 días hábiles']],reviews:[{name:'Renata C.',init:'RC',stars:'★★★★★',text:'Uso este anillo todos los días. Es perfecto: ligero y el color rosa es hermoso.'},{name:'Carolina M.',init:'CM',stars:'★★★★☆',text:'Muy bonito. El tono de la turmalina es más delicado en persona, me encanta.'}]},
+{id:'ring_flor_luna',name:'Anillo Flor de Luna',cat:'Anillos · Colección Rosa',price:'$2,400 MXN',img:'img/ring_flor_luna.png',badge:'',desc:'Diseño floral delicado en plata con cuarzo rosa central. Perfecto para quienes buscan feminidad y elegancia en una sola pieza.',specs:[['Material','Plata .925 esterlina'],['Piedra','Cuarzo rosa natural'],['Peso aprox.','3.8 g'],['Tallas','5 / 6 / 7 US'],['Acabado','Pulido con textura floral'],['Entrega','5–10 días hábiles']],reviews:[{name:'Andrea G.',init:'AG',stars:'★★★★★',text:'¡Hermoso! El detalle floral es precioso y el cuarzo rosa le da un toque súper femenino.'},{name:'Paola R.',init:'PR',stars:'★★★★★',text:'Es mi anillo favorito. Lo uso para todo y siempre recibo cumplidos.'}]},
+{id:'necklace_luna',name:'Collar Luna',cat:'Collares · Colección Rosa',price:'$2,200 MXN',img:'img/necklace_luna.png',badge:'',desc:'Cadena delgada en plata .925 con un delicado dije de cuarzo rosa. Minimalista, elegante y perfecto para el día a día.',specs:[['Material','Plata .925 esterlina'],['Piedra','Cuarzo rosa natural'],['Peso aprox.','6.5 g'],['Largo','42 cm + 5 cm extensión'],['Cierre','Mosquetón reforzado'],['Entrega','5–10 días hábiles']],reviews:[{name:'Laura V.',init:'LV',stars:'★★★★★',text:'Delicado y hermoso. La cadena es de muy buena calidad y el cuarzo brilla precioso.'},{name:'María F.',init:'MF',stars:'★★★★★',text:'Lo compré como regalo de cumpleaños. El empaque es increíble, todo premium.'}]},
+{id:'necklace_noche',name:'Collar Noche Eterna',cat:'Collares · Edición Limitada',price:'$4,400 MXN',img:'img/necklace_noche.png',badge:'Ed. Limitada',desc:'Gargantilla statement en plata .925 con ónix negro tallado a mano. Una pieza dramática que transforma cualquier look.',specs:[['Material','Plata .925 esterlina'],['Piedra','Ónix negro tallado'],['Peso aprox.','14.8 g'],['Largo','38 cm ajustable'],['Cierre','Caja de seguridad'],['Entrega','5–10 días hábiles']],reviews:[{name:'Daniela H.',init:'DH',stars:'★★★★★',text:'WOW. Esta pieza es increíble. Me la pongo con todo negro y es un statement total.'},{name:'Isabel T.',init:'IT',stars:'★★★★★',text:'Vale cada peso. La calidad del ónix y la plata es de otro nivel.'}]},
+{id:'necklace_cielo',name:'Collar Cielo Abierto',cat:'Collares · Colección Cielo',price:'$1,900 MXN',img:'img/necklace_cielo.png',badge:'',desc:'Pendant en forma de estrella en plata .925 con cadena fina. Ligero, versátil y con un brillo sutil que captura la luz.',specs:[['Material','Plata .925 esterlina'],['Piedra','Sin piedra'],['Peso aprox.','4.2 g'],['Largo','45 cm + 5 cm extensión'],['Cierre','Mosquetón'],['Entrega','5–10 días hábiles']],reviews:[{name:'Gabriela M.',init:'GM',stars:'★★★★★',text:'Perfecto para el día a día. Ligero y la estrella es más bonita en persona.'},{name:'Valentina S.',init:'VS',stars:'★★★★☆',text:'Me encanta lo delicado que es. Lo combino con todo.'}]},
+{id:'bracelet_estrella',name:'Pulsera Estrella',cat:'Pulseras · Colección Cielo',price:'$1,800 MXN',img:'img/bracelet_estrella.png',badge:'',desc:'Cadena fina en plata .925 con pequeños charms de estrellas. Delicada, divertida y perfecta para apilar.',specs:[['Material','Plata .925 esterlina'],['Piedra','Sin piedra'],['Peso aprox.','5.1 g'],['Largo','17 cm + 3 cm extensión'],['Cierre','Mosquetón mini'],['Entrega','5–10 días hábiles']],reviews:[{name:'Natalia B.',init:'NB',stars:'★★★★★',text:'La pulsera más bonita que tengo. Los charms de estrella son preciosos y muy delicados.'},{name:'Carmen L.',init:'CL',stars:'★★★★★',text:'Compré dos, una para mí y otra para mi hermana. Nos encantó.'}]},
+{id:'bracelet_jade',name:'Pulsera Jade',cat:'Pulseras · Colección Nocturna',price:'$3,600 MXN',img:'img/bracelet_jade.png',badge:'',desc:'Eslabones robustos en plata .925 intercalados con cabujones de jade verde natural. Equilibrio perfecto entre fuerza y serenidad.',specs:[['Material','Plata .925 esterlina'],['Piedra','Jade verde natural'],['Peso aprox.','18.5 g'],['Largo','18 cm ajustable'],['Cierre','Caja de seguridad'],['Entrega','5–10 días hábiles']],reviews:[{name:'Diana P.',init:'DP',stars:'★★★★★',text:'El jade es hermoso y se siente premium. Los eslabones son sólidos y bien acabados.'},{name:'Fernanda R.',init:'FR',stars:'★★★★☆',text:'Pesada pero en el buen sentido. Se nota la calidad. El verde es precioso.'}]},
+{id:'bracelet_dunas',name:'Brazalete Dunas',cat:'Pulseras · Colección Rosa',price:'$2,900 MXN',img:'img/bracelet_dunas.png',badge:'Nuevo',desc:'Brazalete rígido en plata .925 con textura orgánica inspirada en dunas de arena. Una pieza escultórica y moderna.',specs:[['Material','Plata .925 esterlina'],['Piedra','Sin piedra'],['Peso aprox.','22.3 g'],['Diámetro','6.2 cm interior'],['Acabado','Texturizado orgánico'],['Entrega','5–10 días hábiles']],reviews:[{name:'Alejandra K.',init:'AK',stars:'★★★★★',text:'Es como usar una pequeña obra de arte. La textura es increíble al tacto.'},{name:'Patricia M.',init:'PM',stars:'★★★★★',text:'Recibo cumplidos cada vez que lo uso. Es diferente a todo lo que he visto.'}]},
+{id:'earrings_esmeralda',name:'Aretes Esmeralda',cat:'Aretes · Colección Nocturna',price:'$5,200 MXN',img:'img/earrings_esmeralda.png',badge:'Exclusivo',desc:'Aretes colgantes en plata .925 oxidada con esmeraldas colombianas genuinas. Elegancia dramática para ocasiones especiales.',specs:[['Material','Plata .925 oxidada'],['Piedra','Esmeralda colombiana certificada'],['Peso aprox.','7.8 g (par)'],['Largo total','3.5 cm'],['Cierre','Gancho francés'],['Entrega','5–10 días hábiles']],reviews:[{name:'Mariana A.',init:'MA',stars:'★★★★★',text:'Los usé en mi boda civil. Perfectos. Las esmeraldas son de un verde intenso precioso.'},{name:'Lucía E.',init:'LE',stars:'★★★★★',text:'Son mi posesión más preciada. La calidad es excepcional.'}]},
+{id:'earrings_petalo',name:'Aretes Pétalo',cat:'Aretes · Colección Rosa',price:'$2,800 MXN',img:'img/earrings_petalo.png',badge:'',desc:'Colgantes delicados con cuarzo rosa tallado en forma de pétalo en plata .925. Románticos, femeninos y ligeros.',specs:[['Material','Plata .925 esterlina'],['Piedra','Cuarzo rosa tallado'],['Peso aprox.','4.2 g (par)'],['Largo total','2.8 cm'],['Cierre','Gancho francés'],['Entrega','5–10 días hábiles']],reviews:[{name:'Sofía L.',init:'SL',stars:'★★★★★',text:'Ligeros y hermosos. El cuarzo rosa es de un tono precioso y me combina con todo.'},{name:'Elena V.',init:'EV',stars:'★★★★☆',text:'Muy femeninos. Los uso casi diario, son cómodos y no pesan nada.'}]},
+{id:'earrings_cielo',name:'Aretes Cielo Nocturno',cat:'Aretes · Colección Cielo',price:'$3,100 MXN',img:'img/earrings_cielo.png',badge:'',desc:'Studs elegantes con zafiro azul en plata .925 pulida. Discretos pero con un brillo intenso que captura todas las miradas.',specs:[['Material','Plata .925 esterlina'],['Piedra','Zafiro azul natural'],['Peso aprox.','2.4 g (par)'],['Diámetro','6 mm'],['Cierre','Presión con mariposa'],['Entrega','5–10 días hábiles']],reviews:[{name:'Ana R.',init:'AR',stars:'★★★★★',text:'Perfectos para diario y para vestir. El zafiro es de un azul profundo hermoso.'},{name:'Camila D.',init:'CD',stars:'★★★★★',text:'Los uso para la oficina y para salir. Versátiles y de altísima calidad.'}]}
+];
+
+function openProduct(id){
+  var p=products.find(function(x){return x.id===id});
+  if(!p) return;
+  document.getElementById('pm-img').innerHTML='<img src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover"/>'+(p.badge?'<span class="pm-img-badge">'+p.badge+'</span>':'');
+  document.getElementById('pm-cat').textContent=p.cat;
+  document.getElementById('pm-name').textContent=p.name;
+  document.getElementById('pm-desc').textContent=p.desc;
+  document.getElementById('pm-price').textContent=p.price;
+  var sh='';p.specs.forEach(function(s){sh+='<div class="pm-spec"><span class="pm-spec-k">'+s[0]+'</span><span class="pm-spec-v">'+s[1]+'</span></div>';});
+  document.getElementById('pm-specs-list').innerHTML=sh;
+  var waMsg='Hola Moncatu! Me interesa el '+p.name+' ('+p.price+'). ¿Está disponible?';
+  document.getElementById('pm-actions').innerHTML='<a href="https://wa.me/52330000000?text='+encodeURIComponent(waMsg)+'" class="pm-wa-btn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Comprar por WhatsApp</a><button class="btn btn-outline btn-sm" onclick="closeProduct();go(\'contacto\');">Consultar</button>';
+  document.getElementById('pm-stars').textContent='★★★★★';
+  var rh='';p.reviews.forEach(function(r){rh+='<div class="pm-review"><div class="pm-review-head"><div class="pm-review-av">'+r.init+'</div><span class="pm-review-name">'+r.name+'</span><span class="pm-review-stars">'+r.stars+'</span></div><p class="pm-review-text">'+r.text+'</p></div>';});
+  document.getElementById('pm-reviews-list').innerHTML=rh;
+  document.getElementById('pm-overlay').classList.add('on');
+  document.getElementById('pm-box').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeProduct(){
+  document.getElementById('pm-overlay').classList.remove('on');
+  document.getElementById('pm-box').classList.remove('on');
+  document.body.style.overflow='';
+}
+document.getElementById('pm-close').addEventListener('click',closeProduct);
+document.getElementById('pm-overlay').addEventListener('click',closeProduct);
+document.getElementById('pm-box').addEventListener('click',function(e){if(e.target===this)closeProduct();});
+
+/* Wire up product cards */
+document.querySelectorAll('.pcard').forEach(function(card){
+  var nameEl=card.querySelector('.pcard-name');
+  if(!nameEl) return;
+  var name=nameEl.textContent;
+  var p=products.find(function(x){return x.name===name});
+  if(!p) return;
+  card.style.cursor='pointer';
+  card.addEventListener('click',function(e){
+    if(e.target.closest('.pcard-wish')||e.target.closest('.pcard-btn')) return;
+    openProduct(p.id);
+  });
+  var cta=card.querySelector('.pcard-cta');
+  if(cta){cta.onclick=function(e){e.stopPropagation();openProduct(p.id);};}
+  var btn=card.querySelector('.pcard-btn');
+  if(btn){btn.onclick=function(e){e.stopPropagation();openProduct(p.id);};}
 });
 </script>
 </body>
