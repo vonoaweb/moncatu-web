@@ -533,7 +533,65 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   .pm-img{min-height:280px}
   .pm-inner{margin:1rem auto}
   .pm-box{padding:1rem}
+  .cart-drawer{width:100%}
+  .ck-grid{grid-template-columns:1fr}
 }
+
+/* ══ CART ══ */
+.cart-icon{position:relative;background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center}
+.cart-icon svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.5;transition:stroke .2s}
+.cart-icon:hover svg{stroke:var(--esm)}
+.cart-badge{position:absolute;top:-4px;right:-6px;background:var(--esm);color:var(--white);font-size:.5rem;font-weight:600;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:all .25s}
+.cart-badge.on{opacity:1;transform:scale(1)}
+.cart-drawer-overlay{position:fixed;inset:0;z-index:600;background:rgba(26,29,46,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-drawer-overlay.on{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;z-index:601;width:420px;max-width:100%;background:var(--white);box-shadow:-8px 0 40px rgba(0,0,0,.15);transform:translateX(100%);transition:transform .35s;display:flex;flex-direction:column}
+.cart-drawer.on{transform:translateX(0)}
+.cd-head{display:flex;justify-content:space-between;align-items:center;padding:1.5rem;border-bottom:1px solid var(--borde)}
+.cd-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--ink)}
+.cd-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--borde);background:none;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--ink2);cursor:pointer;transition:all .2s}
+.cd-close:hover{background:var(--esm);color:var(--white);border-color:var(--esm)}
+.cd-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.cd-empty{text-align:center;padding:3rem 1rem;color:var(--ink3);font-size:.9rem}
+.cd-item{display:grid;grid-template-columns:72px 1fr 32px;gap:1rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--borde)}
+.cd-item:last-child{border-bottom:none}
+.cd-item-img{width:72px;height:72px;border-radius:4px;overflow:hidden;background:var(--cream2)}
+.cd-item-img img{width:100%;height:100%;object-fit:cover}
+.cd-item-name{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:500;color:var(--ink)}
+.cd-item-price{font-size:.8rem;color:var(--azul);font-weight:500;margin-top:.15rem}
+.cd-item-qty{display:flex;align-items:center;gap:.4rem;margin-top:.3rem}
+.cd-qty-btn{width:22px;height:22px;border:1px solid var(--borde);border-radius:2px;background:none;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--ink2);cursor:pointer;transition:all .15s}
+.cd-qty-btn:hover{border-color:var(--esm);color:var(--esm)}
+.cd-qty-n{font-size:.78rem;font-weight:500;color:var(--ink);min-width:16px;text-align:center}
+.cd-item-del{width:28px;height:28px;border-radius:50%;border:1px solid var(--borde);background:none;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--ink3);cursor:pointer;transition:all .15s}
+.cd-item-del:hover{border-color:#c44;color:#c44}
+.cd-foot{padding:1.5rem;border-top:1px solid var(--borde);background:var(--cream)}
+.cd-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem}
+.cd-total-label{font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}
+.cd-total-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--azul)}
+.cd-checkout{width:100%;padding:.85rem;background:var(--esm);color:var(--white);border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:opacity .2s;margin-bottom:.8rem}
+.cd-checkout:hover{opacity:.88}
+.cd-wa-checkout{width:100%;padding:.75rem;background:#25D366;color:var(--white);border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none}
+.cd-wa-checkout:hover{opacity:.88}
+.cd-wa-checkout svg{width:16px;height:16px;fill:white}
+.cd-trust{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-top:.8rem;flex-wrap:wrap}
+.cd-trust-item{font-size:.52rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:.25rem}
+.cd-trust-item svg{width:14px;height:14px;fill:var(--esm)}
+.cd-pay-logos{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--borde)}
+.cd-pay-logo{font-size:.5rem;font-weight:700;letter-spacing:.06em;color:var(--ink3);padding:.2rem .5rem;border:1px solid var(--borde);border-radius:2px;text-transform:uppercase}
+
+/* Security badges in modal */
+.pm-security{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--borde)}
+.pm-sec-badge{display:flex;align-items:center;gap:.3rem;font-size:.54rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.pm-sec-badge svg{width:14px;height:14px}
+.pm-pay-methods{display:flex;gap:.4rem;margin-top:.5rem}
+.pm-pay-tag{font-size:.48rem;font-weight:600;letter-spacing:.05em;color:var(--ink3);padding:.18rem .45rem;border:1px solid var(--borde);border-radius:2px;text-transform:uppercase}
+
+/* Add to cart button */
+.pm-add-cart{display:inline-flex;align-items:center;gap:.5rem;background:var(--esm);color:var(--white);padding:.78rem 1.6rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s}
+.pm-add-cart:hover{opacity:.88;transform:translateY(-1px)}
+.pm-add-cart svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2}
+.pm-added{background:#3B5469!important;pointer-events:none}
 </style>
 </head>
 <body>
@@ -561,6 +619,10 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     </ul>
     <div class="nav-right">
       <button onclick="go('colecciones')">Catálogo</button>
+      <button class="cart-icon" id="cart-icon" onclick="toggleCart()" title="Mi carrito">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
       <button class="nav-cta-btn" onclick="go('contacto')">Consultar</button>
     </div>
   </nav>
@@ -1130,6 +1192,37 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   </div>
 </div>
 
+<!-- ══ CART DRAWER ══ -->
+<div class="cart-drawer-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cd-head">
+    <span class="cd-title">Mi carrito (<span id="cd-count">0</span>)</span>
+    <button class="cd-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cd-items" id="cd-items">
+    <div class="cd-empty" id="cd-empty">Tu carrito está vacío.<br><br><button class="btn btn-outline btn-sm" onclick="toggleCart();go('colecciones');">Explorar colecciones</button></div>
+  </div>
+  <div class="cd-foot" id="cd-foot" style="display:none">
+    <div class="cd-total"><span class="cd-total-label">Total</span><span class="cd-total-val" id="cd-total">$0</span></div>
+    <a class="cd-wa-checkout" id="cd-wa-btn" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+      Finalizar compra por WhatsApp
+    </a>
+    <div class="cd-trust">
+      <span class="cd-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra segura</span>
+      <span class="cd-trust-item"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Datos protegidos</span>
+      <span class="cd-trust-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Confirmación email</span>
+    </div>
+    <div class="cd-pay-logos">
+      <span class="cd-pay-logo">VISA</span>
+      <span class="cd-pay-logo">MC</span>
+      <span class="cd-pay-logo">AMEX</span>
+      <span class="cd-pay-logo">OXXO</span>
+      <span class="cd-pay-logo">SPEI</span>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ── ROUTING ── */
 function go(page){
@@ -1242,7 +1335,10 @@ function openProduct(id){
   var sh='';p.specs.forEach(function(s){sh+='<div class="pm-spec"><span class="pm-spec-k">'+s[0]+'</span><span class="pm-spec-v">'+s[1]+'</span></div>';});
   document.getElementById('pm-specs-list').innerHTML=sh;
   var waMsg='Hola Moncatu! Me interesa el '+p.name+' ('+p.price+'). ¿Está disponible?';
-  document.getElementById('pm-actions').innerHTML='<a href="https://wa.me/52330000000?text='+encodeURIComponent(waMsg)+'" class="pm-wa-btn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Comprar por WhatsApp</a><button class="btn btn-outline btn-sm" onclick="closeProduct();go(\'contacto\');">Consultar</button>';
+  document.getElementById('pm-actions').innerHTML='<button class="pm-add-cart" id="pm-add-btn" onclick="addToCart(\''+p.id+'\');this.innerHTML=\'✓ Agregado al carrito\';this.classList.add(\'pm-added\');setTimeout(function(){document.getElementById(\'pm-add-btn\').innerHTML=\'<svg viewBox=\"0 0 24 24\"><path d=\"M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Añadir al carrito\';document.getElementById(\'pm-add-btn\').classList.remove(\'pm-added\');},2000)"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke-linecap="round" stroke-linejoin="round"/></svg>Añadir al carrito</button>'+
+  '<a href="https://wa.me/52330000000?text='+encodeURIComponent(waMsg)+'" class="pm-wa-btn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Comprar directo</a>';
+  /* Security badges */
+  document.getElementById('pm-actions').innerHTML+='<div class="pm-security"><span class="pm-sec-badge"><svg viewBox="0 0 24 24" fill="#0D7A6F"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra segura</span><span class="pm-sec-badge"><svg viewBox="0 0 24 24" fill="#0D7A6F"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Certificado</span><span class="pm-sec-badge"><svg viewBox="0 0 24 24" fill="#0D7A6F"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/></svg>Garantía</span></div><div class="pm-pay-methods"><span class="pm-pay-tag">VISA</span><span class="pm-pay-tag">MC</span><span class="pm-pay-tag">AMEX</span><span class="pm-pay-tag">OXXO</span><span class="pm-pay-tag">SPEI</span></div>';
   document.getElementById('pm-stars').textContent='★★★★★';
   var rh='';p.reviews.forEach(function(r){rh+='<div class="pm-review"><div class="pm-review-head"><div class="pm-review-av">'+r.init+'</div><span class="pm-review-name">'+r.name+'</span><span class="pm-review-stars">'+r.stars+'</span></div><p class="pm-review-text">'+r.text+'</p></div>';});
   document.getElementById('pm-reviews-list').innerHTML=rh;
@@ -1276,6 +1372,70 @@ document.querySelectorAll('.pcard').forEach(function(card){
   var btn=card.querySelector('.pcard-btn');
   if(btn){btn.onclick=function(e){e.stopPropagation();openProduct(p.id);};}
 });
+/* ── CART SYSTEM ── */
+var cart=JSON.parse(localStorage.getItem('moncatu_cart')||'[]');
+function saveCart(){localStorage.setItem('moncatu_cart',JSON.stringify(cart));}
+function updateCartBadge(){
+  var total=cart.reduce(function(s,i){return s+i.qty;},0);
+  var b=document.getElementById('cart-badge');
+  b.textContent=total;
+  if(total>0)b.classList.add('on');else b.classList.remove('on');
+  document.getElementById('cd-count').textContent=total;
+}
+function parsePrice(s){return parseInt(s.replace(/[^0-9]/g,''));}
+function formatPrice(n){return '$'+n.toLocaleString('es-MX')+' MXN';}
+function addToCart(id){
+  var p=products.find(function(x){return x.id===id;});
+  if(!p) return;
+  var existing=cart.find(function(i){return i.id===id;});
+  if(existing){existing.qty++;} else {cart.push({id:id,name:p.name,price:parsePrice(p.price),img:p.img,qty:1});}
+  saveCart();updateCartBadge();renderCart();
+}
+function removeFromCart(id){
+  cart=cart.filter(function(i){return i.id!==id;});
+  saveCart();updateCartBadge();renderCart();
+}
+function changeQty(id,delta){
+  var item=cart.find(function(i){return i.id===id;});
+  if(!item) return;
+  item.qty+=delta;
+  if(item.qty<1) return removeFromCart(id);
+  saveCart();updateCartBadge();renderCart();
+}
+function renderCart(){
+  var container=document.getElementById('cd-items');
+  var foot=document.getElementById('cd-foot');
+  var empty=document.getElementById('cd-empty');
+  if(cart.length===0){
+    empty.style.display='';foot.style.display='none';
+    container.innerHTML='';container.appendChild(empty);
+    return;
+  }
+  empty.style.display='none';foot.style.display='';
+  var html='';var total=0;
+  cart.forEach(function(item){
+    var sub=item.price*item.qty;total+=sub;
+    html+='<div class="cd-item"><div class="cd-item-img"><img src="'+item.img+'" alt="'+item.name+'"/></div><div><div class="cd-item-name">'+item.name+'</div><div class="cd-item-price">'+formatPrice(item.price)+'</div><div class="cd-item-qty"><button class="cd-qty-btn" onclick="changeQty(\''+item.id+'\', -1)">−</button><span class="cd-qty-n">'+item.qty+'</span><button class="cd-qty-btn" onclick="changeQty(\''+item.id+'\', 1)">+</button></div></div><button class="cd-item-del" onclick="removeFromCart(\''+item.id+'\')" title="Eliminar">✕</button></div>';
+  });
+  container.innerHTML=html;
+  document.getElementById('cd-total').textContent=formatPrice(total);
+  /* WhatsApp link with full order */
+  var msg='Hola Moncatu! Quiero hacer el siguiente pedido:\n\n';
+  cart.forEach(function(item){msg+=('• '+item.name+' x'+item.qty+' — '+formatPrice(item.price*item.qty)+'\n');});
+  msg+='\nTotal: '+formatPrice(total);
+  if(total>=3000) msg+='\n✓ Envío gratis incluido';
+  else msg+='\nEnvío: por calcular';
+  document.getElementById('cd-wa-btn').href='https://wa.me/52330000000?text='+encodeURIComponent(msg);
+}
+function toggleCart(){
+  var drawer=document.getElementById('cart-drawer');
+  var overlay=document.getElementById('cart-overlay');
+  var isOpen=drawer.classList.contains('on');
+  if(isOpen){drawer.classList.remove('on');overlay.classList.remove('on');document.body.style.overflow='';}
+  else{drawer.classList.add('on');overlay.classList.add('on');document.body.style.overflow='hidden';renderCart();}
+}
+document.getElementById('cart-overlay').addEventListener('click',toggleCart);
+updateCartBadge();renderCart();
 </script>
 </body>
 </html>
