@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colecciones - Moncatu Joyería</title>
+  
+  <!-- Tu CSS actual -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- CSS del carrito -->
+  <link rel="stylesheet" href="cart-styles.css">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  
+  <!-- Stripe SDK -->
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <a href="/" class="logo">MONCATU</a>
+      
+      <div class="nav-links">
+        <a href="/colecciones.html">Colecciones</a>
+        <a href="/nosotros.html">Nosotros</a>
+        <a href="/contacto.html">Contacto</a>
+      </div>
+      
+      <div class="nav-actions">
+        <!-- ICONO DEL CARRITO -->
+        <button class="cart-icon" data-cart-toggle>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <section class="collections-header">
+      <h1>Nuestras Colecciones</h1>
+      <p>Joyería selecta con piezas únicas para ti</p>
+    </section>
+
+    <!-- FILTROS -->
+    <div class="filters">
+      <button class="filter-btn active" data-category="all">Todas</button>
+      <button class="filter-btn" data-category="anillos">Anillos</button>
+      <button class="filter-btn" data-category="collares">Collares</button>
+      <button class="filter-btn" data-category="pulseras">Pulseras</button>
+      <button class="filter-btn" data-category="aretes">Aretes</button>
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="products-grid" id="products-grid">
+      <!-- Los productos se cargarán aquí dinámicamente -->
+      <div class="loading">Cargando productos...</div>
+    </div>
+  </main>
+
+  <!-- MODAL DEL CARRITO -->
+  <div id="cart-modal" class="cart-modal">
+    <div class="cart-header">
+      <h2>Mi Carrito</h2>
+      <button class="close-cart">×</button>
+    </div>
+    
+    <div class="cart-items">
+      <!-- Items del carrito se cargan aquí -->
+    </div>
+    
+    <div class="cart-footer">
+      <div class="shipping-message">
+        Agrega $3,000 más para envío gratis
+      </div>
+      
+      <div class="cart-totals">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <span class="cart-subtotal">$0</span>
+        </div>
+        <div class="cart-total-row">
+          <span>Envío</span>
+          <span class="cart-shipping">$0</span>
+        </div>
+        <div class="cart-total-row total">
+          <span>Total</span>
+          <span class="cart-total">$0</span>
+        </div>
+      </div>
+      
+      <button class="btn-checkout">Finalizar Compra</button>
+      
+      <div class="payment-methods">
+        <img src="/img/visa.svg" alt="Visa">
+        <img src="/img/mastercard.svg" alt="Mastercard">
+        <img src="/img/amex.svg" alt="American Express">
+        <img src="/img/oxxo.svg" alt="OXXO">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Overlay del carrito -->
+  <div class="cart-overlay"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MONCATU</h4>
+        <p>Joyería selecta con piezas únicas</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Colecciones</h4>
+        <a href="#">Anillos</a>
+        <a href="#">Collares</a>
+        <a href="#">Pulseras</a>
+        <a href="#">Aretes</a>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Información</h4>
+        <a href="/nosotros.html">Nuestra historia</a>
+        <a href="#">Envíos</a>
+        <a href="#">Garantía</a>
+        <a href="#">FAQ</a>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <a href="mailto:hola@moncatu.mx">hola@moncatu.mx</a>
+        <a href="https://wa.me/52330000000">WhatsApp</a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2025 Moncatu® — Todos los derechos reservados. Guadalajara, México.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <!-- 1. Configuración de Firebase -->
+  <script src="firebase-config.js"></script>
+  <script src="medusa-store.js"></script>
+  
+  <!-- 2. Sistema de carrito -->
+  <script src="cart.js"></script>
+  
+  <!-- 3. Gestor de productos -->
+  <script src="products.js"></script>
+  
+  <!-- 4. Inicialización de la página -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      
+      // Cargar todos los productos inicialmente
+      try {
+        const products = await productManager.loadProducts();
+        productManager.renderProducts(products);
+      } catch (error) {
+        console.error('Error cargando productos:', error);
+        document.getElementById('products-grid').innerHTML = `
+          <div class="error-message">
+            <p>Error al cargar productos. Por favor recarga la página.</p>
+          </div>
+        `;
+      }
+      
+      // Filtros de categoría
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          // Actualizar botón activo
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          // Filtrar productos
+          const category = btn.dataset.category;
+          if (category === 'all') {
+            const products = await productManager.loadProducts();
+            productManager.renderProducts(products);
+          } else {
+            await productManager.filterByCategory(category);
+          }
+        });
+      });
+      
+      // Buscador (si tienes uno)
+      const searchInput = document.getElementById('search-products');
+      if (searchInput) {
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            const query = e.target.value;
+            if (query.length >= 3) {
+              productManager.searchProducts(query);
+            } else if (query.length === 0) {
+              productManager.loadProducts().then(products => {
+                productManager.renderProducts(products);
+              });
+            }
+          }, 300);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

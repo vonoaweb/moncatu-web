@@ -1,0 +1,51 @@
+Moncatu + Medusa.js (v2)
+========================
+
+1) Base de datos
+   - En la raíz del repo: docker compose up -d
+   - O usa PostgreSQL propio (Supabase, Neon, etc.).
+
+2) Crear el backend Medusa (Node 20+, Git)
+   npx create-medusa-app@latest moncatu-medusa --db-url "postgres://medusa:medusa@localhost:5432/medusa"
+   Sigue el asistente (usuario admin, seed opcional).
+
+3) Arrancar Medusa
+   cd moncatu-medusa/apps/backend
+   npm run dev
+   API típica: http://localhost:9000
+
+4) CORS (para servir colecciones.html desde otro puerto)
+   En el backend, permite el origen de tu sitio estático, por ejemplo:
+   - Variables de entorno STORE_CORS / ADMIN_CORS según la plantilla del proyecto, o
+   - medusa-config según la documentación actual de Medusa v2.
+
+5) Clave publicable y región
+   - Abre Medusa Admin (puerto indicado al crear el proyecto).
+   - Crea una "Publishable API Key" y copia el token.
+   - Crea o usa una región con moneda MXN y copia su ID (region_...).
+
+6) Conectar esta tienda HTML
+   medusa-store.js ya trae baseUrl localhost:9000, la clave publicable del storefront
+   y regionCode dk (se resuelve region_id solo vía GET /store/regions).
+   Si cambias la clave en Admin, actualiza publishableKey en medusa-store.js.
+   STORE_CORS en apps/backend/.env debe incluir el origen de la web estática
+   (p. ej. http://localhost:5500). Tras editar .env, reinicia el backend.
+
+   Flujo rápido:
+   - start-medusa-local.ps1  (desde esta carpeta; apunta a C:\tmp\moncatu-medusa-yarn)
+   - serve-moncatu-web.ps1   (http://localhost:5500/colecciones.html)
+
+7) Categorías
+   Los filtros de colecciones.html usan handles: anillos, collares, pulseras, aretes.
+   Crea categorías en Admin con esos mismos handles y asígnalas a los productos.
+
+8) Metadatos opcionales (metadata del producto en Medusa)
+   - material, stone, sizes (string "6,7,8" o lista)
+   - featured, limited, exclusive (true/false) para badges
+
+9) Carrito y pago
+   Esta web sigue usando carrito en localStorage + checkout propio.
+   Para checkout 100% Medusa (carrito API, pagos del backend) hace falta ampliar cart.js
+   con /store/carts. El catálogo ya se alimenta del Store API cuando Medusa está configurado.
+
+Documentación: https://docs.medusajs.com

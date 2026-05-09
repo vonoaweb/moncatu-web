@@ -1,0 +1,55 @@
+/* Panel admin mínimo */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a1d2e;
+}
+.admin-container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+.admin-container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.admin-content { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.login-box { max-width: 360px; margin: 2rem auto; }
+.login-box input {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.login-box button, .btn-primary {
+  padding: 0.6rem 1rem;
+  background: #0d7a6f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.products-table { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f8f9fa; }
+.modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 520px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-content input, .modal-content textarea, .modal-content select {
+  width: 100%; margin: 0.35rem 0; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;
+}
+.form-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+.btn-secondary { padding: 0.6rem 1rem; background: #6c757d; color: #fff; border: none; border-radius: 4px; cursor: pointer; }

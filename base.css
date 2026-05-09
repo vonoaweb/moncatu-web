@@ -1,0 +1,13 @@
+/* Tokens compartidos (colecciones.html y páginas oscuras) */
+:root {
+  --t2: rgba(255, 255, 255, 0.72);
+  --t3: rgba(255, 255, 255, 0.45);
+  --esm: #0d7a6f;
+  --blanco: #ffffff;
+  --noche: #1a1d2e;
+  --azul: #3b5469;
+  --rosa: #c8a5b5;
+  --label: #c8a5b5;
+  --gris: rgba(255, 255, 255, 0.35);
+  --grad: linear-gradient(135deg, rgba(59, 84, 105, 0.95) 0%, rgba(26, 29, 46, 0.98) 100%);
+}

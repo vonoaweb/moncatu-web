@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Colecciones — Moncatu</title>
+<link rel="stylesheet" href="base.css"/>
+<link rel="stylesheet" href="cart-styles.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+.filter-bar {
+  background:rgba(59,84,105,.15);
+  border-bottom:1px solid rgba(59,84,105,.25);
+  padding:.85rem 3.5rem;
+  display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  position:sticky; top:64px; z-index:100;
+  backdrop-filter:blur(10px);
+}
+.filter-lbl { font-family:'Inter',sans-serif; font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--t3); margin-right:.5rem; }
+.flt {
+  font-family:'Inter',sans-serif; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--t2); background:transparent; border:1px solid rgba(59,84,105,.4);
+  padding:.38rem .9rem; border-radius:2px; cursor:none; transition:all .2s;
+}
+.flt.active, .flt:hover { background:var(--esm); color:var(--blanco); border-color:var(--esm); }
+.filter-right { margin-left:auto; }
+.sort-sel {
+  font-family:'Inter',sans-serif; font-size:.6rem; letter-spacing:.12em;
+  color:var(--t2); background:rgba(59,84,105,.2); border:1px solid rgba(59,84,105,.35);
+  border-radius:2px; padding:.38rem .9rem; cursor:none; outline:none;
+}
+.sort-sel option { background:var(--noche); }
+
+/* GRID */
+.products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.pg-card { background:rgba(59,84,105,.1); border:1px solid rgba(59,84,105,.22); border-radius:3px; overflow:hidden; cursor:none; transition:transform .35s, border-color .35s; }
+.pg-card:hover { transform:translateY(-6px); border-color:rgba(13,122,111,.4); }
+.pg-img {
+  aspect-ratio:1; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.pg-bg { width:100%; height:100%; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; transition:transform .5s; }
+.pg-card:hover .pg-bg { transform:scale(1.06); }
+.b1{background:linear-gradient(145deg,#253545,#3B5469);}
+.b2{background:linear-gradient(145deg,#C8A5B5,#EDE0E7);}
+.b3{background:linear-gradient(145deg,#0D7A6F,#1a5c56);}
+.b4{background:linear-gradient(145deg,#2a2040,#3B5469);}
+.b5{background:linear-gradient(145deg,#3B5469,#0D7A6F);}
+.b6{background:linear-gradient(145deg,#5a3a50,#3B5469);}
+.pg-ov { position:absolute; inset:0; background:linear-gradient(to top,rgba(26,29,46,.85),transparent 55%); opacity:0; transition:opacity .35s; }
+.pg-card:hover .pg-ov { opacity:1; }
+.pg-bdg { position:absolute; top:.9rem; left:.9rem; font-family:'Inter',sans-serif; font-size:.5rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; background:var(--esm); color:var(--blanco); padding:.25rem .6rem; border-radius:2px; }
+.pg-wish { position:absolute; top:.9rem; right:.9rem; width:30px; height:30px; border:1px solid rgba(255,255,255,.25); border-radius:50%; background:rgba(26,29,46,.5); display:flex; align-items:center; justify-content:center; font-size:.8rem; color:var(--t2); cursor:none; transition:all .2s; opacity:0; }
+.pg-card:hover .pg-wish { opacity:1; }
+.pg-wish:hover { background:var(--esm); border-color:var(--esm); color:var(--blanco); }
+.pg-qv { position:absolute; bottom:.9rem; left:50%; transform:translateX(-50%) translateY(8px); font-family:'Inter',sans-serif; font-size:.56rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; background:rgba(255,255,255,.95); color:var(--noche); padding:.45rem 1.1rem; border-radius:2px; white-space:nowrap; opacity:0; transition:opacity .3s, transform .3s; }
+.pg-card:hover .pg-qv { opacity:1; transform:translateX(-50%) translateY(0); }
+.pg-info { padding:1.2rem; }
+.pg-cat { font-family:'Inter',sans-serif; font-size:.54rem; letter-spacing:.18em; text-transform:uppercase; color:var(--label); margin-bottom:.25rem; }
+.pg-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--blanco); margin-bottom:.2rem; }
+.pg-desc { font-family:'Cormorant Garamond',serif; font-size:.9rem; font-style:italic; color:var(--t2); margin-bottom:.85rem; }
+.pg-bot { display:flex; justify-content:space-between; align-items:center; }
+.pg-price { font-family:'Playfair Display',serif; font-size:.9rem; color:var(--label); }
+.pg-add { font-family:'Inter',sans-serif; font-size:.54rem; letter-spacing:.16em; text-transform:uppercase; color:var(--t3); border:1px solid rgba(59,84,105,.4); padding:.35rem .85rem; border-radius:2px; text-decoration:none; transition:all .2s; }
+.pg-add:hover { border-color:var(--esm); color:var(--blanco); }
+
+/* HIGHLIGHT */
+.highlight-band {
+  background:var(--azul); padding:4.5rem 3.5rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
+}
+.hl-visual {
+  aspect-ratio:4/5; max-width:380px;
+  background:var(--grad); border-radius:3px;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.hl-tag { position:absolute; bottom:-1rem; right:-1rem; background:var(--esm); padding:.9rem 1.3rem; border-radius:3px; }
+.hl-tag-n { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--blanco); }
+.hl-tag-l { font-family:'Inter',sans-serif; font-size:.54rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.7); }
+.hl-name { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; line-height:1.1; color:var(--blanco); margin:1rem 0; }
+.hl-name em { font-style:italic; color:var(--rosa); }
+.hl-desc { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:var(--t2); line-height:1.75; margin-bottom:1.8rem; }
+.specs { margin-bottom:2rem; }
+.spec { display:flex; justify-content:space-between; padding:.6rem 0; border-bottom:1px solid rgba(255,255,255,.08); }
+.sk { font-family:'Inter',sans-serif; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gris); }
+.sv { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--t2); }
+.hl-price { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:var(--label); margin-bottom:1.4rem; }
+.hl-actions { display:flex; gap:.8rem; flex-wrap:wrap; }
+
+/* EMPTY/FEATURED CTA */
+.bespoke-sec { background:#0b0e1c; padding:5rem 3.5rem; text-align:center; }
+.bespoke-t { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:700; color:var(--blanco); margin-bottom:.8rem; }
+.bespoke-d { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:var(--t2); margin-bottom:2rem; max-width:480px; margin-left:auto; margin-right:auto; }
+
+/* RESULTS COUNT */
+.results-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; }
+.results-count { font-family:'Inter',sans-serif; font-size:.75rem; color:var(--t3); }
+
+@media(max-width:1024px){ .products-grid{grid-template-columns:1fr 1fr;} .highlight-band{grid-template-columns:1fr;} }
+@media(max-width:640px){ .products-grid{grid-template-columns:1fr;} .filter-bar{padding:.85rem 1.5rem;} }
+
+/* ══ PRODUCT MODAL (premium, shared with index.html) ══ */
+:root{--ink:#1C1C1C;--ink2:#4A4A4A;--ink3:#767676;--cream:#F8F5F1;--cream2:#EDE9E3;--azul:#3B5469;--esm:#0D7A6F;--rosa:#C8A5B5;--borde:rgba(59,84,105,0.15);--borde2:rgba(59,84,105,0.25)}
+.pm-overlay{position:fixed;inset:0;z-index:500;background:rgba(26,29,46,.7);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .35s}
+.pm-overlay.on{opacity:1;pointer-events:all}
+.pm-box{position:fixed;inset:0;z-index:501;overflow-y:auto;padding:2rem;display:flex;align-items:flex-start;justify-content:center;opacity:0;pointer-events:none;transform:translateY(20px);transition:opacity .35s,transform .35s}
+.pm-box.on{opacity:1;pointer-events:all;transform:none}
+.pm-inner{background:#F8F5F1;border-radius:6px;max-width:960px;width:100%;margin:3rem auto;box-shadow:0 24px 80px rgba(0,0,0,.25);overflow:hidden}
+.pm-close{position:absolute;top:1rem;right:1rem;z-index:10;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--borde);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--ink2);cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.pm-close:hover{background:var(--esm);color:#fff;border-color:var(--esm)}
+.pm-grid{display:grid;grid-template-columns:1fr 1fr}
+.pm-img{position:relative;background:var(--cream2);display:flex;align-items:center;justify-content:center;min-height:400px}
+.pm-img img{width:100%;height:100%;object-fit:cover}
+.pm-img-badge{position:absolute;top:1rem;left:1rem;font-size:.52rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;background:var(--esm);color:#fff;padding:.3rem .7rem;border-radius:2px}
+.pm-info{padding:2.5rem;position:relative;background:#F8F5F1}
+.pm-cat{font-size:.6rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--esm);margin-bottom:.4rem;font-family:'DM Sans',sans-serif}
+.pm-name{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:.5rem}
+.pm-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--ink2);line-height:1.7;margin-bottom:1.5rem}
+.pm-price-row{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--borde)}
+.pm-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--azul)}
+.pm-ship{font-size:.62rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--esm)}
+.pm-specs{margin-bottom:1.5rem}
+.pm-specs-title{font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:.7rem;font-family:'DM Sans',sans-serif}
+.pm-spec{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--borde);font-size:.84rem}
+.pm-spec:last-child{border-bottom:none}
+.pm-spec-k{color:var(--ink3);font-weight:400}
+.pm-spec-v{color:var(--ink);font-weight:500;text-align:right}
+.pm-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.pm-wa-btn{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:#fff;padding:.78rem 1.6rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:none;transition:opacity .2s;cursor:pointer}
+.pm-wa-btn:hover{opacity:.88}
+.pm-wa-btn svg{width:18px;height:18px;fill:white}
+.pm-reviews{border-top:1px solid var(--borde);padding-top:1.5rem}
+.pm-reviews-title{font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;font-family:'DM Sans',sans-serif}
+.pm-reviews-title span{font-size:.8rem;color:var(--esm);letter-spacing:.05em}
+.pm-review{padding:.9rem 0;border-bottom:1px solid var(--borde)}
+.pm-review:last-child{border-bottom:none}
+.pm-review-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem}
+.pm-review-av{width:28px;height:28px;border-radius:50%;background:var(--azul);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.6rem;color:#fff;flex-shrink:0}
+.pm-review-name{font-size:.78rem;font-weight:500;color:var(--ink)}
+.pm-review-stars{font-size:.65rem;color:var(--esm);margin-left:auto}
+.pm-review-text{font-size:.82rem;font-weight:300;color:var(--ink2);line-height:1.7}
+.pm-security{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--borde)}
+.pm-sec-badge{display:flex;align-items:center;gap:.3rem;font-size:.54rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.pm-sec-badge svg{width:14px;height:14px}
+.pm-pay-methods{display:flex;gap:.4rem;margin-top:.5rem}
+.pm-pay-tag{font-size:.48rem;font-weight:600;letter-spacing:.05em;color:var(--ink3);padding:.18rem .45rem;border:1px solid var(--borde);border-radius:2px;text-transform:uppercase}
+.pm-add-cart{display:inline-flex;align-items:center;gap:.5rem;background:var(--esm);color:#fff;padding:.78rem 1.6rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s}
+.pm-add-cart:hover{opacity:.88;transform:translateY(-1px)}
+.pm-add-cart svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2}
+.pm-added{background:var(--azul)!important;pointer-events:none}
+@media(max-width:768px){.pm-grid{grid-template-columns:1fr}.pm-img{min-height:280px}.pm-inner{margin:1rem auto}.pm-box{padding:1rem}}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="ring"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo">
+    <svg class="logo-ico" viewBox="0 0 100 107" fill="none"><polygon points="27,12 73,12 95,53 73,95 27,95 5,53" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/><polygon points="50,12 73,53 50,95 27,53" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/></svg>
+    <div class="logo-sep"></div>
+    <div><div class="logo-txt">MONCATU</div><span class="logo-sub">Donde la Joyería se Encuentra con el Futuro</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="colecciones.html" class="active">Colecciones</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-r">
+    <button class="cart-icon" data-cart-toggle style="background:transparent;border:none;cursor:pointer;color:white;display:flex;align-items:center;gap:4px;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="cart-count">0</span>
+    </button>
+    <a href="#" class="nav-icon" title="Wishlist">♡</a>
+    <a href="contacto.html" class="nav-cta">Consultar</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+    <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><span>Colecciones</span></div>
+    <h1 class="ph-title">Nuestras <em>colecciones</em></h1>
+    <p class="ph-sub">Piezas únicas diseñadas con pasión. Cada joya cuenta una historia diferente.</p>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-i"><span class="trust-dot"></span>Envío gratis +$3,000</div>
+  <div class="trust-i"><span class="trust-dot"></span>Hecho a mano en México</div>
+  <div class="trust-i"><span class="trust-dot"></span>Garantía de por vida</div>
+  <div class="trust-i"><span class="trust-dot"></span>Diseño exclusivo</div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filterBar">
+  <span class="filter-lbl">Filtrar:</span>
+  <button class="flt active" data-cat="all">Todos</button>
+  <button class="flt" data-cat="anillos">Anillos</button>
+  <button class="flt" data-cat="collares">Collares</button>
+  <button class="flt" data-cat="pulseras">Pulseras</button>
+  <button class="flt" data-cat="aretes">Aretes</button>
+  <div class="filter-right">
+    <select class="sort-sel" id="sortSel">
+      <option>Ordenar: Destacados</option>
+      <option>Precio: menor a mayor</option>
+      <option>Precio: mayor a menor</option>
+      <option>Más nuevos</option>
+    </select>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="sec" style="background:#0e111e;">
+  <div class="inner">
+    <div class="results-bar"><span class="results-count" id="rCount">8 piezas</span></div>
+    <p id="moncatu-catalog-hint" style="display:none;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.55);margin:0 0 1rem;line-height:1.5;max-width:42rem;"></p>
+    <div class="products-grid" id="products-grid">
+      <div class="loading">Cargando productos...</div>
+    </div>
+  </div>
+</section>
+
+<!-- PIEZA DESTACADA -->
+<div class="highlight-band">
+  <div class="hl-visual rv-l">
+    <svg width="120" height="128" viewBox="0 0 100 107" fill="none" style="opacity:.12"><polygon points="27,12 73,12 95,53 73,95 27,95 5,53" stroke="white" stroke-width="5.5"/><polygon points="50,12 73,53 50,95 27,53" stroke="white" stroke-width="5.5"/></svg>
+    <div class="hl-tag"><div class="hl-tag-l">Solo</div><div class="hl-tag-n">12 pzas</div></div>
+  </div>
+  <div class="rv-r">
+    <p class="lbl">Pieza destacada · 2025</p>
+    <h2 class="hl-name">Anillo <em>Constelación</em></h2>
+    <p class="hl-desc">Una obra de arte que llevas en el dedo. Zafiros azules en el patrón exacto de Orión, en plata .925.</p>
+    <div class="specs">
+      <div class="spec"><span class="sk">Material</span><span class="sv">Plata .925</span></div>
+      <div class="spec"><span class="sk">Piedra</span><span class="sv">Zafiro natural</span></div>
+      <div class="spec"><span class="sk">Tallas</span><span class="sv">6 / 7 / 8 US</span></div>
+      <div class="spec"><span class="sk">Entrega</span><span class="sv">7–14 días hábiles</span></div>
+    </div>
+    <div class="hl-price">$4,800 MXN</div>
+    <div class="hl-actions">
+      <a href="contacto.html" class="btn btn-fill">Reservar mi pieza</a>
+      <a href="contacto.html" class="btn btn-border">Más información</a>
+    </div>
+  </div>
+</div>
+
+<!-- BESPOKE CTA -->
+<div class="bespoke-sec">
+  <div class="rv">
+    <p class="lbl" style="justify-content:center;">Diseño a medida</p>
+    <h2 class="bespoke-t">¿No encontraste lo que buscas?</h2>
+    <p class="bespoke-d">Diseñamos tu pieza desde cero. Cuéntanos tu idea y la hacemos realidad.</p>
+    <a href="contacto.html" class="btn btn-fill">Iniciar mi pieza personalizada</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="inner">
+    <div class="ft-grid">
+      <div>
+        <div class="logo" style="pointer-events:none;margin-bottom:.8rem;">
+          <svg width="26" height="28" viewBox="0 0 100 107" fill="none"><polygon points="27,12 73,12 95,53 73,95 27,95 5,53" stroke="white" stroke-width="5.5"/><polygon points="50,12 73,53 50,95 27,53" stroke="white" stroke-width="5.5"/></svg>
+          <div class="logo-sep" style="height:20px;"></div><span class="logo-txt">MONCATU</span>
+        </div>
+        <p class="ft-brand-desc">Joyería de autor, hecha a mano en México. Cada pieza es única y diseñada para ti.</p>
+        <div class="ft-social"><a class="ft-soc" href="#">IG</a><a class="ft-soc" href="#">FB</a><a class="ft-soc" href="#">TT</a><a class="ft-soc" href="#">WA</a></div>
+      </div>
+      <div class="ft-col"><h4>Colecciones</h4><ul class="ft-list"><li><a href="colecciones.html">Colección Cielo</a></li><li><a href="colecciones.html">Colección Rosa</a></li><li><a href="colecciones.html">Colección Nocturna</a></li><li><a href="contacto.html">Diseño a Medida</a></li></ul></div>
+      <div class="ft-col"><h4>Información</h4><ul class="ft-list"><li><a href="nosotros.html">Nuestra historia</a></li><li><a href="nosotros.html#proceso">Proceso</a></li><li><a href="contacto.html#faq">FAQ</a></li><li><a href="#">Guía de tallas</a></li></ul></div>
+      <div class="ft-col"><h4>Contacto</h4><ul class="ft-list"><li><a href="mailto:hola@moncatu.mx">hola@moncatu.mx</a></li><li><a href="#">@moncatu</a></li><li><a href="contacto.html">Agendar consulta</a></li></ul></div>
+    </div>
+    <div class="ft-bottom">
+      <span class="ft-copy">© 2025 Moncatu® — Todos los derechos reservados.</span>
+      <div class="ft-badges"><span class="ft-badge">Plata .925</span><span class="ft-badge">Hecho en MX</span></div>
+    </div>
+  </div>
+</footer>
+<a href="https://wa.me/52330000000" class="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Modal del carrito -->
+<div id="cart-modal" class="cart-modal">
+  <div class="cart-header">
+    <h2>Mi Carrito</h2>
+    <button class="close-cart">×</button>
+  </div>
+  <div class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="shipping-message"></div>
+    <div class="cart-totals">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span class="cart-subtotal">$0</span>
+      </div>
+      <div class="cart-total-row">
+        <span>Envío</span>
+        <span class="cart-shipping">$0</span>
+      </div>
+      <div class="cart-total-row total">
+        <span>Total</span>
+        <span class="cart-total">$0</span>
+      </div>
+    </div>
+    <button class="btn-checkout" id="colec-checkout-btn">Finalizar Compra</button>
+  </div>
+</div>
+<div class="cart-overlay"></div>
+
+<!-- Modal premium de producto (colecciones.html lo genera dinámicamente vía products.js) -->
+<!-- Scripts: sin Firebase aquí — catálogo vía Medusa o demo -->
+<script src="medusa-store.js"></script>
+<script src="cart.js"></script>
+<script src="products.js"></script>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function l(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(l);})();
+document.querySelectorAll('a,button,.pg-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+const nav=document.getElementById('nav'),btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>80);btt.classList.toggle('show',window.scrollY>400);});
+const obs=new IntersectionObserver((en)=>{en.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*80);obs.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>obs.observe(el));
+
+// Filtering
+const filters=document.querySelectorAll('.flt');
+const rCount=document.getElementById('rCount');
+filters.forEach(btn=>{
+  btn.addEventListener('click',async ()=>{
+    filters.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat=btn.dataset.cat;
+    
+    if (cat === 'all') {
+      const products = await productManager.loadProducts();
+      productManager.renderProducts(products);
+      rCount.textContent=products.length+' '+(products.length===1?'pieza':'piezas');
+    } else {
+      await productManager.filterByCategory(cat);
+      rCount.textContent = productManager.products.length + ' ' + (productManager.products.length === 1 ? 'pieza' : 'piezas');
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  var hint=document.getElementById('moncatu-catalog-hint');
+  if(hint && location.protocol==='file:'){
+    hint.style.display='block';
+    hint.textContent='Abre esta página por http (ej. ejecuta serve-moncatu-web.ps1 y usa http://localhost:5500/colecciones.html). Desde archivo file:// el navegador suele bloquear las llamadas a Medusa.';
+  }
+
+  // Checkout button → cart flow
+  const ckBtn = document.getElementById('colec-checkout-btn');
+  if (ckBtn) {
+    ckBtn.addEventListener('click', () => {
+      if (typeof cart !== 'undefined' && cart.items.length > 0) {
+        cart.proceedToCheckout();
+      } else {
+        alert('Tu carrito está vacío');
+      }
+    });
+  }
+
+  try {
+    const products = await productManager.loadProducts();
+    productManager.renderProducts(products);
+    rCount.textContent=products.length+' '+(products.length===1?'pieza':'piezas');
+    if(hint && window.__MONCATU_CATALOG_SOURCE__ === 'demo'){
+      hint.style.display='block';
+      hint.textContent = 'Mostrando catálogo de demostración. ' +
+        (location.protocol === 'file:'
+          ? 'Abre con http://localhost:5500 para mejor compatibilidad.'
+          : 'Configura Firebase o conecta un backend Medusa para ver tus productos reales.');
+    }
+  } catch (error) {
+    console.error('Error cargando productos:', error);
+    if(hint){ hint.style.display='block'; hint.textContent='Error al cargar el catálogo. Recarga la página o revisa la consola (F12).'; }
+  }
+});
+</script>
+</body>
+</html>
