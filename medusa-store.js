@@ -12,7 +12,7 @@
     'https://placehold.co/600x600/EDE9E3/3B5469?text=Moncatu';
 
   global.MONCATU_MEDUSA = global.MONCATU_MEDUSA || {
-    baseUrl: 'http://localhost:9000',
+    baseUrl: 'https://moncatu-backend-production.up.railway.app',
     publishableKey:
       'pk_46dd7413c778e24c31a7962683d97a7b018d5ce2b994539b030d3c9030d1d352',
     regionId: '',
