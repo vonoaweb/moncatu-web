@@ -806,7 +806,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   <div class="ph"><div class="w">
     <div class="bc"><button onclick="go('inicio')">Inicio</button><span class="sep">/</span><span>Colecciones</span></div>
     <h1 class="ph-title">Nuestras <em>colecciones</em></h1>
-    <p class="ph-sub">8 piezas únicas en 4 categorías. Cada joya, hecha a mano en México.</p>
+    <p class="ph-sub">Piezas únicas seleccionadas a mano en México. Filtra por categoría para encontrar la tuya.</p>
   </div></div>
   <div class="trust">
     <div class="trust-item"><span class="trust-dot"></span>Envío gratis +$3,000</div>
@@ -815,123 +815,29 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <div class="trust-item"><span class="trust-dot"></span>Piezas exclusivas</div>
   </div>
 
-  <!-- CATEGORY TABS -->
+  <!-- CATEGORY FILTER TABS (dynamic) -->
   <div class="cat-tabs" id="cat-tabs">
-    <button class="cat-tab on" data-jump="cat-anillos">Anillos</button>
-    <button class="cat-tab" data-jump="cat-collares">Collares</button>
-    <button class="cat-tab" data-jump="cat-pulseras">Pulseras</button>
-    <button class="cat-tab" data-jump="cat-aretes">Aretes</button>
+    <button class="cat-tab on" data-cat="all">Todas</button>
+    <button class="cat-tab" data-cat="anillos">Anillos</button>
+    <button class="cat-tab" data-cat="collares">Collares</button>
+    <button class="cat-tab" data-cat="pulseras">Pulseras</button>
+    <button class="cat-tab" data-cat="aretes">Aretes</button>
     <button class="cat-tab" data-jump="cat-bespoke">A Medida</button>
   </div>
 
-  <!-- ──── ANILLOS ──── -->
-  <section class="cat-section sec" id="cat-anillos" style="background:var(--cream)">
+  <!-- ──── CATÁLOGO DINÁMICO (Medusa) ──── -->
+  <section class="cat-section sec" id="cat-todos" style="background:var(--cream)">
     <div class="w">
       <div class="cat-header rv">
         <div class="cat-title-block">
-          <p class="cat-eyebrow">Categoría 01</p>
-          <h2 class="cat-title">Anillos</h2>
-          <p class="cat-desc">Diseños únicos en plata y oro. Para cada dedo y cada historia.</p>
+          <p class="cat-eyebrow" id="colec-eyebrow">Catálogo completo</p>
+          <h2 class="cat-title" id="colec-title">Todas las piezas</h2>
+          <p class="cat-desc" id="colec-desc">Cada joya es seleccionada y verificada por nuestro equipo en Guadalajara.</p>
         </div>
-        <span class="cat-count">3 piezas disponibles</span>
+        <span class="cat-count" id="colec-count">Cargando…</span>
       </div>
-      <div class="prod-grid">
-        <div class="pcard rv">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/ring_constelacion.png" alt="Anillo Constelación" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><span class="pcard-badge">Nuevo</span><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Anillo Constelación</h3><p class="pcard-sub">Plata .925 con zafiros naturales en patrón Orión</p><div class="pcard-foot"><span class="pcard-price">$4,800 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.06s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/ring_aurora.png" alt="Anillo Aurora" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Anillo Aurora</h3><p class="pcard-sub">Banda en plata .925 con turmalina rosa natural</p><div class="pcard-foot"><span class="pcard-price">$3,200 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.12s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/ring_flor_luna.png" alt="Anillo Flor de Luna" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Anillo Flor de Luna</h3><p class="pcard-sub">Plata con cuarzo rosa y acabado floral</p><div class="pcard-foot"><span class="pcard-price">$2,400 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ──── COLLARES ──── -->
-  <section class="cat-section sec" id="cat-collares" style="background:var(--cream2)">
-    <div class="w">
-      <div class="cat-header rv">
-        <div class="cat-title-block">
-          <p class="cat-eyebrow">Categoría 02</p>
-          <h2 class="cat-title">Collares &amp; Gargantillas</h2>
-          <p class="cat-desc">Desde cadenas delicadas hasta piezas statement de alta joyería.</p>
-        </div>
-        <span class="cat-count">3 piezas disponibles</span>
-      </div>
-      <div class="prod-grid">
-        <div class="pcard rv">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/necklace_luna.png" alt="Collar Luna" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Collar Luna</h3><p class="pcard-sub">Plata y cuarzo rosa en cadena delgada</p><div class="pcard-foot"><span class="pcard-price">$2,200 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.06s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/necklace_noche.png" alt="Collar Noche Eterna" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><span class="pcard-badge">Ed. Limitada</span><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Collar Noche Eterna</h3><p class="pcard-sub">Gargantilla en plata con ónix negro tallado</p><div class="pcard-foot"><span class="pcard-price">$4,400 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.12s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/necklace_cielo.png" alt="Collar Cielo Abierto" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Collar Cielo Abierto</h3><p class="pcard-sub">Plata .925 con pendant en forma de estrella</p><div class="pcard-foot"><span class="pcard-price">$1,900 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ──── PULSERAS ──── -->
-  <section class="cat-section sec" id="cat-pulseras" style="background:var(--cream)">
-    <div class="w">
-      <div class="cat-header rv">
-        <div class="cat-title-block">
-          <p class="cat-eyebrow">Categoría 03</p>
-          <h2 class="cat-title">Pulseras &amp; Brazaletes</h2>
-          <p class="cat-desc">Minimalistas o statement. Pulseras que cuentan tu historia en tu muñeca.</p>
-        </div>
-        <span class="cat-count">3 piezas disponibles</span>
-      </div>
-      <div class="prod-grid">
-        <div class="pcard rv">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/bracelet_estrella.png" alt="Pulsera Estrella" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Pulsera Estrella</h3><p class="pcard-sub">Cadena en plata con charms de estrellas</p><div class="pcard-foot"><span class="pcard-price">$1,800 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.06s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/bracelet_jade.png" alt="Pulsera Jade" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Pulsera Jade</h3><p class="pcard-sub">Eslabones de plata con jade verde natural</p><div class="pcard-foot"><span class="pcard-price">$3,600 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.12s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/bracelet_dunas.png" alt="Brazalete Dunas" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><span class="pcard-badge">Nuevo</span><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Brazalete Dunas</h3><p class="pcard-sub">Brazalete rígido en plata con textura orgánica</p><div class="pcard-foot"><span class="pcard-price">$2,900 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ──── ARETES ──── -->
-  <section class="cat-section sec" id="cat-aretes" style="background:var(--cream2)">
-    <div class="w">
-      <div class="cat-header rv">
-        <div class="cat-title-block">
-          <p class="cat-eyebrow">Categoría 04</p>
-          <h2 class="cat-title">Aretes &amp; Pendientes</h2>
-          <p class="cat-desc">Desde studs discretos hasta aretes colgantes de alta joyería.</p>
-        </div>
-        <span class="cat-count">3 piezas disponibles</span>
-      </div>
-      <div class="prod-grid">
-        <div class="pcard rv">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/earrings_esmeralda.png" alt="Aretes Esmeralda" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><span class="pcard-badge">Exclusivo</span><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Aretes Esmeralda</h3><p class="pcard-sub">Plata oxidada con esmeralda colombiana</p><div class="pcard-foot"><span class="pcard-price">$5,200 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.06s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/earrings_petalo.png" alt="Aretes Pétalo" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Aretes Pétalo</h3><p class="pcard-sub">Colgantes con cuarzo rosa en plata .925</p><div class="pcard-foot"><span class="pcard-price">$2,800 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
-        <div class="pcard rv" style="transition-delay:.12s">
-          <div class="pcard-img"><div class="pcard-bg" style="width:100%;height:100%"><img src="https://vonoaweb.github.io/moncatu-web/img/earrings_cielo.png" alt="Aretes Cielo Nocturno" style="width:100%;height:100%;object-fit:cover"/></div><div class="pcard-ov"></div><button class="pcard-wish">♡</button><button class="pcard-cta" onclick="go('contacto')">Consultar pieza</button></div>
-          <div class="pcard-body"><h3 class="pcard-name">Aretes Cielo Nocturno</h3><p class="pcard-sub">Studs con zafiro azul en plata pulida</p><div class="pcard-foot"><span class="pcard-price">$3,100 MXN</span><button class="pcard-btn" onclick="go('contacto')">Consultar</button></div></div>
-        </div>
+      <div class="prod-grid" id="colec-grid" style="min-height:240px">
+        <p style="grid-column:1/-1;text-align:center;color:var(--ink3);font-family:'Cormorant Garamond',serif;font-style:italic">Cargando catálogo…</p>
       </div>
     </div>
   </section>
@@ -1222,6 +1128,9 @@ function go(page){
   if(nb) nb.classList.add('on');
   window.scrollTo(0,0);
   setTimeout(initReveal,60);
+  if(page==='colecciones' && typeof loadColecciones==='function'){
+    loadColecciones(window.__moncatuActiveCat||'all');
+  }
 }
 
 /* ── SCROLL ── */
@@ -1230,34 +1139,25 @@ window.addEventListener('scroll',function(){
   document.getElementById('btt').classList.toggle('on',window.scrollY>400);
 },{passive:true});
 
-/* ── CATEGORY TABS (jump within page) ── */
+/* ── CATEGORY TABS (filter colecciones grid) ── */
 var tabs=document.querySelectorAll('.cat-tab');
 tabs.forEach(function(tab){
   tab.addEventListener('click',function(){
     tabs.forEach(function(t){t.classList.remove('on')});
     tab.classList.add('on');
-    var target=document.getElementById(tab.dataset.jump);
-    if(target){
-      var offset=target.getBoundingClientRect().top+window.scrollY-130;
-      window.scrollTo({top:offset,behavior:'smooth'});
+    if(tab.dataset.jump){
+      var target=document.getElementById(tab.dataset.jump);
+      if(target){
+        var offset=target.getBoundingClientRect().top+window.scrollY-130;
+        window.scrollTo({top:offset,behavior:'smooth'});
+      }
+      return;
     }
+    var cat=tab.dataset.cat||'all';
+    window.__moncatuActiveCat=cat;
+    if(typeof loadColecciones==='function') loadColecciones(cat);
   });
 });
-
-/* Highlight active tab on scroll */
-window.addEventListener('scroll',function(){
-  var sections=['cat-anillos','cat-collares','cat-pulseras','cat-aretes','cat-bespoke'];
-  var active='';
-  sections.forEach(function(id){
-    var el=document.getElementById(id);
-    if(el && el.getBoundingClientRect().top<=180) active=id;
-  });
-  if(active){
-    tabs.forEach(function(t){
-      t.classList.toggle('on',t.dataset.jump===active);
-    });
-  }
-},{passive:true});
 
 /* ── REVEAL ── */
 function initReveal(){
@@ -1527,6 +1427,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+/* ── DYNAMIC COLECCIONES (Medusa-backed) ── */
+window.__moncatuActiveCat = 'all';
+const __MONCATU_CAT_META = {
+  all:      { eyebrow:'Catálogo completo', title:'Todas las piezas',     desc:'Cada joya es seleccionada y verificada por nuestro equipo en Guadalajara.' },
+  anillos:  { eyebrow:'Categoría 01',      title:'Anillos',              desc:'Diseños únicos en plata y oro. Para cada dedo y cada historia.' },
+  collares: { eyebrow:'Categoría 02',      title:'Collares & Gargantillas', desc:'Desde cadenas delicadas hasta piezas statement de alta joyería.' },
+  pulseras: { eyebrow:'Categoría 03',      title:'Pulseras & Brazaletes',desc:'Minimalistas o statement. Pulseras que cuentan tu historia en tu muñeca.' },
+  aretes:   { eyebrow:'Categoría 04',      title:'Aretes & Pendientes',  desc:'Desde studs discretos hasta aretes colgantes de alta joyería.' }
+};
+
+async function loadColecciones(cat){
+  cat = cat || 'all';
+  const grid = document.getElementById('colec-grid');
+  const eyebrow = document.getElementById('colec-eyebrow');
+  const title = document.getElementById('colec-title');
+  const desc = document.getElementById('colec-desc');
+  const count = document.getElementById('colec-count');
+  if(!grid) return;
+  const meta = __MONCATU_CAT_META[cat] || __MONCATU_CAT_META.all;
+  if(eyebrow) eyebrow.textContent = meta.eyebrow;
+  if(title)   title.textContent   = meta.title;
+  if(desc)    desc.textContent    = meta.desc;
+  if(count)   count.textContent   = 'Cargando…';
+  grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--ink3);font-family:\'Cormorant Garamond\',serif;font-style:italic">Cargando catálogo…</p>';
+  try{
+    const all = await productManager.loadProducts();
+    const list = (cat==='all') ? all : all.filter(function(p){ return (p.category||'').toLowerCase()===cat; });
+    if(!list.length){
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem"><p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:1.1rem;color:var(--ink2);margin-bottom:.4rem">Sin piezas en esta categoría todavía.</p><p style="font-family:\'Inter\',sans-serif;font-size:.78rem;color:var(--ink3)">Pronto añadiremos nuevos diseños. Mientras tanto, escríbenos para una pieza a medida.</p></div>';
+      if(count) count.textContent = '0 piezas';
+      return;
+    }
+    productManager.renderProducts(list, 'colec-grid');
+    if(count) count.textContent = list.length+' '+(list.length===1?'pieza disponible':'piezas disponibles');
+    if(typeof initReveal==='function') setTimeout(initReveal, 50);
+  }catch(err){
+    console.warn('loadColecciones:', err);
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--ink3)">Error al cargar el catálogo. Recarga la página.</p>';
+    if(count) count.textContent = '';
+  }
+}
 
 </script>
 </body>
