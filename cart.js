@@ -134,7 +134,7 @@ class ShoppingCart {
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
           <p>Tu carrito está vacío</p>
-          <a href="colecciones.html" class="btn-explore">Explorar colecciones</a>
+          <a href="index.html#colecciones" class="btn-explore">Explorar colecciones</a>
         </div>
       `;
       if (cartSubtotal) cartSubtotal.textContent = '$0';

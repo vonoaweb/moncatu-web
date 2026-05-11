@@ -618,7 +618,6 @@ footer{background:var(--noche);padding:4rem 0 2rem}
       <li><button id="nb-contacto" onclick="go('contacto')">Contacto</button></li>
     </ul>
     <div class="nav-right">
-      <button onclick="go('colecciones')">Catálogo</button>
       <button class="cart-icon" id="cart-icon" onclick="toggleCart()" title="Mi carrito">
         <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span class="cart-badge" id="cart-badge">0</span>
@@ -1119,19 +1118,51 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 </div>
 
 <script>
-/* ── ROUTING ── */
-function go(page){
+/* ── ROUTING (SPA con hash en URL) ── */
+var __MONCATU_PAGES = ['inicio','colecciones','nosotros','contacto'];
+function go(page, opts){
+  opts = opts || {};
+  if(__MONCATU_PAGES.indexOf(page) === -1) page = 'inicio';
+  var pageEl = document.getElementById('page-'+page);
+  if(!pageEl) return;
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
-  document.getElementById('page-'+page).classList.add('on');
+  pageEl.classList.add('on');
   document.querySelectorAll('.nav-ul li button').forEach(function(b){b.classList.remove('on')});
   var nb=document.getElementById('nb-'+page);
   if(nb) nb.classList.add('on');
+  // Actualiza URL: refresh preserva la ruta, link compartible (#colecciones)
+  if(!opts.skipHash){
+    var newHash = page === 'inicio' ? '' : '#'+page;
+    if(window.location.hash !== newHash){
+      try{ history.replaceState(null,'',window.location.pathname+window.location.search+newHash); }
+      catch(_){ window.location.hash = newHash; }
+    }
+  }
   window.scrollTo(0,0);
   setTimeout(initReveal,60);
   if(page==='colecciones' && typeof loadColecciones==='function'){
     loadColecciones(window.__moncatuActiveCat||'all');
   }
 }
+
+/* Al cargar: respeta el hash de la URL (ej. /index.html#colecciones) */
+(function initRoute(){
+  var hash = (window.location.hash || '').replace('#','').toLowerCase();
+  if(hash && __MONCATU_PAGES.indexOf(hash) !== -1 && hash !== 'inicio'){
+    // Esperar a DOM listo para que page-X exista
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', function(){ go(hash, {skipHash:true}); });
+    } else {
+      go(hash, {skipHash:true});
+    }
+  }
+})();
+
+/* Botón atrás del navegador */
+window.addEventListener('hashchange', function(){
+  var h = (window.location.hash||'').replace('#','').toLowerCase() || 'inicio';
+  if(__MONCATU_PAGES.indexOf(h) !== -1) go(h, {skipHash:true});
+});
 
 /* ── SCROLL ── */
 window.addEventListener('scroll',function(){
