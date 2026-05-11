@@ -1,10 +1,10 @@
-# seed-medusa-products.ps1
+﻿# seed-medusa-products.ps1
 # Limpia productos de prueba y agrega el catálogo completo de joyería Moncatu a Medusa.
 # Uso: .\seed-medusa-products.ps1
 # Requiere: Medusa corriendo en http://localhost:9000
 
-$BASE = "http://localhost:9000"
-$PK   = "pk_46dd7413c778e24c31a7962683d97a7b018d5ce2b994539b030d3c9030d1d352"
+$BASE = "https://moncatu-backend-production.up.railway.app"
+$PK   = "pk_9808c180ac40289f88a7f050264eb6e61b06d2a0daf0a0234bfc9c28e575f69e"
 $HEADERS = @{
     "Content-Type"           = "application/json"
     "x-publishable-api-key"  = $PK
@@ -13,7 +13,7 @@ $HEADERS = @{
 # Necesitamos token de admin para crear/borrar productos
 # Primero obtenemos token admin
 Write-Host "[0] Obteniendo token admin..." -ForegroundColor Cyan
-$loginBody = '{"email":"admin@moncatu.mx","password":"supersecret"}'
+$loginBody = '{"email":"owner@moncatu.com","password":"Moncatu2024!"}'
 try {
     $loginRes = Invoke-RestMethod -Uri "$BASE/auth/user/emailpass" -Method POST -ContentType "application/json" -Body $loginBody
     $TOKEN = $loginRes.token
@@ -88,9 +88,9 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/ring_constelacion.png" })
         metadata    = @{ category="anillos"; material="Plata .925 esterlina"; stone="Zafiro natural certificado"; weight="5.2 g"; finish="Pulido alto brillo"; delivery="7–14 días hábiles"; featured="true"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Talla 6"; prices=@(@{ currency_code="mxn"; amount=480000 }); options=@(@{ value="6" }) }
-            @{ title="Talla 7"; prices=@(@{ currency_code="mxn"; amount=480000 }); options=@(@{ value="7" }) }
-            @{ title="Talla 8"; prices=@(@{ currency_code="mxn"; amount=480000 }); options=@(@{ value="8" }) }
+            @{ title="Talla 6"; prices=@(@{ currency_code="mxn"; amount=480000 }); options=@{ Talla="6" } }
+            @{ title="Talla 7"; prices=@(@{ currency_code="mxn"; amount=480000 }); options=@{ Talla="7" } }
+            @{ title="Talla 8"; prices=@(@{ currency_code="mxn"; amount=480000 }); options=@{ Talla="8" } }
         )
         options     = @(@{ title="Talla"; values=@("6","7","8") })
     },
@@ -102,10 +102,10 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/ring_aurora.png" })
         metadata    = @{ category="anillos"; material="Plata .925 esterlina"; stone="Turmalina rosa natural"; weight="4.1 g"; finish="Satinado mate"; delivery="5–10 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Talla 5"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@(@{ value="5" }) }
-            @{ title="Talla 6"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@(@{ value="6" }) }
-            @{ title="Talla 7"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@(@{ value="7" }) }
-            @{ title="Talla 8"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@(@{ value="8" }) }
+            @{ title="Talla 5"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@{ Talla="5" } }
+            @{ title="Talla 6"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@{ Talla="6" } }
+            @{ title="Talla 7"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@{ Talla="7" } }
+            @{ title="Talla 8"; prices=@(@{ currency_code="mxn"; amount=320000 }); options=@{ Talla="8" } }
         )
         options     = @(@{ title="Talla"; values=@("5","6","7","8") })
     },
@@ -117,9 +117,9 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/ring_flor_luna.png" })
         metadata    = @{ category="anillos"; material="Plata .925 esterlina"; stone="Cuarzo rosa natural"; weight="3.8 g"; finish="Pulido brillante"; delivery="5–10 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Talla 5"; prices=@(@{ currency_code="mxn"; amount=240000 }); options=@(@{ value="5" }) }
-            @{ title="Talla 6"; prices=@(@{ currency_code="mxn"; amount=240000 }); options=@(@{ value="6" }) }
-            @{ title="Talla 7"; prices=@(@{ currency_code="mxn"; amount=240000 }); options=@(@{ value="7" }) }
+            @{ title="Talla 5"; prices=@(@{ currency_code="mxn"; amount=240000 }); options=@{ Talla="5" } }
+            @{ title="Talla 6"; prices=@(@{ currency_code="mxn"; amount=240000 }); options=@{ Talla="6" } }
+            @{ title="Talla 7"; prices=@(@{ currency_code="mxn"; amount=240000 }); options=@{ Talla="7" } }
         )
         options     = @(@{ title="Talla"; values=@("5","6","7") })
     },
@@ -131,7 +131,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/necklace_luna.png" })
         metadata    = @{ category="collares"; material="Plata .925 esterlina"; stone="Cuarzo rosa"; weight="3.2 g"; finish="Pulido brillante"; delivery="5–10 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=220000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=220000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -143,7 +143,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/necklace_noche.png" })
         metadata    = @{ category="collares"; material="Plata .925 esterlina"; stone="Ónix negro tallado"; weight="8.5 g"; finish="Oxidado antique"; delivery="7–14 días hábiles"; featured="false"; limited="true"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=440000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=440000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -155,7 +155,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/necklace_cielo.png" })
         metadata    = @{ category="collares"; material="Plata .925 esterlina"; stone="—"; weight="2.6 g"; finish="Pulido brillante"; delivery="3–7 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=190000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=190000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -167,7 +167,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/bracelet_estrella.png" })
         metadata    = @{ category="pulseras"; material="Plata .925 esterlina"; stone="—"; weight="4.8 g"; finish="Pulido satinado"; delivery="3–7 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=180000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=180000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -179,7 +179,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/bracelet_jade.png" })
         metadata    = @{ category="pulseras"; material="Plata .925 + Jade"; stone="Jade verde natural"; weight="9.3 g"; finish="Natural pulido"; delivery="5–10 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=360000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=360000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -191,7 +191,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/bracelet_dunas.png" })
         metadata    = @{ category="pulseras"; material="Plata .925 esterlina"; stone="—"; weight="12.1 g"; finish="Martillado orgánico"; delivery="5–10 días hábiles"; featured="true"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=290000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=290000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -203,7 +203,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/earrings_esmeralda.png" })
         metadata    = @{ category="aretes"; material="Plata oxidada .925"; stone="Esmeralda colombiana"; weight="6.4 g"; finish="Oxidado artesanal"; delivery="7–14 días hábiles"; featured="true"; limited="false"; exclusive="true" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=520000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=520000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -215,7 +215,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/earrings_petalo.png" })
         metadata    = @{ category="aretes"; material="Plata .925 esterlina"; stone="Cuarzo rosa natural"; weight="3.9 g"; finish="Pulido brillante"; delivery="5–10 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=280000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=280000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     },
@@ -227,7 +227,7 @@ $PRODUCTS = @(
         images      = @(@{ url = "$IMG/earrings_cielo.png" })
         metadata    = @{ category="aretes"; material="Plata .925 esterlina"; stone="Zafiro azul natural"; weight="2.8 g"; finish="Pulido alto brillo"; delivery="5–10 días hábiles"; featured="false"; limited="false"; exclusive="false" }
         variants    = @(
-            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=310000 }); options=@(@{ value="Única" }) }
+            @{ title="Única"; prices=@(@{ currency_code="mxn"; amount=310000 }); options=@{ Talla="Única" } }
         )
         options     = @(@{ title="Talla"; values=@("Única") })
     }

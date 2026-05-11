@@ -14,9 +14,9 @@
   global.MONCATU_MEDUSA = global.MONCATU_MEDUSA || {
     baseUrl: 'https://moncatu-backend-production.up.railway.app',
     publishableKey:
-      'pk_46dd7413c778e24c31a7962683d97a7b018d5ce2b994539b030d3c9030d1d352',
+      'pk_9808c180ac40289f88a7f050264eb6e61b06d2a0daf0a0234bfc9c28e575f69e',
     regionId: '',
-    regionCode: 'dk'
+    regionCode: 'mx'
   };
 
   function medusaHeaders() {
