@@ -174,10 +174,20 @@
     const params = new URLSearchParams();
     params.set('limit', String(opts.limit || 100));
     params.set('offset', String(opts.offset || 0));
+    params.set('order', '-created_at');
     if (regionId) params.set('region_id', regionId);
 
     const url = base + '/store/products?' + params.toString();
-    const res = await fetch(url, { headers: medusaHeaders(), credentials: 'omit', signal: opts.signal || null });
+    // cache: 'no-store' prevents the browser from serving a stale catalog when
+    // the user uploads a new product in the admin panel. Without it, the browser
+    // would heuristically cache /store/products responses (no Cache-Control on
+    // the API) and the home grid would lag behind the real catalog by minutes.
+    const res = await fetch(url, {
+      headers: medusaHeaders(),
+      credentials: 'omit',
+      cache: 'no-store',
+      signal: opts.signal || null
+    });
     if (!res.ok) {
       const t = await res.text();
       throw new Error('Medusa list ' + res.status + ': ' + t.slice(0, 200));
@@ -189,22 +199,18 @@
     }
     let list = raw.map(moncatuMedusaMapProduct);
     if (opts.category) list = list.filter(function (x) { return x.category === opts.category; });
-    if (opts.featured) {
-      var feats = list.filter(function (x) { return x.featured; });
-      if (feats.length > 0) {
-        list = feats;
-      } else {
-        list = list.slice(0, 4);
-      }
-    }
+    // Sort by createdAt desc BEFORE slicing — otherwise the "featured" path on
+    // the home grid would slice 4 random products and then sort just those.
+    // createdAt is a Firestore-style { seconds } object (see moncatuMedusaMapProduct).
     list.sort(function (a, b) {
-      // createdAt is a Firestore-style { seconds } object (see moncatuMedusaMapProduct).
-      // Previously called .getTime() which threw TypeError and made the whole catalog
-      // fall through to the demo fallback.
       var tA = (a.createdAt && typeof a.createdAt.seconds === 'number') ? a.createdAt.seconds : 0;
       var tB = (b.createdAt && typeof b.createdAt.seconds === 'number') ? b.createdAt.seconds : 0;
       return tB - tA;
     });
+    if (opts.featured) {
+      var feats = list.filter(function (x) { return x.featured; });
+      list = feats.length > 0 ? feats : list.slice(0, 4);
+    }
     return list;
   }
 
@@ -216,7 +222,7 @@
     if (regionId) params.set('region_id', regionId);
     const q = params.toString();
     const url = base + '/store/products/' + encodeURIComponent(id) + (q ? '?' + q : '');
-    const res = await fetch(url, { headers: medusaHeaders(), credentials: 'omit' });
+    const res = await fetch(url, { headers: medusaHeaders(), credentials: 'omit', cache: 'no-store' });
     if (!res.ok) throw new Error('Producto no encontrado');
     const data = await res.json();
     const p = data.product;
