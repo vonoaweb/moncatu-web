@@ -197,10 +197,13 @@
         list = list.slice(0, 4);
       }
     }
-    list.sort(function (a, b) { 
-      var tA = a.createdAt ? a.createdAt.getTime() : 0;
-      var tB = b.createdAt ? b.createdAt.getTime() : 0;
-      return tB - tA; 
+    list.sort(function (a, b) {
+      // createdAt is a Firestore-style { seconds } object (see moncatuMedusaMapProduct).
+      // Previously called .getTime() which threw TypeError and made the whole catalog
+      // fall through to the demo fallback.
+      var tA = (a.createdAt && typeof a.createdAt.seconds === 'number') ? a.createdAt.seconds : 0;
+      var tB = (b.createdAt && typeof b.createdAt.seconds === 'number') ? b.createdAt.seconds : 0;
+      return tB - tA;
     });
     return list;
   }
