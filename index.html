@@ -666,6 +666,76 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .pm-add-cart:hover{opacity:.88;transform:translateY(-1px)}
 .pm-add-cart svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2}
 .pm-added{background:#3B5469!important;pointer-events:none}
+
+/* ══ CHECKOUT PAGE ══ */
+.ck-wrap{max-width:1100px;margin:0 auto;padding:2rem 2.5rem 4rem}
+.ck-stepper{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:3rem}
+.ck-step{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);transition:color .2s}
+.ck-step.active{color:var(--esm);font-weight:600}
+.ck-step.done{color:var(--esm)}
+.ck-step-n{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--borde);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:600;transition:all .2s}
+.ck-step.active .ck-step-n{background:var(--esm);color:var(--white);border-color:var(--esm)}
+.ck-step.done .ck-step-n{background:var(--esm);color:var(--white);border-color:var(--esm)}
+.ck-step-line{width:40px;height:1px;background:var(--borde);margin:0 .6rem}
+.ck-step-line.done{background:var(--esm)}
+.ck-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:start}
+.ck-main{background:var(--white);border:1px solid var(--borde);padding:2rem}
+.ck-main h2{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;margin-bottom:1.2rem;color:var(--ink)}
+.ck-main p.ck-sub{color:var(--ink3);font-size:.82rem;margin-bottom:1.5rem}
+.ck-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.ck-form-row.full{grid-template-columns:1fr}
+.ck-field{display:flex;flex-direction:column;gap:.3rem}
+.ck-field label{font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.ck-field input,.ck-field select{padding:.7rem .9rem;border:1px solid var(--borde);font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--ink);background:var(--cream);transition:border-color .2s}
+.ck-field input:focus,.ck-field select:focus{outline:none;border-color:var(--esm)}
+.ck-sidebar{position:sticky;top:120px}
+.ck-summary{background:var(--cream);border:1px solid var(--borde);padding:1.5rem}
+.ck-summary h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--borde)}
+.ck-line{display:flex;gap:.8rem;padding:.6rem 0;border-bottom:1px solid rgba(0,0,0,.05);align-items:center}
+.ck-line:last-child{border-bottom:none}
+.ck-line-img{width:50px;height:50px;border-radius:3px;overflow:hidden;background:var(--cream2);flex-shrink:0}
+.ck-line-img img{width:100%;height:100%;object-fit:cover}
+.ck-line-info{flex:1;min-width:0}
+.ck-line-name{font-size:.78rem;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ck-line-meta{font-size:.62rem;color:var(--ink3);margin-top:2px}
+.ck-line-price{font-size:.78rem;font-weight:600;color:var(--azul);white-space:nowrap}
+.ck-totals{margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--borde)}
+.ck-total-row{display:flex;justify-content:space-between;font-size:.72rem;color:var(--ink2);padding:.25rem 0}
+.ck-total-row.big{font-size:1rem;font-weight:700;color:var(--ink);font-family:'Playfair Display',serif;padding:.5rem 0;border-top:1px solid var(--borde);margin-top:.4rem}
+.ck-total-row .free{color:var(--esm);font-weight:500}
+.ck-trust-mini{display:flex;gap:.6rem;margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--borde);flex-wrap:wrap;justify-content:center}
+.ck-trust-mini span{font-size:.5rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:.2rem}
+.ck-trust-mini svg{width:12px;height:12px;fill:var(--esm)}
+.ck-actions{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
+.ck-btn{flex:1;padding:.85rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s;text-align:center}
+.ck-btn-primary{background:var(--esm);color:var(--white)}
+.ck-btn-primary:hover{background:var(--azul)}
+.ck-btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.ck-btn-ghost{background:none;border:1px solid var(--borde);color:var(--ink2)}
+.ck-btn-ghost:hover{border-color:var(--esm);color:var(--esm)}
+.ck-btn-wa{background:#25D366;color:var(--white);display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none}
+.ck-btn-wa:hover{opacity:.9}
+.ck-btn-wa svg{width:16px;height:16px;fill:white}
+.ck-confirm{text-align:center;padding:2rem}
+.ck-confirm-icon{width:64px;height:64px;border-radius:50%;background:var(--esm);color:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:1.6rem}
+.ck-confirm h2{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:.5rem}
+.ck-confirm p{color:var(--ink3);font-size:.88rem;margin-bottom:1.5rem}
+.ck-order-id{display:inline-block;background:var(--cream);padding:.5rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.14em;color:var(--azul);border:1px solid var(--borde);margin-bottom:1.5rem}
+.ck-pay-info{background:var(--cream);border:1px solid var(--borde);padding:1.2rem;margin:1.2rem auto;max-width:420px;text-align:left}
+.ck-pay-info h4{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--esm);margin-bottom:.5rem}
+.ck-pay-info p{font-size:.78rem;color:var(--ink2);margin:.3rem 0}
+.ck-spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ck-empty{text-align:center;padding:4rem 2rem}
+.ck-empty p{color:var(--ink3);font-size:1rem;margin-bottom:1rem}
+@media(max-width:768px){
+  .ck-grid{grid-template-columns:1fr;gap:1.5rem}
+  .ck-sidebar{position:static}
+  .ck-form-row{grid-template-columns:1fr}
+  .ck-stepper{gap:0;flex-wrap:wrap}
+  .ck-step span:not(.ck-step-n){display:none}
+  .ck-step-line{width:24px}
+}
 </style>
 </head>
 <body>
@@ -1221,6 +1291,55 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 </div><!-- /contacto -->
 
 
+<!-- ═════════════ PAGE: CHECKOUT ═════════════ -->
+<div class="page" id="page-checkout">
+  <div class="ph" style="padding-bottom:1.5rem"><div class="w">
+    <div class="bc"><button onclick="go('inicio')">Inicio</button><span class="sep">/</span><span>Checkout</span></div>
+    <h1 class="ph-title">Finalizar <em>compra</em></h1>
+  </div></div>
+
+  <section class="sec" style="background:var(--cream);padding-top:2rem">
+    <div class="ck-wrap">
+      <!-- Stepper -->
+      <div class="ck-stepper" id="ck-stepper">
+        <div class="ck-step active" data-step="1"><span class="ck-step-n">1</span><span>Resumen</span></div>
+        <div class="ck-step-line"></div>
+        <div class="ck-step" data-step="2"><span class="ck-step-n">2</span><span>Datos</span></div>
+        <div class="ck-step-line"></div>
+        <div class="ck-step" data-step="3"><span class="ck-step-n">3</span><span>Pago</span></div>
+        <div class="ck-step-line"></div>
+        <div class="ck-step" data-step="4"><span class="ck-step-n">4</span><span>Confirmación</span></div>
+      </div>
+
+      <div class="ck-grid">
+        <!-- Main content area (steps render here) -->
+        <div class="ck-main" id="ck-main">
+          <!-- JS will render step content here -->
+          <div class="ck-empty" id="ck-empty">
+            <p>Tu carrito está vacío.</p>
+            <button class="btn btn-esm" onclick="go('colecciones')">Explorar colecciones</button>
+          </div>
+        </div>
+
+        <!-- Sidebar: order summary (persistent) -->
+        <div class="ck-sidebar">
+          <div class="ck-summary" id="ck-summary">
+            <h3>Resumen del pedido</h3>
+            <div id="ck-items"></div>
+            <div class="ck-totals" id="ck-totals"></div>
+          </div>
+          <div class="ck-trust-mini">
+            <span><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra segura</span>
+            <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Certificado</span>
+            <span><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/></svg>Garantía</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /checkout -->
+
+
 <!-- ══ PRODUCT MODAL ══ -->
 <div class="pm-overlay" id="pm-overlay"></div>
 <div class="pm-box" id="pm-box">
@@ -1280,7 +1399,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 
 <script>
 /* ── ROUTING (SPA con hash en URL) ── */
-var __MONCATU_PAGES = ['inicio','colecciones','nosotros','contacto'];
+var __MONCATU_PAGES = ['inicio','colecciones','nosotros','contacto','checkout'];
 function go(page, opts){
   opts = opts || {};
   if(__MONCATU_PAGES.indexOf(page) === -1) page = 'inicio';
@@ -1292,12 +1411,10 @@ function go(page, opts){
   document.querySelectorAll('.nav-ul li button, .nav-ul li .nav-menu-trigger').forEach(function(b){b.classList.remove('on')});
   var nb=document.getElementById('nb-'+page);
   if(nb) nb.classList.add('on');
-  // Special: highlight collectionsBtn when on colecciones page
   if(page==='colecciones'){
     var cb=document.getElementById('collectionsBtn');
     if(cb) cb.classList.add('on');
   }
-  // Actualiza URL: refresh preserva la ruta, link compartible (#colecciones)
   if(!opts.skipHash){
     var newHash = page === 'inicio' ? '' : '#'+page;
     if(window.location.hash !== newHash){
@@ -1309,6 +1426,9 @@ function go(page, opts){
   setTimeout(initReveal,60);
   if(page==='colecciones' && typeof loadColecciones==='function'){
     loadColecciones(window.__moncatuActiveCat||'all');
+  }
+  if(page==='checkout' && typeof initCheckout==='function'){
+    initCheckout();
   }
 }
 
@@ -1435,6 +1555,7 @@ if(nlb) nlb.addEventListener('click',function(){
 <!-- Scripts del Proyecto -->
 <script src="firebase-config.js"></script>
 <script src="medusa-store.js"></script>
+<script src="medusa-cart.js"></script>
 <script src="cart.js"></script>
 <script src="products.js"></script>
 
@@ -1695,6 +1816,228 @@ async function loadColecciones(cat){
   }
 }
 
+</script>
+
+<script>
+/* ══ CHECKOUT CONTROLLER ══ */
+var __ckStep = 1;
+var __ckData = { email:'', name:'', phone:'', street:'', city:'', state:'', zip:'', country:'México' };
+
+function initCheckout(){
+  __ckStep = 1;
+  if(!cart || cart.items.length === 0){
+    document.getElementById('ck-main').innerHTML = '<div class="ck-empty"><p>Tu carrito está vacío.</p><button class="btn btn-esm" onclick="go(\'colecciones\')">Explorar colecciones</button></div>';
+    document.getElementById('ck-items').innerHTML = '';
+    document.getElementById('ck-totals').innerHTML = '';
+    return;
+  }
+  renderCkSidebar();
+  renderCkStep();
+}
+
+function renderCkSidebar(){
+  var items = cart.items;
+  var h = '';
+  items.forEach(function(it){
+    h += '<div class="ck-line"><div class="ck-line-img"><img src="'+(it.image||'')+'" alt="'+it.name+'"/></div><div class="ck-line-info"><div class="ck-line-name">'+it.name+'</div><div class="ck-line-meta">Cant: '+it.quantity+'</div></div><div class="ck-line-price">$'+((it.price*it.quantity).toLocaleString('es-MX'))+' MXN</div></div>';
+  });
+  document.getElementById('ck-items').innerHTML = h;
+  var sub = cart.getSubtotal();
+  var ship = cart.getShipping();
+  var total = cart.getFinalTotal();
+  var t = '<div class="ck-total-row"><span>Subtotal</span><span>$'+sub.toLocaleString('es-MX')+' MXN</span></div>';
+  t += '<div class="ck-total-row"><span>Envío</span><span class="'+(ship===0?'free':'')+'">'+(ship===0?'Gratis':'$'+ship.toLocaleString('es-MX')+' MXN')+'</span></div>';
+  t += '<div class="ck-total-row big"><span>Total</span><span>$'+total.toLocaleString('es-MX')+' MXN</span></div>';
+  document.getElementById('ck-totals').innerHTML = t;
+}
+
+function setCkStep(n){
+  __ckStep = n;
+  var steps = document.querySelectorAll('.ck-step');
+  var lines = document.querySelectorAll('.ck-step-line');
+  steps.forEach(function(s,i){
+    s.classList.remove('active','done');
+    if(i+1 < n) s.classList.add('done');
+    if(i+1 === n) s.classList.add('active');
+  });
+  lines.forEach(function(l,i){
+    l.classList.toggle('done', i+1 < n);
+  });
+  renderCkStep();
+}
+
+function renderCkStep(){
+  var main = document.getElementById('ck-main');
+  if(__ckStep === 1) renderCkStep1(main);
+  else if(__ckStep === 2) renderCkStep2(main);
+  else if(__ckStep === 3) renderCkStep3(main);
+  else if(__ckStep === 4) renderCkStep4(main);
+}
+
+function renderCkStep1(el){
+  var h = '<h2>Revisa tu pedido</h2><p class="ck-sub">Verifica los productos y cantidades antes de continuar.</p>';
+  cart.items.forEach(function(it,i){
+    h += '<div class="ck-line" style="padding:.8rem 0"><div class="ck-line-img"><img src="'+(it.image||'')+'" alt="'+it.name+'"/></div><div class="ck-line-info"><div class="ck-line-name">'+it.name+'</div><div class="ck-line-meta">'+(it.size?'Talla: '+it.size+' · ':'')+it.quantity+' × $'+it.price.toLocaleString('es-MX')+'</div></div><div class="ck-line-price">$'+((it.price*it.quantity).toLocaleString('es-MX'))+'</div></div>';
+  });
+  h += '<div class="ck-actions"><button class="ck-btn ck-btn-ghost" onclick="go(\'colecciones\')">← Seguir comprando</button><button class="ck-btn ck-btn-primary" onclick="setCkStep(2)">Continuar →</button></div>';
+  el.innerHTML = h;
+}
+
+function renderCkStep2(el){
+  var d = __ckData;
+  var h = '<h2>Información de envío</h2><p class="ck-sub">Ingresa tus datos para preparar el envío.</p>';
+  h += '<form id="ck-form" onsubmit="submitCkForm(event)">';
+  h += '<div class="ck-form-row"><div class="ck-field"><label>Email *</label><input type="email" id="ck-email" value="'+d.email+'" required placeholder="tu@email.com"/></div><div class="ck-field"><label>Nombre completo *</label><input type="text" id="ck-name" value="'+d.name+'" required placeholder="María García"/></div></div>';
+  h += '<div class="ck-form-row"><div class="ck-field"><label>Teléfono / WhatsApp *</label><input type="tel" id="ck-phone" value="'+d.phone+'" required placeholder="+52 33 1234 5678"/></div></div>';
+  h += '<div class="ck-form-row full"><div class="ck-field"><label>Calle y número *</label><input type="text" id="ck-street" value="'+d.street+'" required placeholder="Av. Chapultepec 123"/></div></div>';
+  h += '<div class="ck-form-row"><div class="ck-field"><label>Ciudad *</label><input type="text" id="ck-city" value="'+d.city+'" required placeholder="Guadalajara"/></div><div class="ck-field"><label>Estado *</label><input type="text" id="ck-state" value="'+d.state+'" required placeholder="Jalisco"/></div></div>';
+  h += '<div class="ck-form-row"><div class="ck-field"><label>Código Postal *</label><input type="text" id="ck-zip" value="'+d.zip+'" required placeholder="44100"/></div><div class="ck-field"><label>País</label><input type="text" id="ck-country" value="'+d.country+'" readonly/></div></div>';
+  h += '<div class="ck-actions"><button type="button" class="ck-btn ck-btn-ghost" onclick="setCkStep(1)">← Atrás</button><button type="submit" class="ck-btn ck-btn-primary">Continuar al pago →</button></div>';
+  h += '</form>';
+  el.innerHTML = h;
+}
+
+function submitCkForm(e){
+  e.preventDefault();
+  __ckData.email = document.getElementById('ck-email').value;
+  __ckData.name = document.getElementById('ck-name').value;
+  __ckData.phone = document.getElementById('ck-phone').value;
+  __ckData.street = document.getElementById('ck-street').value;
+  __ckData.city = document.getElementById('ck-city').value;
+  __ckData.state = document.getElementById('ck-state').value;
+  __ckData.zip = document.getElementById('ck-zip').value;
+  __ckData.country = document.getElementById('ck-country').value;
+  // Try to sync with Medusa (non-blocking)
+  syncMedusaCheckout();
+  setCkStep(3);
+}
+
+async function syncMedusaCheckout(){
+  if(typeof MedusaCart === 'undefined' || !moncatuMedusaActive()) return;
+  try {
+    // Ensure cart exists and add items
+    var mc = await MedusaCart.ensureCart();
+    // Update cart with email + shipping address
+    await MedusaCart.updateCart({
+      email: __ckData.email,
+      shipping_address: {
+        first_name: __ckData.name.split(' ')[0] || __ckData.name,
+        last_name: __ckData.name.split(' ').slice(1).join(' ') || '-',
+        address_1: __ckData.street,
+        city: __ckData.city,
+        province: __ckData.state,
+        postal_code: __ckData.zip,
+        country_code: 'mx',
+        phone: __ckData.phone
+      },
+      billing_address: {
+        first_name: __ckData.name.split(' ')[0] || __ckData.name,
+        last_name: __ckData.name.split(' ').slice(1).join(' ') || '-',
+        address_1: __ckData.street,
+        city: __ckData.city,
+        province: __ckData.state,
+        postal_code: __ckData.zip,
+        country_code: 'mx',
+        phone: __ckData.phone
+      }
+    });
+    console.info('[Checkout] Medusa cart updated with address');
+  } catch(err) {
+    console.warn('[Checkout] Medusa sync:', err.message || err);
+  }
+}
+
+function renderCkStep3(el){
+  var total = cart.getFinalTotal();
+  var h = '<h2>Método de pago</h2><p class="ck-sub">Elige cómo deseas pagar tu pedido de $'+total.toLocaleString('es-MX')+' MXN.</p>';
+  h += '<div style="display:grid;gap:1rem">';
+  h += '<label style="display:flex;align-items:center;gap:1rem;padding:1rem;border:1.5px solid var(--borde);cursor:pointer;transition:border-color .2s" onclick="this.querySelector(\'input\').checked=true;document.querySelectorAll(\'.ck-pay-opt\').forEach(function(l){l.style.borderColor=\'var(--borde)\'});this.style.borderColor=\'var(--esm)\'" class="ck-pay-opt"><input type="radio" name="ck-pay" value="transfer" checked style="accent-color:var(--esm)"/><div><strong style="font-size:.82rem">Transferencia bancaria (SPEI)</strong><p style="font-size:.72rem;color:var(--ink3);margin-top:2px">Datos bancarios al confirmar. Procesamos tu pedido al recibir el pago.</p></div></label>';
+  h += '<label style="display:flex;align-items:center;gap:1rem;padding:1rem;border:1.5px solid var(--borde);cursor:pointer;transition:border-color .2s" onclick="this.querySelector(\'input\').checked=true;document.querySelectorAll(\'.ck-pay-opt\').forEach(function(l){l.style.borderColor=\'var(--borde)\'});this.style.borderColor=\'var(--esm)\'" class="ck-pay-opt"><input type="radio" name="ck-pay" value="oxxo" style="accent-color:var(--esm)"/><div><strong style="font-size:.82rem">Depósito en OXXO</strong><p style="font-size:.72rem;color:var(--ink3);margin-top:2px">Genera tu ficha de pago. Deposita en cualquier OXXO.</p></div></label>';
+  h += '<label style="display:flex;align-items:center;gap:1rem;padding:1rem;border:1.5px solid var(--borde);cursor:pointer;transition:border-color .2s" onclick="this.querySelector(\'input\').checked=true;document.querySelectorAll(\'.ck-pay-opt\').forEach(function(l){l.style.borderColor=\'var(--borde)\'});this.style.borderColor=\'var(--esm)\'" class="ck-pay-opt"><input type="radio" name="ck-pay" value="whatsapp" style="accent-color:var(--esm)"/><div><strong style="font-size:.82rem">Pagar vía WhatsApp</strong><p style="font-size:.72rem;color:var(--ink3);margin-top:2px">Te contactamos para coordinar el pago directamente.</p></div></label>';
+  h += '</div>';
+  h += '<div class="ck-actions"><button class="ck-btn ck-btn-ghost" onclick="setCkStep(2)">← Atrás</button><button class="ck-btn ck-btn-primary" id="ck-confirm-btn" onclick="confirmOrder()">Confirmar pedido →</button></div>';
+  el.innerHTML = h;
+  // Pre-select first option visual
+  var first = el.querySelector('.ck-pay-opt');
+  if(first) first.style.borderColor = 'var(--esm)';
+}
+
+async function confirmOrder(){
+  var btn = document.getElementById('ck-confirm-btn');
+  if(btn){ btn.disabled=true; btn.innerHTML='<span class="ck-spinner"></span> Procesando...'; }
+  var payMethod = 'transfer';
+  var radios = document.querySelectorAll('input[name="ck-pay"]');
+  radios.forEach(function(r){ if(r.checked) payMethod = r.value; });
+
+  // Try Medusa complete
+  var orderId = 'MC-' + Date.now().toString(36).toUpperCase();
+  try {
+    if(typeof MedusaCart !== 'undefined' && moncatuMedusaActive() && MedusaCart.savedCartId()){
+      // Try to create payment collection and complete
+      try {
+        var providers = await MedusaCart.listPaymentProviders();
+        var pid = 'pp_system_default';
+        if(providers.length > 0) pid = providers[0].id;
+        var pc = await MedusaCart.createPaymentCollection();
+        await MedusaCart.initPaymentSession(pc.id, pid);
+        var result = await MedusaCart.completeCart();
+        if(result.success && result.order){
+          orderId = result.order.display_id || result.order.id || orderId;
+        }
+      } catch(mErr){
+        console.warn('[Checkout] Medusa payment/complete:', mErr.message || mErr);
+      }
+    }
+  } catch(e){ console.warn('[Checkout] Medusa order:', e); }
+
+  // Clear local cart
+  cart.items = [];
+  cart.saveCart();
+  updateBadge();
+  MedusaCart && MedusaCart.clearCart();
+
+  // Show confirmation
+  __ckData._orderId = orderId;
+  __ckData._payMethod = payMethod;
+  setCkStep(4);
+}
+
+function renderCkStep4(el){
+  var d = __ckData;
+  var pm = d._payMethod || 'transfer';
+  var h = '<div class="ck-confirm">';
+  h += '<div class="ck-confirm-icon">✓</div>';
+  h += '<h2>¡Pedido confirmado!</h2>';
+  h += '<p>Gracias, '+d.name+'. Tu pedido ha sido registrado exitosamente.</p>';
+  h += '<div class="ck-order-id">Pedido: '+(d._orderId||'')+'</div>';
+  if(pm === 'transfer'){
+    h += '<div class="ck-pay-info"><h4>Datos para transferencia (SPEI)</h4><p><strong>Banco:</strong> BBVA</p><p><strong>CLABE:</strong> 012 320 0015 XXXXXXX</p><p><strong>Beneficiario:</strong> Moncatu MX</p><p><strong>Referencia:</strong> '+(d._orderId||'')+'</p><p style="margin-top:.5rem;font-size:.68rem;color:var(--esm)">Envía tu comprobante por WhatsApp para procesar tu envío.</p></div>';
+  } else if(pm === 'oxxo'){
+    h += '<div class="ck-pay-info"><h4>Depósito OXXO</h4><p>Te enviaremos la ficha de pago por WhatsApp y email en los próximos minutos.</p><p><strong>Referencia:</strong> '+(d._orderId||'')+'</p></div>';
+  }
+  var waMsg = 'Hola Moncatu! Acabo de hacer el pedido '+(d._orderId||'')+'. Mi nombre es '+d.name+'. '+(pm==='transfer'?'Pagaré por transferencia.':'');
+  h += '<div class="ck-actions" style="justify-content:center;margin-top:1.5rem"><a href="https://wa.me/52330000000?text='+encodeURIComponent(waMsg)+'" class="ck-btn ck-btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Enviar comprobante por WhatsApp</a></div>';
+  h += '<button class="ck-btn ck-btn-ghost" style="max-width:200px;margin:1rem auto 0;display:block" onclick="go(\'inicio\')">Volver al inicio</button>';
+  h += '</div>';
+  el.innerHTML = h;
+  // Clear sidebar
+  document.getElementById('ck-items').innerHTML = '<p style="text-align:center;color:var(--ink3);font-size:.78rem;padding:1rem 0">Pedido completado ✓</p>';
+  document.getElementById('ck-totals').innerHTML = '';
+}
+
+/* Update cart drawer checkout button */
+document.addEventListener('DOMContentLoaded', function(){
+  var cdWaBtn = document.getElementById('cd-wa-btn');
+  if(cdWaBtn){
+    // Add a proper checkout button before the WhatsApp button
+    var ckBtn = document.createElement('button');
+    ckBtn.className = 'cd-checkout';
+    ckBtn.textContent = 'Finalizar compra';
+    ckBtn.style.cssText = 'width:100%;padding:.85rem;background:var(--esm);color:white;border:none;border-radius:3px;font-family:DM Sans,sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;margin-bottom:.6rem;transition:opacity .2s';
+    ckBtn.onclick = function(){ toggleCart(); go('checkout'); };
+    cdWaBtn.parentNode.insertBefore(ckBtn, cdWaBtn);
+  }
+});
 </script>
 </body>
 </html>
