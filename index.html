@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Moncatu — Joyería · Estilo · Elegancia</title>
+<title>Moncatu | Joyería con Alma y Diseño Exclusivo</title>
+<meta name="description" content="Joyería artesanal mexicana en plata .925 y piedras naturales. Diseños exclusivos creados para destacar tu esencia."/>
+<meta property="og:title" content="Moncatu | Joyería con Alma y Diseño Exclusivo"/>
+<meta property="og:description" content="Joyería artesanal mexicana en plata .925 y piedras naturales."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://vonoaweb.github.io/moncatu-web/"/>
+<meta property="og:image" content="https://vonoaweb.github.io/moncatu-web/img/ring_constelacion.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ── RESET ── */
@@ -39,22 +45,67 @@ a{color:inherit;text-decoration:none}
 ──────────────────────────────────── */
 .logo-svg{display:block}
 
+/* ── TOPLINE BAR ── */
+.topline{position:fixed;z-index:210;inset:0 0 auto;background:var(--noche);color:rgba(255,255,255,.78);border-bottom:1px solid rgba(255,255,255,.08)}
+.topline-inner{max-width:1280px;height:34px;margin:0 auto;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
+.topline strong{color:var(--rosa);font-weight:500}
+.topline-links{display:flex;align-items:center;gap:18px;white-space:nowrap}
+.topline-links a{transition:color .18s}
+.topline-links a:hover{color:var(--white)}
+.topline-links .tl-dot{width:4px;height:4px;border-radius:50%;background:var(--esm);display:inline-block}
+
 /* ── NAV ── */
-.nav-wrap{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(248,245,241,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--borde);transition:box-shadow .3s}
+.nav-wrap{position:fixed;top:34px;left:0;right:0;z-index:200;background:rgba(248,245,241,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--borde);transition:box-shadow .3s}
 .nav-wrap.sh{box-shadow:0 2px 24px rgba(59,84,105,0.1)}
 .nav{max-width:1280px;margin:0 auto;padding:0 2.5rem;height:68px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:.6rem;background:none;border:none;padding:0}
 .nav-logo-sep{width:1px;height:26px;background:var(--esm);flex-shrink:0;margin:0 .3rem}
 .nav-logo-name{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;letter-spacing:.22em;color:var(--ink);display:block;line-height:1.1}
 .nav-logo-tag{font-family:'Cormorant Garamond',serif;font-size:.6rem;font-style:italic;color:var(--ink3);display:block;margin-top:1px}
-.nav-ul{display:flex;gap:2rem;list-style:none}
-.nav-ul li button{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);padding:.2rem 0;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s}
-.nav-ul li button:hover,.nav-ul li button.on{color:var(--esm);border-bottom-color:var(--esm)}
+.nav-ul{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-ul li button,.nav-ul li .nav-menu-trigger{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);padding:.2rem 0;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.nav-ul li button:hover,.nav-ul li button.on,.nav-ul li .nav-menu-trigger:hover,.nav-ul li .nav-menu-trigger[aria-expanded="true"]{color:var(--esm);border-bottom-color:var(--esm)}
+.chev{width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-1px);display:inline-block}
 .nav-right{display:flex;align-items:center;gap:1.2rem}
 .nav-right button{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);transition:color .2s}
 .nav-right button:hover{color:var(--esm)}
 .nav-cta-btn{background:var(--esm)!important;color:var(--white)!important;padding:.5rem 1.4rem;border-radius:2px;border:none;transition:background .2s!important}
 .nav-cta-btn:hover{background:var(--azul)!important}
+
+/* ── MEGA MENU ── */
+.mega{position:absolute;top:68px;left:50%;width:min(1180px,calc(100vw - 48px));max-height:calc(100vh - 34px - 68px - 24px);overflow:auto;transform:translateX(-50%) translateY(-10px);opacity:0;pointer-events:none;background:var(--white);border:1px solid var(--borde);box-shadow:0 28px 80px rgba(26,29,46,.18);transition:opacity .18s ease,transform .18s ease;z-index:300}
+.mega.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.mega-grid{display:grid;grid-template-columns:1.05fr 1.2fr .9fr;min-height:360px}
+.mega-panel{padding:28px;border-right:1px solid var(--borde)}
+.mega-panel:last-child{border-right:0}
+.mega-kicker{color:var(--esm);font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
+.mega-cats{display:grid;gap:12px}
+.mega-cat{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:14px;padding:10px;border:1px solid transparent;transition:border-color .18s ease,background .18s ease;text-decoration:none;cursor:pointer}
+.mega-cat:hover{border-color:var(--borde);background:var(--cream)}
+.cat-thumb{width:54px;height:54px;display:grid;place-items:center;background:linear-gradient(135deg,#ede9e3,#fffdfa);border:1px solid var(--borde);color:var(--azul)}
+.cat-thumb svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.35}
+.mega-cat h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500}
+.mega-cat p{color:var(--ink3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;margin-top:2px}
+.mega-cat span.mega-arrow{color:var(--esm);font-size:1.1rem}
+.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fcard{border:1px solid var(--borde);background:var(--cream);overflow:hidden;text-decoration:none;display:block;transition:box-shadow .2s,transform .2s}
+.fcard:hover{box-shadow:0 8px 24px rgba(59,84,105,.1);transform:translateY(-2px)}
+.fcard-art{position:relative;aspect-ratio:1/.78;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 65% 35%,rgba(200,165,181,.32),transparent 32%),linear-gradient(135deg,#fffdfa,#ede9e3 72%)}
+.fcard-art svg{width:78px;height:78px;color:var(--azul);stroke:currentColor;fill:none;stroke-width:1.15;opacity:.92}
+.fcard-badge{position:absolute;top:10px;left:10px;background:var(--esm);color:var(--white);padding:5px 8px;font-size:.5rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.fcard-body{padding:14px}
+.fcard-body h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500}
+.fcard-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;color:var(--azul);font-size:.72rem;font-weight:600}
+.fcard-meta small{color:var(--ink3);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
+.curated{height:100%;background:linear-gradient(160deg,rgba(26,29,46,.98),rgba(59,84,105,.96));color:white;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.curated .mega-kicker{color:var(--rosa)}
+.curated h3{font-family:'Playfair Display',serif;font-size:2rem;line-height:1.02;font-weight:700}
+.curated h3 em{display:block;color:var(--rosa);font-style:italic;font-weight:500}
+.curated>div>p{margin-top:14px;color:rgba(255,255,255,.68);font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.55}
+.curated-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.curated-stat{border:1px solid rgba(255,255,255,.12);padding:14px}
+.curated-stat strong{display:block;color:var(--rosa);font-family:'Playfair Display',serif;font-size:1.5rem;line-height:1}
+.curated-stat span{display:block;margin-top:6px;color:rgba(255,255,255,.5);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase}
 
 /* ── LAYOUT HELPERS ── */
 .w{max-width:1280px;margin:0 auto;padding:0 2.5rem}
@@ -155,7 +206,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 ════════════════════════════════════════ */
 
 /* Hero */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--noche);position:relative}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--noche);position:relative;padding-top:34px}
 .hero-l{display:flex;flex-direction:column;justify-content:center;padding:110px 5rem 80px;z-index:2}
 .hero-eyebrow{font-size:.62rem;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--esm);display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem;animation:fadeup .7s .15s both}
 .hero-eyebrow::before{content:'';width:22px;height:1px;background:var(--esm)}
@@ -174,6 +225,19 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .hero-r-orb2{position:absolute;width:260px;height:260px;border-radius:50%;left:60px;bottom:80px;background:rgba(200,165,181,.06);border:1px solid rgba(200,165,181,.12)}
 .hero-r-mark{position:relative;z-index:2;opacity:.12}
 .hero-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--esm),var(--azul))}
+
+/* Hero showcase card */
+.hero-showcase{position:relative;min-height:620px;display:flex;align-items:center;justify-content:center;padding:88px 42px 60px;overflow:hidden;background:radial-gradient(circle at 70% 24%,rgba(200,165,181,.22),transparent 26%),linear-gradient(145deg,#253545,#3B5469)}
+.showcase-card{width:min(440px,90%);background:rgba(255,253,250,.96);color:var(--ink);border:1px solid rgba(255,255,255,.4);box-shadow:0 40px 90px rgba(0,0,0,.28);animation:fadeup .9s .4s both}
+.showcase-art{min-height:420px;display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,rgba(200,165,181,.28),transparent 34%),linear-gradient(160deg,#fffdfa 0%,#ede9e3 100%);overflow:hidden}
+.showcase-art img{width:100%;height:100%;object-fit:cover}
+.showcase-body{padding:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid var(--borde)}
+.showcase-body h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500}
+.showcase-body p{margin-top:4px;color:var(--ink3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem}
+.showcase-price{color:var(--azul);font-family:'Playfair Display',serif;font-size:1.5rem;white-space:nowrap}
+.floating-note{position:absolute;right:30px;bottom:50px;max-width:230px;background:var(--esm);color:white;padding:18px;box-shadow:0 18px 42px rgba(13,122,111,.25);animation:fadeup .8s .8s both}
+.floating-note strong{display:block;font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1}
+.floating-note span{display:block;margin-top:8px;color:rgba(255,255,255,.72);font-size:.62rem;line-height:1.5;letter-spacing:.08em;text-transform:uppercase}
 
 /* Collection cards */
 .col-section{background:var(--cream);padding:6rem 0}
@@ -436,10 +500,14 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   .hero{grid-template-columns:1fr}
   .hero-l{padding:110px 2.5rem 4rem;text-align:center}
   .hero-eyebrow{justify-content:center}
-  .hero-sub{margin:1.4rem auto 0}
-  .hero-actions{justify-content:center}
+  .hero-sub{margin:1.4rem auto 0; font-size: 1.05rem !important;}
+  .hero-actions{justify-content:center; flex-direction:column; width: 100%; gap: 1rem;}
+  .hero-actions .btn{width: 100%;}
   .hero-stats{justify-content:center}
   .hero-r{display:none}
+  .hero-showcase{display:none}
+  .mega-grid{grid-template-columns:1fr 1fr}
+  .curated{grid-column:1/-1}
   .hl-grid{grid-template-columns:1fr;gap:3rem}
   .hl-frame{max-width:100%}
   .nos-grid{grid-template-columns:1fr;gap:3rem}
@@ -458,6 +526,9 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   .bespoke-visual{min-height:100px;padding:1.5rem}
 }
 @media(max-width:768px){
+  .topline{display:none}
+  .nav-wrap{top:0}
+  .hero{padding-top:0}
   .nav-ul{display:none}
   .nav-logo-tag{display:none}
   .nav{padding:0 1.5rem}
@@ -482,6 +553,9 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   .wa-block{flex-direction:column}
   .cat-tabs{padding:0 1.5rem}
   .ph{padding:6.5rem 1.5rem 2.5rem}
+  .mega{display:none}
+  .floating-note{position:static;max-width:none;width:100%;margin-top:14px}
+  .showcase-art{min-height:320px}
 }
 @media(max-width:480px){
   .proc-grid{grid-template-columns:1fr}
@@ -596,6 +670,20 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 </head>
 <body>
 
+<!-- ══ TOPLINE BAR ══ -->
+<div class="topline" aria-label="Beneficios de compra">
+  <div class="topline-inner">
+    <p><strong>Envío gratis</strong> desde $3,000 MXN · piezas verificadas en Guadalajara</p>
+    <div class="topline-links" aria-hidden="true">
+      <a href="#" onclick="go('contacto');return false;">Citas privadas</a>
+      <span class="tl-dot"></span>
+      <a href="#" onclick="go('contacto');return false;">Garantía Moncatu</a>
+      <span class="tl-dot"></span>
+      <a href="https://wa.me/52330000000" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</div>
+
 <!-- ══ NAV ══ -->
 <header class="nav-wrap" id="navwrap">
   <nav class="nav">
@@ -613,7 +701,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     </button>
     <ul class="nav-ul">
       <li><button id="nb-inicio" class="on" onclick="go('inicio')">Inicio</button></li>
-      <li><button id="nb-colecciones" onclick="go('colecciones')">Colecciones</button></li>
+      <li><button class="nav-menu-trigger" type="button" id="collectionsBtn" aria-expanded="false" onclick="toggleMegaMenu()">Colecciones <span class="chev" aria-hidden="true"></span></button></li>
       <li><button id="nb-nosotros" onclick="go('nosotros')">Nosotros</button></li>
       <li><button id="nb-contacto" onclick="go('contacto')">Contacto</button></li>
     </ul>
@@ -625,6 +713,73 @@ footer{background:var(--noche);padding:4rem 0 2rem}
       <button class="nav-cta-btn" onclick="go('contacto')">Consultar</button>
     </div>
   </nav>
+
+  <!-- MEGA MENU -->
+  <div class="mega" id="mega" aria-label="Menú de colecciones">
+    <div class="mega-grid">
+      <section class="mega-panel">
+        <p class="mega-kicker">Comprar por categoría</p>
+        <div class="mega-cats">
+          <a class="mega-cat" href="#" onclick="closeMegaMenu();go('colecciones');window.__moncatuActiveCat='anillos';if(typeof loadColecciones==='function')loadColecciones('anillos');return false;">
+            <span class="cat-thumb" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="29" r="13"/><path d="M16 18h16l-5-7h-6l-5 7Z"/></svg></span>
+            <span><h3>Anillos</h3><p>Compromiso, statement y diario</p></span>
+            <span class="mega-arrow">→</span>
+          </a>
+          <a class="mega-cat" href="#" onclick="closeMegaMenu();go('colecciones');window.__moncatuActiveCat='collares';if(typeof loadColecciones==='function')loadColecciones('collares');return false;">
+            <span class="cat-thumb" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 10c2 17 26 17 28 0"/><path d="M24 27v9"/><path d="m19 36 5 5 5-5"/></svg></span>
+            <span><h3>Collares</h3><p>Cadenas, dijes y gargantillas</p></span>
+            <span class="mega-arrow">→</span>
+          </a>
+          <a class="mega-cat" href="#" onclick="closeMegaMenu();go('colecciones');window.__moncatuActiveCat='aretes';if(typeof loadColecciones==='function')loadColecciones('aretes');return false;">
+            <span class="cat-thumb" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="17" cy="16" r="5"/><circle cx="31" cy="16" r="5"/><path d="M17 21v15M31 21v15"/><path d="M13 36h8M27 36h8"/></svg></span>
+            <span><h3>Aretes</h3><p>Studs, hoops y piezas de noche</p></span>
+            <span class="mega-arrow">→</span>
+          </a>
+          <a class="mega-cat" href="#" onclick="closeMegaMenu();go('colecciones');window.__moncatuActiveCat='pulseras';if(typeof loadColecciones==='function')loadColecciones('pulseras');return false;">
+            <span class="cat-thumb" aria-hidden="true"><svg viewBox="0 0 48 48"><ellipse cx="24" cy="25" rx="16" ry="10"/><path d="M12 19c5 4 19 4 24 0"/></svg></span>
+            <span><h3>Pulseras</h3><p>Brazaletes y piezas ajustables</p></span>
+            <span class="mega-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="mega-panel">
+        <p class="mega-kicker">Piezas destacadas</p>
+        <div class="featured-grid" id="mega-featured">
+          <a class="fcard" href="#" onclick="closeMegaMenu();go('colecciones');return false;">
+            <div class="fcard-art"><span class="fcard-badge">Nuevo</span><svg viewBox="0 0 100 100"><circle cx="50" cy="58" r="24"/><path d="M34 35h32l-10-14H44L34 35Z"/><path d="M44 21 50 35l6-14"/></svg></div>
+            <div class="fcard-body"><h3>Anillo Solara</h3><div class="fcard-meta"><span>$2,890 MXN</span><small>Plata .925</small></div></div>
+          </a>
+          <a class="fcard" href="#" onclick="closeMegaMenu();go('colecciones');return false;">
+            <div class="fcard-art"><span class="fcard-badge">Favorito</span><svg viewBox="0 0 100 100"><path d="M25 20c3 28 47 28 50 0"/><path d="M50 53v22"/><path d="m38 75 12 12 12-12"/></svg></div>
+            <div class="fcard-body"><h3>Collar Aurora</h3><div class="fcard-meta"><span>$3,420 MXN</span><small>Baño oro</small></div></div>
+          </a>
+          <a class="fcard" href="#" onclick="closeMegaMenu();go('colecciones');return false;">
+            <div class="fcard-art"><svg viewBox="0 0 100 100"><circle cx="35" cy="27" r="10"/><circle cx="65" cy="27" r="10"/><path d="M35 37v32M65 37v32"/><path d="M25 69h20M55 69h20"/></svg></div>
+            <div class="fcard-body"><h3>Aretes Luna</h3><div class="fcard-meta"><span>$1,760 MXN</span><small>Perla</small></div></div>
+          </a>
+          <a class="fcard" href="#" onclick="closeMegaMenu();go('colecciones');return false;">
+            <div class="fcard-art"><span class="fcard-badge">Ed. limitada</span><svg viewBox="0 0 100 100"><ellipse cx="50" cy="54" rx="34" ry="20"/><path d="M20 45c13 10 47 10 60 0"/><circle cx="50" cy="35" r="6"/></svg></div>
+            <div class="fcard-body"><h3>Pulsera Serena</h3><div class="fcard-meta"><span>$2,180 MXN</span><small>Ajustable</small></div></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="mega-panel curated">
+        <div>
+          <p class="mega-kicker">Guía Moncatu</p>
+          <h3>Regalos listos <em>para entregar</em></h3>
+          <p>Una selección pensada por ocasión, presupuesto y estilo. Ideal para que el sitio se sienta acompañado, no vacío.</p>
+        </div>
+        <div class="curated-stats">
+          <div class="curated-stat"><strong>24h</strong><span>respuesta por WhatsApp</span></div>
+          <div class="curated-stat"><strong>+120</strong><span>piezas disponibles</span></div>
+          <div class="curated-stat"><strong>.925</strong><span>plata verificada</span></div>
+          <div class="curated-stat"><strong>GDL</strong><span>atención local</span></div>
+        </div>
+      </section>
+    </div>
+  </div>
 </header>
 
 <!-- FLOTANTES -->
@@ -648,11 +803,11 @@ footer{background:var(--noche);padding:4rem 0 2rem}
         </svg>
       </div>
       <div class="hero-hdiv"></div>
-      <h1 class="hero-h1">MONCATU<em>Joyería</em></h1>
-      <p class="hero-sub">Descubre piezas únicas que expresan tu estilo. Joyería selecta con personalidad y elegancia.</p>
+      <h1 class="hero-h1" style="font-size: clamp(2.8rem, 5vw, 5.5rem); letter-spacing: 0.02em;">MONCATU<em style="font-size: 0.8em; margin-top: -0.1em; display: block;">Joyería con Alma</em></h1>
+      <p class="hero-sub" style="font-size: 1.15rem; max-width: 440px;">Piezas limitadas en plata .925 y piedras naturales. Diseño artesanal mexicano creado para destacar tu esencia.</p>
       <div class="hero-actions">
-        <button class="btn btn-esm" onclick="go('colecciones')">Explorar colecciones</button>
-        <button class="btn btn-white-ghost" onclick="go('contacto')">Pieza a medida</button>
+        <button class="btn btn-esm" style="padding: 1.1rem 2.8rem; font-size: 0.75rem; letter-spacing: 0.2em; box-shadow: 0 8px 30px rgba(13,122,111,0.4); transform: translateY(-2px);" onclick="go('colecciones')">VER COLECCIÓN</button>
+        <button class="btn btn-white-ghost" style="padding: 1.1rem 2.5rem; font-size: 0.75rem; letter-spacing: 0.2em;" onclick="go('contacto')">PIEZA A MEDIDA</button>
       </div>
       <div class="hero-stats">
         <div><div class="hstat-n">+200</div><div class="hstat-l">Piezas selectas</div></div>
@@ -660,27 +815,33 @@ footer{background:var(--noche);padding:4rem 0 2rem}
         <div><div class="hstat-n">2023</div><div class="hstat-l">Fundada en GDL</div></div>
       </div>
     </div>
-    <div class="hero-r">
-      <div class="hero-r-bg"></div>
-      <div class="hero-r-orb1"></div>
-      <div class="hero-r-orb2"></div>
-      <div class="hero-r-mark">
-        <svg width="300" height="336" viewBox="0 0 60 68" fill="none">
-          <polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3" stroke-linejoin="round" fill="none"/>
-          <polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3" stroke-linejoin="round" fill="none"/>
-        </svg>
-      </div>
-      <div class="hero-bar"></div>
+    <div class="hero-showcase">
+      <article class="showcase-card" id="hero-showcase-card">
+        <div class="showcase-art">
+          <img src="https://vonoaweb.github.io/moncatu-web/img/ring_constelacion.png" alt="Anillo Constelación" />
+        </div>
+        <div class="showcase-body">
+          <div>
+            <h2>Anillo Constelación</h2>
+            <p>Plata .925 · zafiro natural · edición limitada</p>
+          </div>
+          <strong class="showcase-price">$4,800</strong>
+        </div>
+      </article>
+      <aside class="floating-note">
+        <strong>Compra guiada</strong>
+        <span>Búsqueda, categorías y acceso rápido a WhatsApp/cita.</span>
+      </aside>
     </div>
   </section>
 
   <!-- TRUST -->
-  <div class="trust">
-    <div class="trust-item"><span class="trust-dot"></span>Envío gratis en pedidos +$3,000 MXN</div>
-    <div class="trust-item"><span class="trust-dot"></span>Envío a todo México</div>
-    <div class="trust-item"><span class="trust-dot"></span>Garantía de por vida</div>
-    <div class="trust-item"><span class="trust-dot"></span>Piezas exclusivas</div>
-    <div class="trust-item"><span class="trust-dot"></span>Pago seguro</div>
+  <div class="trust" style="padding: 1.2rem 0;">
+    <div class="trust-item" style="border: none; padding: 0.5rem 1.5rem;"><svg viewBox="0 0 24 24" width="16" height="16" fill="var(--esm)" style="margin-right:0.4rem;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Pago 100% Seguro</div>
+    <div class="trust-item" style="border: none; padding: 0.5rem 1.5rem;"><svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--esm)" stroke-width="2" fill="none" stroke-linecap="round" style="margin-right:0.4rem;"><path d="M5 9l3 3 5-5"/></svg> Envío gratis +$3,000 MXN</div>
+    <div class="trust-item" style="border: none; padding: 0.5rem 1.5rem;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--esm)" stroke-width="2" style="margin-right:0.4rem;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Envío Nacional Seguro</div>
+    <div class="trust-item" style="border: none; padding: 0.5rem 1.5rem;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--esm)" stroke-width="2" style="margin-right:0.4rem;"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4"/></svg> Garantía de Calidad</div>
+    <div class="trust-item" style="border: none; padding: 0.5rem 1.5rem;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--esm)" stroke-width="2" style="margin-right:0.4rem;"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/></svg> Plata .925 Auténtica</div>
   </div>
 
   <!-- MARQUEE -->
@@ -771,12 +932,12 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   </section>
 
   <!-- NEWSLETTER -->
-  <section class="nl-sec">
+  <section class="nl-sec" style="background: linear-gradient(135deg, var(--noche) 0%, var(--azul) 100%);">
     <div class="w"><div class="nl-inner rv">
-      <h2 class="nl-title">Sé la primera en saberlo</h2>
-      <p class="nl-sub">Nuevas colecciones, historias de diseño y ofertas exclusivas para nuestra comunidad.</p>
-      <div class="nl-form"><input class="nl-input" type="email" placeholder="tu@email.com" id="nle"/><button class="nl-btn" id="nlb">Suscribirme</button></div>
-      <p class="nl-note">Sin spam. Cancela cuando quieras.</p>
+      <h2 class="nl-title">Únete a nuestro círculo exclusivo</h2>
+      <p class="nl-sub">Recibe <strong style="color:var(--rosa)">10% de descuento</strong> en tu primera compra, acceso anticipado a nuevas colecciones e historias de diseño.</p>
+      <div class="nl-form"><input class="nl-input" type="email" placeholder="Ingresa tu email" id="nle" style="font-family:'DM Sans',sans-serif;"/><button class="nl-btn" id="nlb" style="background:var(--esm); color:var(--white);">Suscribirme</button></div>
+      <p class="nl-note" style="color: rgba(255,255,255,0.6);">Al suscribirte aceptas nuestras políticas de privacidad. Sin spam, garantizado.</p>
     </div></div>
   </section>
 
@@ -791,11 +952,11 @@ footer{background:var(--noche);padding:4rem 0 2rem}
         <p class="ft-desc">Joyería selecta con piezas únicas y exclusivas para ti.</p>
         <div class="ft-socs"><button class="ft-soc">IG</button><button class="ft-soc">FB</button><button class="ft-soc">TT</button><button class="ft-soc">WA</button></div>
       </div>
-      <div class="ft-col"><h4>Colecciones</h4><ul class="ft-li"><li><button onclick="go('colecciones')">Colección Cielo</button></li><li><button onclick="go('colecciones')">Colección Rosa</button></li><li><button onclick="go('colecciones')">Colección Nocturna</button></li><li><button onclick="go('contacto')">Diseño a medida</button></li></ul></div>
-      <div class="ft-col"><h4>Información</h4><ul class="ft-li"><li><button onclick="go('nosotros')">Nuestra historia</button></li><li><button onclick="go('nosotros')">Nuestro servicio</button></li><li><button onclick="go('contacto')">Preguntas frecuentes</button></li></ul></div>
-      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:hola@moncatu.mx">hola@moncatu.mx</a></li><li><a href="https://wa.me/52330000000" target="_blank">WhatsApp</a></li><li><button onclick="go('contacto')">Agendar consulta</button></li></ul></div>
+      <div class="ft-col"><h4>Colecciones</h4><ul class="ft-li"><li><button onclick="go('colecciones')">Anillos</button></li><li><button onclick="go('colecciones')">Collares</button></li><li><button onclick="go('colecciones')">Pulseras</button></li><li><button onclick="go('colecciones')">Aretes</button></li></ul></div>
+      <div class="ft-col"><h4>Políticas y Ayuda</h4><ul class="ft-li"><li><button onclick="go('contacto')">Envíos y Devoluciones</button></li><li><button onclick="go('contacto')">Garantía Moncatu</button></li><li><button onclick="go('contacto')">Preguntas Frecuentes</button></li><li><button onclick="go('contacto')">Cuidado de Joyería</button></li></ul></div>
+      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:hola@moncatu.mx" style="text-decoration:underline;">hola@moncatu.mx</a></li><li><a href="https://wa.me/52330000000" target="_blank" style="text-decoration:underline;">WhatsApp (33) 0000 0000</a></li><li><button onclick="go('contacto')">Agendar Cita Privada</button></li></ul></div>
     </div>
-    <div class="ft-bot"><span class="ft-copy">© 2026 Moncatu® — Todos los derechos reservados. Guadalajara, México.</span><div class="ft-badges"><span class="ft-badge">Plata .925</span><span class="ft-badge">Envío nacional</span><span class="ft-badge">Piezas exclusivas</span></div></div>
+    <div class="ft-bot"><span class="ft-copy">© 2026 Moncatu® — Todos los derechos reservados. Guadalajara, Jalisco, México. <br> <span style="font-size:0.55rem; color:rgba(255,255,255,0.2); margin-top:0.4rem; display:block;">Pago procesado de forma segura mediante encriptación SSL de 256 bits.</span></span><div class="ft-badges"><span class="ft-badge">Plata .925</span><span class="ft-badge">Envío nacional</span><span class="ft-badge">Piezas exclusivas</span></div></div>
   </div></footer>
 </div><!-- /inicio -->
 
@@ -1125,11 +1286,17 @@ function go(page, opts){
   if(__MONCATU_PAGES.indexOf(page) === -1) page = 'inicio';
   var pageEl = document.getElementById('page-'+page);
   if(!pageEl) return;
+  closeMegaMenu();
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
   pageEl.classList.add('on');
-  document.querySelectorAll('.nav-ul li button').forEach(function(b){b.classList.remove('on')});
+  document.querySelectorAll('.nav-ul li button, .nav-ul li .nav-menu-trigger').forEach(function(b){b.classList.remove('on')});
   var nb=document.getElementById('nb-'+page);
   if(nb) nb.classList.add('on');
+  // Special: highlight collectionsBtn when on colecciones page
+  if(page==='colecciones'){
+    var cb=document.getElementById('collectionsBtn');
+    if(cb) cb.classList.add('on');
+  }
   // Actualiza URL: refresh preserva la ruta, link compartible (#colecciones)
   if(!opts.skipHash){
     var newHash = page === 'inicio' ? '' : '#'+page;
@@ -1168,7 +1335,34 @@ window.addEventListener('hashchange', function(){
 window.addEventListener('scroll',function(){
   document.getElementById('navwrap').classList.toggle('sh',window.scrollY>10);
   document.getElementById('btt').classList.toggle('on',window.scrollY>400);
+  // Close mega menu on scroll
+  if(window.scrollY>60) closeMegaMenu();
 },{passive:true});
+
+/* ── MEGA MENU ── */
+function toggleMegaMenu(){
+  var m=document.getElementById('mega');
+  var btn=document.getElementById('collectionsBtn');
+  if(!m)return;
+  var open=m.classList.toggle('open');
+  if(btn) btn.setAttribute('aria-expanded',open);
+}
+function closeMegaMenu(){
+  var m=document.getElementById('mega');
+  var btn=document.getElementById('collectionsBtn');
+  if(m) m.classList.remove('open');
+  if(btn) btn.setAttribute('aria-expanded','false');
+}
+// Close when clicking outside
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mega');
+  if(!m||!m.classList.contains('open'))return;
+  if(!e.target.closest('.mega')&&!e.target.closest('#collectionsBtn'))closeMegaMenu();
+});
+// Close on Escape
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')closeMegaMenu();
+});
 
 /* ── CATEGORY TABS (filter colecciones grid) ── */
 var tabs=document.querySelectorAll('.cat-tab');
