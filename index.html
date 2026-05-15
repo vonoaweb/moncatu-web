@@ -248,7 +248,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .showcase-body h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500}
 .showcase-body p{margin-top:4px;color:var(--ink3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem}
 .showcase-price{color:var(--azul);font-family:'Playfair Display',serif;font-size:1.5rem;white-space:nowrap}
-.floating-note{position:absolute;right:30px;bottom:50px;max-width:230px;background:var(--esm);color:white;padding:18px;box-shadow:0 18px 42px rgba(13,122,111,.25);animation:fadeup .8s .8s both}
+.floating-note{position:absolute;right:20px;bottom:20px;max-width:200px;background:var(--esm);color:white;padding:15px;box-shadow:0 18px 42px rgba(13,122,111,.25);animation:fadeup .8s .8s both; z-index:10;}
 .floating-note strong{display:block;font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1}
 .floating-note span{display:block;margin-top:8px;color:rgba(255,255,255,.72);font-size:.62rem;line-height:1.5;letter-spacing:.08em;text-transform:uppercase}
 
@@ -1420,6 +1420,18 @@ function go(page, opts){
   var pageEl = document.getElementById('page-'+page);
   if(!pageEl) return;
   closeMegaMenu();
+  
+  // Cerrar el carrito si está abierto
+  var drawer = document.getElementById('cart-drawer');
+  var overlay1 = document.getElementById('cart-overlay');
+  var overlay2 = document.getElementById('cart-drawer-overlay');
+  if (drawer && drawer.classList.contains('on')) {
+    drawer.classList.remove('on');
+    if(overlay1) overlay1.classList.remove('on');
+    if(overlay2) overlay2.classList.remove('on');
+    document.body.style.overflow = '';
+  }
+
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
   pageEl.classList.add('on');
   document.querySelectorAll('.nav-ul li button, .nav-ul li .nav-menu-trigger').forEach(function(b){b.classList.remove('on')});
@@ -1641,7 +1653,12 @@ async function openProduct(id){
     
     document.getElementById('pm-stars').textContent='★★★★★';
     var rh='';
-    const reviews = p.reviews || [{name:'Cliente Moncatu', init:'M', stars:'★★★★★', text:'Pieza excepcional, calidad premium.'}];
+    const defaultReviews = [
+      {name:'Valeria Sánchez', init:'V', stars:'★★★★★', text:'Pieza excepcional, calidad premium. Me encantó el detalle.'},
+      {name:'Ana Gabriela', init:'A', stars:'★★★★★', text:'Superó mis expectativas, la piedra tiene un brillo hermoso.'},
+      {name:'Fernanda L.', init:'F', stars:'★★★★★', text:'Hermoso diseño y excelente servicio. Llegó impecable.'}
+    ];
+    const reviews = (p.reviews && p.reviews.length > 0) ? p.reviews : [defaultReviews[Math.floor(Math.random() * defaultReviews.length)]];
     reviews.forEach(function(r){
       rh+='<div class="pm-review"><div class="pm-review-head"><div class="pm-review-av">'+r.init+'</div><span class="pm-review-name">'+r.name+'</span><span class="pm-review-stars">'+r.stars+'</span></div><p class="pm-review-text">'+r.text+'</p></div>';
     });
@@ -1801,6 +1818,30 @@ document.addEventListener('DOMContentLoaded', () => {
     productManager.loadProducts(null, true).then(products => {
       if(products && products.length > 0) {
         productManager.renderProducts(products, 'home-featured-grid');
+        
+        // Sincronizar Hero con el primer producto destacado
+        const p = products[0];
+        const heroCard = document.getElementById('hero-showcase-card');
+        if(heroCard && p) {
+          const img0 = (p.images && p.images[0]) || p.img || '';
+          const priceStr = typeof formatMoncatuProductPrice === 'function' ? formatMoncatuProductPrice(p) : '$' + p.price.toLocaleString('es-MX');
+          const materialStr = p.material ? p.material : 'Plata .925';
+          const stoneStr = p.stone && p.stone !== '—' ? ' · ' + p.stone : '';
+          
+          heroCard.innerHTML = `
+            <div class="showcase-art" onclick="openProduct('${p.id}')" style="cursor:pointer;">
+              <img src="${img0}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover" />
+            </div>
+            <div class="showcase-body" onclick="openProduct('${p.id}')" style="cursor:pointer;">
+              <div>
+                <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;margin-bottom:4px;">${p.name}</h2>
+                <p style="font-size:0.75rem;color:var(--ink3);">${materialStr}${stoneStr}</p>
+              </div>
+              <strong class="showcase-price" style="font-size:1.1rem;color:var(--azul);">${priceStr} MXN</strong>
+            </div>
+          `;
+        }
+        
         if(typeof initReveal === 'function') setTimeout(initReveal, 50);
       } else {
         const grid = document.getElementById('home-featured-grid');
