@@ -303,6 +303,14 @@ class ProductManager {
       snapshot.forEach(doc => {
         this.products.push({ id: doc.id, ...doc.data() });
       });
+
+      // Si Firebase está vacío, caer a demo para evitar página vacía
+      if (this.products.length === 0) {
+        console.warn('Moncatu: Firebase no tiene productos. Usando demo.');
+        if (typeof window !== 'undefined') window.__MONCATU_CATALOG_SOURCE__ = 'demo';
+        return this.applyDemoProducts(category, featured);
+      }
+
       if (typeof window !== 'undefined') {
         window.allProducts = this.products.slice();
         window.__MONCATU_CATALOG_SOURCE__ = 'firebase';
