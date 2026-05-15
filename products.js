@@ -212,9 +212,35 @@ class ProductManager {
     if (category) list = list.filter((p) => p.category === category);
     if (featured) list = list.filter((p) => p.featured === true);
     list = list.slice().sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    list = this._qualityFilter(list);
     this.products = list;
     if (typeof window !== 'undefined') window.allProducts = list;
     return list;
+  }
+
+  // Filtro de calidad: elimina productos con datos de prueba/absurdos
+  _qualityFilter(products) {
+    return products.filter(p => {
+      const price = Number(p.price) || 0;
+      // Filtrar precios absurdos (< $100 MXN o > $100,000 MXN)
+      if (price < 100 || price > 100000) {
+        console.warn(`[Moncatu] Producto filtrado por precio: ${p.name} ($${price})`);
+        return false;
+      }
+      // Filtrar nombres sospechosos (1 sola palabra sin mayúsculas)
+      const name = (p.name || '').trim();
+      if (name.length < 3) {
+        console.warn(`[Moncatu] Producto filtrado por nombre: "${name}"`);
+        return false;
+      }
+      return true;
+    }).map(p => {
+      // Auto-capitalizar nombres si es necesario
+      if (p.name && p.name === p.name.toLowerCase()) {
+        p.name = p.name.charAt(0).toUpperCase() + p.name.slice(1);
+      }
+      return p;
+    });
   }
 
   // Cargar productos (Medusa tiene prioridad si está vivo)
@@ -237,12 +263,14 @@ class ProductManager {
         clearTimeout(timeout);
 
         if (list.length > 0) {
-          this.products = list;
+          // Apply quality filter to Medusa products too
+          const filtered = this._qualityFilter(list);
+          this.products = filtered;
           if (typeof window !== 'undefined') {
-            window.allProducts = list.slice();
+            window.allProducts = filtered.slice();
             window.__MONCATU_CATALOG_SOURCE__ = 'medusa';
           }
-          return list;
+          return filtered;
         }
         console.warn('Moncatu: Medusa devolvió 0 productos. Usando demo.');
       } catch (err) {
@@ -567,7 +595,7 @@ class ProductManager {
                   <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   Añadir al carrito
                 </button>
-                <a href="https://wa.me/52330000000?text=${encodeURIComponent(waMsg)}" class="pm-wa-btn" target="_blank" rel="noopener">
+                <a href="https://wa.me/5215644645574?text=${encodeURIComponent(waMsg)}" class="pm-wa-btn" target="_blank" rel="noopener">
                   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
                   Comprar directo
                 </a>

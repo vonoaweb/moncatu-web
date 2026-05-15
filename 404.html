@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<title>Redirigiendo… — Moncatu</title>
+<script>
+// GitHub Pages SPA redirect
+// Convierte /colecciones → /#colecciones, /nosotros → /#nosotros, etc.
+(function(){
+  var path = window.location.pathname;
+  // Remove base path if on GitHub Pages (e.g. /moncatu-web/)
+  var base = '/moncatu-web';
+  if(path.indexOf(base) === 0) path = path.slice(base.length);
+  // Remove leading/trailing slashes
+  path = path.replace(/^\/|\/$/g, '');
+  if(path && path !== 'index.html'){
+    var hash = '#' + path;
+    window.location.replace(
+      window.location.origin + base + '/' + hash
+    );
+  } else {
+    window.location.replace(window.location.origin + base + '/');
+  }
+})();
+</script>
+</head>
+<body>
+<p style="font-family:sans-serif;text-align:center;margin-top:4rem;color:#767676">Redirigiendo a Moncatu…</p>
+</body>
+</html>

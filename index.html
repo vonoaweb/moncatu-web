@@ -201,6 +201,19 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes fadeup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
+/* ── TOAST NOTIFICATIONS ── */
+.cart-notification{position:fixed;top:-80px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--noche);color:var(--white);padding:.85rem 1.6rem;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,.25);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.06em;transition:top .45s cubic-bezier(.4,0,.2,1),opacity .45s;opacity:0;white-space:nowrap;border-bottom:2px solid var(--esm)}
+.cart-notification.show{top:110px;opacity:1}
+.cart-notification .notification-content{display:flex;align-items:center;gap:.6rem}
+.cart-notification .notification-content svg{color:var(--esm);flex-shrink:0}
+.cart-notification.error{border-bottom-color:#c44}
+
+/* ── NEWSLETTER FEEDBACK ── */
+.nl-feedback{font-size:.72rem;margin-top:.5rem;font-weight:500;letter-spacing:.06em;opacity:0;transition:opacity .3s}
+.nl-feedback.show{opacity:1}
+.nl-feedback.success{color:rgba(255,255,255,.9)}
+.nl-feedback.error{color:#ff7b7b}
+
 /* ════════════════════════════════════════
    PAGE 1 — INICIO
 ════════════════════════════════════════ */
@@ -749,7 +762,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
       <span class="tl-dot"></span>
       <a href="#" onclick="go('contacto');return false;">Garantía Moncatu</a>
       <span class="tl-dot"></span>
-      <a href="https://wa.me/52330000000" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://wa.me/5215644645574" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </div>
@@ -853,7 +866,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 </header>
 
 <!-- FLOTANTES -->
-<a href="https://wa.me/52330000000?text=Hola%20Moncatu!" class="wa-float" target="_blank" rel="noopener" title="WhatsApp">
+<a href="https://wa.me/5215644645574?text=Hola%20Moncatu!%20Me%20interesa%20conocer%20sus%20piezas." class="wa-float" target="_blank" rel="noopener" title="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 <button id="btt" title="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -941,23 +954,23 @@ footer{background:var(--noche);padding:4rem 0 2rem}
       <div class="hl-grid">
         <div class="hl-vis rvl">
           <div class="hl-ring"></div>
-          <div class="hl-frame"><img src="https://vonoaweb.github.io/moncatu-web/img/ring_constelacion.png" alt="Anillo Constelación" style="width:100%;height:100%;object-fit:cover"/></div>
-          <div class="hl-tag"><div class="hl-tag-n">12</div><div class="hl-tag-l">Ed. Limitada</div></div>
+          <div class="hl-frame"><img src="https://vonoaweb.github.io/moncatu-web/img/earrings_esmeralda.png" alt="Aretes Esmeralda" style="width:100%;height:100%;object-fit:cover"/></div>
+          <div class="hl-tag"><div class="hl-tag-n">✦</div><div class="hl-tag-l">Exclusivo</div></div>
         </div>
         <div class="rvr">
           <p class="eyebrow">Pieza destacada · 2026</p>
-          <h2 class="hl-name">Anillo<em>Constelación</em></h2>
-          <p class="hl-sub">Zafiros azules en el patrón de Orión, engastados en plata .925. Una obra de arte que llevas en el dedo.</p>
+          <h2 class="hl-name">Aretes<em>Esmeralda</em></h2>
+          <p class="hl-sub">Esmeraldas colombianas certificadas engastadas en plata oxidada .925. Alta joyería con identidad latinoamericana.</p>
           <div class="specs">
-            <div class="spec-row"><span class="spec-k">Material</span><span class="spec-v">Plata .925 esterlina</span></div>
-            <div class="spec-row"><span class="spec-k">Piedra</span><span class="spec-v">Zafiro natural certificado</span></div>
-            <div class="spec-row"><span class="spec-k">Tallas</span><span class="spec-v">6 / 7 / 8 US</span></div>
+            <div class="spec-row"><span class="spec-k">Material</span><span class="spec-v">Plata oxidada .925</span></div>
+            <div class="spec-row"><span class="spec-k">Piedra</span><span class="spec-v">Esmeralda colombiana certificada</span></div>
+            <div class="spec-row"><span class="spec-k">Peso</span><span class="spec-v">6.4 g</span></div>
             <div class="spec-row"><span class="spec-k">Entrega</span><span class="spec-v">7–14 días hábiles</span></div>
           </div>
-          <div class="hl-price">$4,800 MXN</div>
+          <div class="hl-price">$5,200 MXN</div>
           <div class="hl-acts">
-            <button class="btn btn-dark" onclick="go('contacto')">Reservar mi pieza</button>
-            <button class="btn btn-outline" onclick="go('contacto')">Más información</button>
+            <button class="btn btn-dark" onclick="openProduct('earrings_esmeralda')">Ver detalles</button>
+            <a href="https://wa.me/5215644645574?text=Hola%20Moncatu!%20Me%20interesan%20los%20Aretes%20Esmeralda." class="btn btn-outline" target="_blank" rel="noopener">Consultar por WhatsApp</a>
           </div>
         </div>
       </div>
@@ -985,7 +998,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
         <div class="proc-card rv" style="transition-delay:.16s"><div class="proc-n">03</div><div class="proc-ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="#0D7A6F" stroke-width="1.5"/><circle cx="9" cy="9" r="2.5" fill="#0D7A6F" opacity=".35"/></svg></div><div class="proc-name">Confirma</div><div class="proc-txt">Elige tu pieza, confirma los detalles y realiza tu pedido de forma segura.</div></div>
         <div class="proc-card rv" style="transition-delay:.24s"><div class="proc-n">04</div><div class="proc-ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="#0D7A6F" stroke-width="1.5"/><path d="M5 9l3 3 5-5" stroke="#0D7A6F" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="proc-name">Recibe</div><div class="proc-txt">Tu joya llega con empaque premium, certificado de autenticidad y garantía.</div></div>
       </div>
-      <div class="rv" style="text-align:center;margin-top:2.5rem"><button class="btn btn-outline" onclick="go('nosotros')">Ver proceso completo →</button></div>
+      <div class="rv" style="text-align:center;margin-top:2.5rem"><button class="btn btn-outline" onclick="go('nosotros');setTimeout(function(){var el=document.querySelector('#page-nosotros .psteps');if(el){var y=el.getBoundingClientRect().top+window.scrollY-140;window.scrollTo({top:y,behavior:'smooth'})}},200)">Ver proceso completo →</button></div>
     </div>
   </section>
 
@@ -1020,11 +1033,11 @@ footer{background:var(--noche);padding:4rem 0 2rem}
           <span class="ft-name">MONCATU</span>
         </div>
         <p class="ft-desc">Joyería selecta con piezas únicas y exclusivas para ti.</p>
-        <div class="ft-socs"><button class="ft-soc">IG</button><button class="ft-soc">FB</button><button class="ft-soc">TT</button><button class="ft-soc">WA</button></div>
+        <div class="ft-socs"><a href="https://www.instagram.com/moncatu_joya/" target="_blank" rel="noopener" class="ft-soc" title="Instagram">IG</a><button class="ft-soc" title="Facebook">FB</button><button class="ft-soc" title="TikTok">TT</button><a href="https://wa.me/5215644645574" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp">WA</a></div>
       </div>
       <div class="ft-col"><h4>Colecciones</h4><ul class="ft-li"><li><button onclick="go('colecciones')">Anillos</button></li><li><button onclick="go('colecciones')">Collares</button></li><li><button onclick="go('colecciones')">Pulseras</button></li><li><button onclick="go('colecciones')">Aretes</button></li></ul></div>
       <div class="ft-col"><h4>Políticas y Ayuda</h4><ul class="ft-li"><li><button onclick="go('contacto')">Envíos y Devoluciones</button></li><li><button onclick="go('contacto')">Garantía Moncatu</button></li><li><button onclick="go('contacto')">Preguntas Frecuentes</button></li><li><button onclick="go('contacto')">Cuidado de Joyería</button></li></ul></div>
-      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:hola@moncatu.mx" style="text-decoration:underline;">hola@moncatu.mx</a></li><li><a href="https://wa.me/52330000000" target="_blank" style="text-decoration:underline;">WhatsApp (33) 0000 0000</a></li><li><button onclick="go('contacto')">Agendar Cita Privada</button></li></ul></div>
+      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:contacto@moncatu.com" style="text-decoration:underline;">contacto@moncatu.com</a></li><li><a href="https://wa.me/5215644645574?text=Hola%20Moncatu!" target="_blank" style="text-decoration:underline;">WhatsApp</a></li><li><button onclick="go('contacto')">Agendar Cita Privada</button></li></ul></div>
     </div>
     <div class="ft-bot"><span class="ft-copy">© 2026 Moncatu® — Todos los derechos reservados. Guadalajara, Jalisco, México. <br> <span style="font-size:0.55rem; color:rgba(255,255,255,0.2); margin-top:0.4rem; display:block;">Pago procesado de forma segura mediante encriptación SSL de 256 bits.</span></span><div class="ft-badges"><span class="ft-badge">Plata .925</span><span class="ft-badge">Envío nacional</span><span class="ft-badge">Piezas exclusivas</span></div></div>
   </div></footer>
@@ -1089,10 +1102,10 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 
   <footer><div class="w">
     <div class="ft-grid">
-      <div><div class="ft-logo"><svg width="26" height="29" viewBox="0 0 60 68" fill="none"><polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3"/><polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3"/></svg><div style="width:1px;height:20px;background:rgba(13,122,111,.5);margin:0 .35rem"></div><span class="ft-name">MONCATU</span></div><p class="ft-desc">Joyería selecta con piezas únicas y exclusivas.</p><div class="ft-socs"><button class="ft-soc">IG</button><button class="ft-soc">FB</button><button class="ft-soc">TT</button><button class="ft-soc">WA</button></div></div>
+      <div><div class="ft-logo"><svg width="26" height="29" viewBox="0 0 60 68" fill="none"><polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3"/><polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3"/></svg><div style="width:1px;height:20px;background:rgba(13,122,111,.5);margin:0 .35rem"></div><span class="ft-name">MONCATU</span></div><p class="ft-desc">Joyería selecta con piezas únicas y exclusivas.</p><div class="ft-socs"><a href="https://www.instagram.com/moncatu_joya/" target="_blank" rel="noopener" class="ft-soc" title="Instagram">IG</a><button class="ft-soc" title="Facebook">FB</button><button class="ft-soc" title="TikTok">TT</button><a href="https://wa.me/5215644645574" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp">WA</a></div></div>
       <div class="ft-col"><h4>Categorías</h4><ul class="ft-li"><li><button onclick="go('colecciones')">Anillos</button></li><li><button onclick="go('colecciones')">Collares</button></li><li><button onclick="go('colecciones')">Pulseras</button></li><li><button onclick="go('colecciones')">Aretes</button></li></ul></div>
       <div class="ft-col"><h4>Información</h4><ul class="ft-li"><li><button onclick="go('nosotros')">Nuestra historia</button></li><li><button onclick="go('nosotros')">Proceso</button></li><li><button onclick="go('contacto')">FAQ</button></li></ul></div>
-      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:hola@moncatu.mx">hola@moncatu.mx</a></li><li><button onclick="go('contacto')">Consultar</button></li></ul></div>
+      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:contacto@moncatu.com">contacto@moncatu.com</a></li><li><button onclick="go('contacto')">Consultar</button></li></ul></div>
     </div>
     <div class="ft-bot"><span class="ft-copy">© 2026 Moncatu® — Todos los derechos reservados.</span><div class="ft-badges"><span class="ft-badge">Plata .925</span><span class="ft-badge">Envío nacional</span></div></div>
   </div></footer>
@@ -1178,10 +1191,10 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 
   <footer><div class="w">
     <div class="ft-grid">
-      <div><div class="ft-logo"><svg width="26" height="29" viewBox="0 0 60 68" fill="none"><polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3"/><polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3"/></svg><div style="width:1px;height:20px;background:rgba(13,122,111,.5);margin:0 .35rem"></div><span class="ft-name">MONCATU</span></div><p class="ft-desc">Joyería selecta con piezas únicas y exclusivas.</p><div class="ft-socs"><button class="ft-soc">IG</button><button class="ft-soc">FB</button><button class="ft-soc">TT</button><button class="ft-soc">WA</button></div></div>
+      <div><div class="ft-logo"><svg width="26" height="29" viewBox="0 0 60 68" fill="none"><polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3"/><polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3"/></svg><div style="width:1px;height:20px;background:rgba(13,122,111,.5);margin:0 .35rem"></div><span class="ft-name">MONCATU</span></div><p class="ft-desc">Joyería selecta con piezas únicas y exclusivas.</p><div class="ft-socs"><a href="https://www.instagram.com/moncatu_joya/" target="_blank" rel="noopener" class="ft-soc" title="Instagram">IG</a><button class="ft-soc" title="Facebook">FB</button><button class="ft-soc" title="TikTok">TT</button><a href="https://wa.me/5215644645574" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp">WA</a></div></div>
       <div class="ft-col"><h4>Navegar</h4><ul class="ft-li"><li><button onclick="go('inicio')">Inicio</button></li><li><button onclick="go('colecciones')">Colecciones</button></li><li><button onclick="go('nosotros')">Nosotros</button></li><li><button onclick="go('contacto')">Contacto</button></li></ul></div>
       <div class="ft-col"><h4>Información</h4><ul class="ft-li"><li><button onclick="go('nosotros')">Historia</button></li><li><button onclick="go('nosotros')">Proceso</button></li><li><button onclick="go('contacto')">FAQ</button></li></ul></div>
-      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:hola@moncatu.mx">hola@moncatu.mx</a></li><li><button onclick="go('contacto')">Consultar</button></li></ul></div>
+      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:contacto@moncatu.com">contacto@moncatu.com</a></li><li><button onclick="go('contacto')">Consultar</button></li></ul></div>
     </div>
     <div class="ft-bot"><span class="ft-copy">© 2026 Moncatu® — Todos los derechos reservados.</span><div class="ft-badges"><span class="ft-badge">Plata .925</span><span class="ft-badge">Envío nacional</span></div></div>
   </div></footer>
@@ -1209,9 +1222,9 @@ footer{background:var(--noche);padding:4rem 0 2rem}
         <h2 class="h2 rv" style="margin-bottom:.6rem">Hablemos de<br/><em>tu joya</em></h2>
         <p class="serif rv" style="margin-bottom:0">Cada consulta es única, igual que cada pieza.</p>
         <div class="ci-list rv">
-          <div class="ci"><div class="ci-ico">✉</div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:hola@moncatu.mx">hola@moncatu.mx</a></div></div></div>
-          <div class="ci"><div class="ci-ico">◎</div><div><div class="ci-lbl">Instagram</div><div class="ci-val">@moncatu</div></div></div>
-          <div class="ci"><div class="ci-ico">◉</div><div><div class="ci-lbl">WhatsApp</div><div class="ci-val">+52 33 XXXX XXXX</div></div></div>
+          <div class="ci"><div class="ci-ico">✉</div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:contacto@moncatu.com">contacto@moncatu.com</a></div></div></div>
+          <div class="ci"><div class="ci-ico">◎</div><div><div class="ci-lbl">Instagram</div><div class="ci-val"><a href="https://www.instagram.com/moncatu_joya/" target="_blank" rel="noopener">@moncatu_joya</a></div></div></div>
+          <div class="ci"><div class="ci-ico">◉</div><div><div class="ci-lbl">WhatsApp</div><div class="ci-val"><a href="https://wa.me/5215644645574" target="_blank" rel="noopener">Enviar mensaje</a></div></div></div>
         </div>
         <div class="hrs-card rv">
           <div class="hrs-title">Horario de atención</div>
@@ -1250,7 +1263,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
           </form>
           <div class="wa-block">
             <div><div class="wa-block-t">¿Prefieres WhatsApp?</div><div class="wa-block-d">Te atendemos al instante.</div></div>
-            <a href="https://wa.me/52330000000?text=Hola%20Moncatu!" class="wa-block-btn" target="_blank" rel="noopener">Abrir WhatsApp</a>
+            <a href="https://wa.me/5215644645574?text=Hola%20Moncatu!" class="wa-block-btn" target="_blank" rel="noopener">Abrir WhatsApp</a>
           </div>
         </div>
       </div>
@@ -1274,17 +1287,17 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--white);margin-bottom:.7rem">Tu joya perfecta <em style="font-style:italic;color:var(--rosa)">te espera</em></h2>
     <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(255,255,255,.75);margin-bottom:2rem">El primer paso es una conversación. Sin costo, sin compromiso.</p>
     <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
-      <a href="https://wa.me/52330000000" class="btn btn-white" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a href="https://wa.me/5215644645574" class="btn btn-white" target="_blank" rel="noopener">Escribir por WhatsApp</a>
       <button class="btn btn-white-ghost" onclick="go('colecciones')">Ver colecciones</button>
     </div>
   </div></div></section>
 
   <footer><div class="w">
     <div class="ft-grid">
-      <div><div class="ft-logo"><svg width="26" height="29" viewBox="0 0 60 68" fill="none"><polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3"/><polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3"/></svg><div style="width:1px;height:20px;background:rgba(13,122,111,.5);margin:0 .35rem"></div><span class="ft-name">MONCATU</span></div><p class="ft-desc">Joyería selecta con piezas únicas y exclusivas.</p><div class="ft-socs"><button class="ft-soc">IG</button><button class="ft-soc">FB</button><button class="ft-soc">WA</button></div></div>
+      <div><div class="ft-logo"><svg width="26" height="29" viewBox="0 0 60 68" fill="none"><polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3"/><polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3"/></svg><div style="width:1px;height:20px;background:rgba(13,122,111,.5);margin:0 .35rem"></div><span class="ft-name">MONCATU</span></div><p class="ft-desc">Joyería selecta con piezas únicas y exclusivas.</p><div class="ft-socs"><a href="https://www.instagram.com/moncatu_joya/" target="_blank" rel="noopener" class="ft-soc" title="Instagram">IG</a><button class="ft-soc" title="Facebook">FB</button><a href="https://wa.me/5215644645574" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp">WA</a></div></div>
       <div class="ft-col"><h4>Navegar</h4><ul class="ft-li"><li><button onclick="go('inicio')">Inicio</button></li><li><button onclick="go('colecciones')">Colecciones</button></li><li><button onclick="go('nosotros')">Nosotros</button></li></ul></div>
       <div class="ft-col"><h4>Información</h4><ul class="ft-li"><li><button onclick="go('nosotros')">Historia</button></li><li><button onclick="go('nosotros')">Proceso</button></li><li><button onclick="go('contacto')">FAQ</button></li></ul></div>
-      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:hola@moncatu.mx">hola@moncatu.mx</a></li><li><a href="https://wa.me/52330000000" target="_blank">WhatsApp</a></li></ul></div>
+      <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:contacto@moncatu.com">contacto@moncatu.com</a></li><li><a href="https://wa.me/5215644645574" target="_blank">WhatsApp</a></li></ul></div>
     </div>
     <div class="ft-bot"><span class="ft-copy">© 2026 Moncatu® — Todos los derechos reservados.</span><div class="ft-badges"><span class="ft-badge">Plata .925</span><span class="ft-badge">Envío nacional</span></div></div>
   </div></footer>
@@ -1536,12 +1549,37 @@ if(form) form.addEventListener('submit',function(e){
   document.getElementById('fok').style.display='block';
 });
 
-/* ── NEWSLETTER ── */
+/* ── NEWSLETTER (improved) ── */
 var nlb=document.getElementById('nlb');
 if(nlb) nlb.addEventListener('click',function(){
+  var emailInput = document.getElementById('nle');
+  var email = emailInput ? emailInput.value.trim() : '';
+  var feedbackEl = document.getElementById('nl-feedback');
+  // Remove old feedback
+  if(!feedbackEl){
+    feedbackEl = document.createElement('p');
+    feedbackEl.id = 'nl-feedback';
+    feedbackEl.className = 'nl-feedback';
+    emailInput.parentElement.parentElement.appendChild(feedbackEl);
+  }
+  // Validate
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!email || !emailRegex.test(email)){
+    feedbackEl.textContent = 'Por favor ingresa un email válido';
+    feedbackEl.className = 'nl-feedback error show';
+    emailInput.style.borderColor = '#ff7b7b';
+    setTimeout(function(){ feedbackEl.classList.remove('show'); emailInput.style.borderColor=''; },3000);
+    return;
+  }
+  // Success
+  localStorage.setItem('moncatu_newsletter', email);
   this.textContent='¡Suscrita! ✓';
   this.style.background='#3B5469';
-  setTimeout(function(){nlb.textContent='Suscribirme';nlb.style.background=''},3000);
+  feedbackEl.textContent = '¡Gracias! Recibirás novedades y tu 10% de descuento.';
+  feedbackEl.className = 'nl-feedback success show';
+  emailInput.value = '';
+  var btn = this;
+  setTimeout(function(){btn.textContent='Suscribirme';btn.style.background='';feedbackEl.classList.remove('show');},4000);
 });
 
 /* ── INTEGRACIÓN MONCATU (Firebase / Medusa / Cart) ── */
@@ -1597,7 +1635,7 @@ async function openProduct(id){
     var waMsg='Hola Moncatu! Me interesa el '+p.name+' ('+priceStr+'). ¿Está disponible?';
     
     document.getElementById('pm-actions').innerHTML='<button class="pm-add-cart" id="pm-add-btn" onclick="addToCart(\''+p.id+'\')"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke-linecap="round" stroke-linejoin="round"/></svg>Añadir al carrito</button>'+
-    '<a href="https://wa.me/52330000000?text='+encodeURIComponent(waMsg)+'" class="pm-wa-btn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Comprar directo</a>';
+    '<a href="https://wa.me/5215644645574?text='+encodeURIComponent(waMsg)+'" class="pm-wa-btn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Comprar directo</a>';
     
     document.getElementById('pm-actions').innerHTML+='<div class="pm-security"><span class="pm-sec-badge"><svg viewBox="0 0 24 24" fill="#0D7A6F"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra segura</span><span class="pm-sec-badge"><svg viewBox="0 0 24 24" fill="#0D7A6F"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Certificado</span><span class="pm-sec-badge"><svg viewBox="0 0 24 24" fill="#0D7A6F"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/></svg>Garantía</span></div><div class="pm-pay-methods"><span class="pm-pay-tag">VISA</span><span class="pm-pay-tag">MC</span><span class="pm-pay-tag">AMEX</span><span class="pm-pay-tag">OXXO</span><span class="pm-pay-tag">SPEI</span></div>';
     
@@ -1698,7 +1736,7 @@ function syncDrawer() {
   if (total >= 3000) msg += '\n✓ Envío gratis incluido';
   
   const waBtn = document.getElementById('cd-wa-btn');
-  if (waBtn) waBtn.href = 'https://wa.me/52330000000?text=' + encodeURIComponent(msg);
+  if (waBtn) waBtn.href = 'https://wa.me/5215644645574?text=' + encodeURIComponent(msg);
 }
 
 function updateBadge() {
@@ -2017,7 +2055,7 @@ function renderCkStep4(el){
     h += '<div class="ck-pay-info"><h4>Depósito OXXO</h4><p>Te enviaremos la ficha de pago por WhatsApp y email en los próximos minutos.</p><p><strong>Referencia:</strong> '+(d._orderId||'')+'</p></div>';
   }
   var waMsg = 'Hola Moncatu! Acabo de hacer el pedido '+(d._orderId||'')+'. Mi nombre es '+d.name+'. '+(pm==='transfer'?'Pagaré por transferencia.':'');
-  h += '<div class="ck-actions" style="justify-content:center;margin-top:1.5rem"><a href="https://wa.me/52330000000?text='+encodeURIComponent(waMsg)+'" class="ck-btn ck-btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Enviar comprobante por WhatsApp</a></div>';
+  h += '<div class="ck-actions" style="justify-content:center;margin-top:1.5rem"><a href="https://wa.me/5215644645574?text='+encodeURIComponent(waMsg)+'" class="ck-btn ck-btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Enviar comprobante por WhatsApp</a></div>';
   h += '<button class="ck-btn ck-btn-ghost" style="max-width:200px;margin:1rem auto 0;display:block" onclick="go(\'inicio\')">Volver al inicio</button>';
   h += '</div>';
   el.innerHTML = h;
