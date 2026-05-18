@@ -8,19 +8,43 @@ class ShoppingCart {
     this.initEventListeners();
   }
 
-  // Cargar carrito desde localStorage
+  // Cargar carrito desde localStorage and hydrate with catalog data
   loadCart() {
     const saved = localStorage.getItem('moncatu_cart');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    const items = JSON.parse(saved);
+    return items.map(item => {
+      if (item.price !== undefined) return item;
+      const catalog = (typeof moncatuDemoCatalog === 'function') ? moncatuDemoCatalog() : [];
+      const product = catalog.find(p => p.id === item.id);
+      if (product) {
+        return {
+          ...item,
+          name: product.name,
+          price: product.price,
+          image: product.images ? product.images[0] : '',
+          category: product.category
+        };
+      }
+      return item;
+    }).filter(item => item.price !== undefined);
   }
 
-  // Guardar carrito en localStorage
+  // Guardar carrito en localStorage — only safe fields, never prices
   saveCart() {
-    localStorage.setItem('moncatu_cart', JSON.stringify(this.items));
+    const safeItems = this.items.map(item => ({
+      id: item.id,
+      size: item.size,
+      quantity: item.quantity
+    }));
+    localStorage.setItem('moncatu_cart', JSON.stringify(safeItems));
     this.updateCartUI();
   }
 
   // Agregar producto al carrito
+  // Only persist productId, size, quantity in localStorage.
+  // Display fields (name, price, image, category) are kept in memory for the current session
+  // and re-fetched from the product catalog on page load.
   addItem(product, size = null, quantity = 1) {
     const existingIndex = this.items.findIndex(
       item => item.id === product.id && item.size === size

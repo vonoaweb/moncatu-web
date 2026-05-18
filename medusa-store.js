@@ -1,27 +1,24 @@
 /**
- * Cliente Store API (Medusa v2) para Moncatu — configurado para tu backend local.
+ * Cliente Store API (Medusa v2) para Moncatu
  *
- * Orígenes CORS: el .env del backend debe incluir el puerto desde el que sirves
- * este HTML (ver medusa/INSTRUCCIONES.txt y STORE_CORS en apps/backend/.env).
+ * CONFIGURACIÓN: Las credenciales se leen de window.MONCATU_MEDUSA
+ * definido en moncatu-config.js. Nunca hardcodees URLs o keys aquí.
  *
- * Clave publicable: misma que apps/storefront/.env.local (NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY).
- * Región: si regionId está vacío, se resuelve con GET /store/regions usando regionCode (p. ej. dk).
+ * CORS: El backend en Railway debe tener STORE_CORS configurado
+ * para solo permitir https://moncatu.com
  */
 (function (global) {
   const PLACEHOLDER_IMG =
     'https://placehold.co/600x600/EDE9E3/3B5469?text=Moncatu';
 
-  global.MONCATU_MEDUSA = global.MONCATU_MEDUSA || {
-    baseUrl: 'https://moncatu-backend-production.up.railway.app',
-    publishableKey:
-      'pk_9808c180ac40289f88a7f050264eb6e61b06d2a0daf0a0234bfc9c28e575f69e',
-    regionId: '',
-    regionCode: 'mx'
-  };
+  // Config is loaded from moncatu-config.js — fail gracefully if missing
+  if (!global.MONCATU_MEDUSA || !global.MONCATU_MEDUSA.baseUrl) {
+    console.warn('[Moncatu Medusa] Config not found. Load moncatu-config.js before this script.');
+  }
 
   function medusaHeaders() {
     const h = { Accept: 'application/json' };
-    const key = global.MONCATU_MEDUSA.publishableKey;
+    const key = (global.MONCATU_MEDUSA || {}).publishableKey;
     if (key) h['x-publishable-api-key'] = key;
     return h;
   }
@@ -35,6 +32,7 @@
 
   async function moncatuMedusaEnsureRegion() {
     const m = global.MONCATU_MEDUSA;
+    if (!m) return;
     if (m.regionId) return;
     if (regionResolvePromise) return regionResolvePromise;
     const base = String(m.baseUrl || '').replace(/\/$/, '');
@@ -88,15 +86,7 @@
     if (cp && cp.calculated_amount != null) {
       const amt = Number(cp.calculated_amount);
       const code = (cp.currency_code || '').toLowerCase();
-      const smallest = [
-        'mxn',
-        'usd',
-        'eur',
-        'gbp',
-        'dkk',
-        'sek',
-        'nok'
-      ];
+      const smallest = ['mxn','usd','eur','gbp','dkk','sek','nok'];
       const out = smallest.indexOf(code) !== -1 ? amt / 100 : amt;
       return { amount: out, currencyCode: code };
     }
@@ -169,7 +159,7 @@
   async function moncatuMedusaList(opts) {
     opts = opts || {};
     await moncatuMedusaEnsureRegion();
-    const base = String(global.MONCATU_MEDUSA.baseUrl || '').replace(/\/$/, '');
+    const b = String(global.MONCATU_MEDUSA.baseUrl || '').replace(/\/$/, '');
     const regionId = opts.regionId || global.MONCATU_MEDUSA.regionId || '';
     const params = new URLSearchParams();
     params.set('limit', String(opts.limit || 100));
@@ -177,11 +167,7 @@
     params.set('order', '-created_at');
     if (regionId) params.set('region_id', regionId);
 
-    const url = base + '/store/products?' + params.toString();
-    // cache: 'no-store' prevents the browser from serving a stale catalog when
-    // the user uploads a new product in the admin panel. Without it, the browser
-    // would heuristically cache /store/products responses (no Cache-Control on
-    // the API) and the home grid would lag behind the real catalog by minutes.
+    const url = b + '/store/products?' + params.toString();
     const res = await fetch(url, {
       headers: medusaHeaders(),
       credentials: 'omit',
@@ -194,17 +180,11 @@
     }
     const data = await res.json();
     const raw = Array.isArray(data.products) ? data.products : [];
-    if (raw.length === 0 && data.count > 0) {
-      console.warn('[Moncatu Medusa] Respuesta sin array products; revisa versión de API.');
-    }
     let list = raw.map(moncatuMedusaMapProduct);
     if (opts.category) list = list.filter(function (x) { return x.category === opts.category; });
-    // Sort by createdAt desc BEFORE slicing — otherwise the "featured" path on
-    // the home grid would slice 4 random products and then sort just those.
-    // createdAt is a Firestore-style { seconds } object (see moncatuMedusaMapProduct).
-    list.sort(function (a, b) {
+    list.sort(function (a, b2) {
       var tA = (a.createdAt && typeof a.createdAt.seconds === 'number') ? a.createdAt.seconds : 0;
-      var tB = (b.createdAt && typeof b.createdAt.seconds === 'number') ? b.createdAt.seconds : 0;
+      var tB = (b2.createdAt && typeof b2.createdAt.seconds === 'number') ? b2.createdAt.seconds : 0;
       return tB - tA;
     });
     if (opts.featured) {
@@ -216,12 +196,12 @@
 
   async function moncatuMedusaGet(id) {
     await moncatuMedusaEnsureRegion();
-    const base = String(global.MONCATU_MEDUSA.baseUrl || '').replace(/\/$/, '');
+    const b = String(global.MONCATU_MEDUSA.baseUrl || '').replace(/\/$/, '');
     const regionId = global.MONCATU_MEDUSA.regionId || '';
     const params = new URLSearchParams();
     if (regionId) params.set('region_id', regionId);
     const q = params.toString();
-    const url = base + '/store/products/' + encodeURIComponent(id) + (q ? '?' + q : '');
+    const url = b + '/store/products/' + encodeURIComponent(id) + (q ? '?' + q : '');
     const res = await fetch(url, { headers: medusaHeaders(), credentials: 'omit', cache: 'no-store' });
     if (!res.ok) throw new Error('Producto no encontrado');
     const data = await res.json();
@@ -235,10 +215,4 @@
   global.moncatuMedusaGet = moncatuMedusaGet;
   global.moncatuMedusaMapProduct = moncatuMedusaMapProduct;
   global.moncatuMedusaEnsureRegion = moncatuMedusaEnsureRegion;
-
-  if (typeof window !== 'undefined' && window.location.protocol === 'file:') {
-    console.warn(
-      '[Moncatu] Abre colecciones.html vía http://localhost:5500 (serve-moncatu-web.ps1), no como archivo file://, o el navegador bloqueará Medusa.'
-    );
-  }
 })(typeof window !== 'undefined' ? window : globalThis);

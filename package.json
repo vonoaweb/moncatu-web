@@ -1,8 +1,9 @@
 {
   "name": "moncatu-web",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "description": "Moncatu e-commerce — GitHub Pages frontend + Medusa backend on Railway",
+  "private": true,
   "dependencies": {
-    "stripe": "^14.0.0",
-    "firebase-admin": "^12.0.0"
+    "stripe": "^14.0.0"
   }
 }

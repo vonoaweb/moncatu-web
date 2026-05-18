@@ -1,5 +1,4 @@
 // products.js — Catálogo: Medusa (Store API) → Firebase → demo local
-// Versión: 2.0.1 (corregida)
 
 const MONCATU_IMG_BASE = 'https://vonoaweb.github.io/moncatu-web/img';
 
@@ -139,8 +138,47 @@ class ProductManager {
     });
   }
 
-  // Cargar productos (Forzado local para offline)
   async loadProducts(category = null, featured = false) {
+    // 1. Try Medusa (Railway backend)
+    if (typeof moncatuMedusaActive === 'function' && moncatuMedusaActive()) {
+      try {
+        let list = await moncatuMedusaList({ category: category || undefined, featured: featured });
+        list = this._qualityFilter(list);
+        if (list.length > 0) {
+          this.products = list;
+          if (typeof window !== 'undefined') {
+            window.allProducts = list;
+            window.__MONCATU_CATALOG_SOURCE__ = 'medusa';
+          }
+          return list;
+        }
+      } catch (e) {
+        console.warn('Medusa loadProducts fallback:', e);
+      }
+    }
+    // 2. Try Firestore
+    if (this.db) {
+      try {
+        let query = this.db.collection('products').where('active', '==', true);
+        if (category) query = query.where('category', '==', category);
+        if (featured) query = query.where('featured', '==', true);
+        const snapshot = await query.get();
+        if (!snapshot.empty) {
+          let list = [];
+          snapshot.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+          list = this._qualityFilter(list);
+          this.products = list;
+          if (typeof window !== 'undefined') {
+            window.allProducts = list;
+            window.__MONCATU_CATALOG_SOURCE__ = 'firestore';
+          }
+          return list;
+        }
+      } catch (e) {
+        console.warn('Firestore loadProducts fallback:', e);
+      }
+    }
+    // 3. Demo fallback
     if (typeof window !== 'undefined') window.__MONCATU_CATALOG_SOURCE__ = 'demo';
     return this.applyDemoProducts(category, featured);
   }

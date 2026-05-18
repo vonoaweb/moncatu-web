@@ -165,20 +165,8 @@ class CheckoutManager {
     this.loadSavedCustomerData();
   }
 
-  // Cargar datos guardados del cliente
+  // No longer loads PII from localStorage for security
   loadSavedCustomerData() {
-    const saved = localStorage.getItem('moncatu_customer_data');
-    if (saved) {
-      const data = JSON.parse(saved);
-      const form = document.getElementById('checkout-form');
-      
-      if (confirm('¿Usar la información guardada de tu última compra?')) {
-        Object.keys(data).forEach(key => {
-          const input = form.querySelector(`[name="${key}"]`);
-          if (input) input.value = data[key];
-        });
-      }
-    }
   }
 
   // Recopilar datos del formulario
@@ -198,17 +186,6 @@ class CheckoutManager {
         country: 'México'
       }
     };
-
-    // Guardar para futuras compras
-    localStorage.setItem('moncatu_customer_data', JSON.stringify({
-      name: this.customerData.name,
-      email: this.customerData.email,
-      phone: this.customerData.phone,
-      street: this.customerData.address.street,
-      city: this.customerData.address.city,
-      state: this.customerData.address.state,
-      zipCode: this.customerData.address.zipCode
-    }));
 
     return this.customerData;
   }
@@ -318,26 +295,35 @@ class CheckoutManager {
     });
   }
 
-  // Procesar pago con Stripe
+  // Procesar pago con Stripe via Medusa backend on Railway
   async processStripePayment(customerData) {
     try {
-      // Llamar al backend para crear sesión de Stripe Checkout
-      const response = await fetch('/api/create-stripe-checkout', {
+      const BACKEND_URL = (window.MONCATU_MEDUSA && window.MONCATU_MEDUSA.baseUrl) || '';
+
+      const response = await fetch(BACKEND_URL + '/api/create-stripe-checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          items: this.cartData.items,
-          total: this.cartData.total,
+          items: this.cartData.items.map(item => ({
+            productId: item.id,
+            size: item.size,
+            quantity: item.quantity
+          })),
           customer: customerData,
-          currency: 'mxn'
+          successUrl: window.location.origin + '/order-confirmation.html?session_id={CHECKOUT_SESSION_ID}',
+          cancelUrl: window.location.origin + '/checkout.html'
         })
       });
 
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || 'Error creating checkout session');
+      }
+
       const { sessionId } = await response.json();
 
-      // Redirigir a Stripe Checkout
       const result = await stripe.redirectToCheckout({ sessionId });
 
       if (result.error) {

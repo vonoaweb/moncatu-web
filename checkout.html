@@ -8,6 +8,10 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://js.stripe.com https://*.cloudfunctions.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://firebasestorage.googleapis.com https://vonoaweb.github.io https://placehold.co data: blob:; connect-src 'self' https://moncatu-backend-production.up.railway.app https://*.firebaseio.com https://*.googleapis.com https://api.stripe.com; frame-src https://js.stripe.com;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Checkout - Moncatu</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="cart-styles.css">
@@ -41,7 +45,17 @@
     </div>
   </main>
   
+  <script src="moncatu-config.js"></script>
   <script src="firebase-config.js"></script>
+  <script src="sanitize.js"></script>
   <script src="checkout.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('checkout-form');
+      if (form && typeof MoncatuSanitize !== 'undefined') {
+        MoncatuSanitize.applyToForm(form);
+      }
+    });
+  </script>
 </body>
 </html>
