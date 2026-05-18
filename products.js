@@ -4,7 +4,71 @@
 const MONCATU_IMG_BASE = 'https://vonoaweb.github.io/moncatu-web/img';
 
 function moncatuDemoCatalog() {
-  return [];
+  return [
+    {
+      id: "prod_local_1",
+      name: "Anillo Constelación",
+      category: "anillos",
+      price: 2450,
+      material: "Plata .925",
+      stone: "Zafiro Blanco",
+      images: ["https://vonoaweb.github.io/moncatu-web/img/ring_constelacion.png"],
+      description: "Anillo de plata .925 con detalles de zafiro blanco inspirado en las constelaciones.",
+      featured: true
+    },
+    {
+      id: "prod_local_2",
+      name: "Collar Eclipse",
+      category: "collares",
+      price: 3200,
+      material: "Plata .925",
+      stone: "Ónice",
+      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Collar+Eclipse"],
+      description: "Elegante collar de plata .925 con piedra ónice central.",
+      featured: true
+    },
+    {
+      id: "prod_local_3",
+      name: "Pulsera Alba",
+      category: "pulseras",
+      price: 1800,
+      material: "Plata .925",
+      stone: "Cuarzo Rosa",
+      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Pulsera+Alba"],
+      description: "Delicada pulsera con cuarzo rosa engarzado en plata .925."
+    },
+    {
+      id: "prod_local_4",
+      name: "Aretes Gota",
+      category: "aretes",
+      price: 1500,
+      material: "Plata .925",
+      stone: "—",
+      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Aretes+Gota"],
+      description: "Aretes minimalistas en forma de gota, plata .925 pulida."
+    },
+    {
+      id: "prod_local_5",
+      name: "Anillo Solsticio",
+      category: "anillos",
+      price: 2800,
+      material: "Oro rosado 18k",
+      stone: "Turmalina",
+      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Anillo+Solsticio"],
+      description: "Anillo bañado en oro rosado 18k con turmalina central.",
+      featured: true
+    },
+    {
+      id: "prod_local_6",
+      name: "Collar Aurora",
+      category: "collares",
+      price: 2600,
+      material: "Plata .925",
+      stone: "Amatista",
+      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Collar+Aurora"],
+      description: "Collar de plata .925 con hermoso dije de amatista."
+    }
+  ];
 }
 
 function moncatuProductThumb(p) {
@@ -75,85 +139,10 @@ class ProductManager {
     });
   }
 
-  // Cargar productos (Medusa tiene prioridad si está vivo)
+  // Cargar productos (Forzado local para offline)
   async loadProducts(category = null, featured = false) {
-    if (typeof window !== 'undefined') window.__MONCATU_CATALOG_SOURCE__ = '';
-
-    // Si Medusa está configurada, intenta usarla, pero con timeout corto
-    if (typeof moncatuMedusaActive === 'function' && moncatuMedusaActive()) {
-      try {
-        // Timeout de 3 segundos para no colgar la página
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 3000);
-
-        const list = await moncatuMedusaList({
-          category,
-          featured,
-          regionId: typeof window !== 'undefined' && window.MONCATU_MEDUSA && window.MONCATU_MEDUSA.regionId,
-          signal: controller.signal
-        });
-        clearTimeout(timeout);
-
-        if (list.length > 0) {
-          // Apply quality filter to Medusa products too
-          const filtered = this._qualityFilter(list);
-          this.products = filtered;
-          if (typeof window !== 'undefined') {
-            window.allProducts = filtered.slice();
-            window.__MONCATU_CATALOG_SOURCE__ = 'medusa';
-          }
-          return filtered;
-        }
-        console.warn('Moncatu: Medusa devolvió 0 productos. Usando demo.');
-      } catch (err) {
-        console.warn('Moncatu: Medusa no disponible (' + (err.message || err) + '). Usando catálogo demo.');
-      }
-    }
-
-    // Si Firebase no está configurado, ir directo a demo
-    if (!window.__MONCATU_FIREBASE_READY__ || !this.db) {
-      if (typeof window !== 'undefined') window.__MONCATU_CATALOG_SOURCE__ = 'demo';
-      return this.applyDemoProducts(category, featured);
-    }
-    try {
-      let query = this.db.collection('products')
-        .where('active', '==', true);
-      
-      if (category) {
-        query = query.where('category', '==', category);
-      }
-      
-      if (featured) {
-        query = query.where('featured', '==', true);
-      }
-      
-      query = query.orderBy('createdAt', 'desc');
-      
-      const snapshot = await query.get();
-      this.products = [];
-      
-      snapshot.forEach(doc => {
-        this.products.push({ id: doc.id, ...doc.data() });
-      });
-
-      // Si Firebase está vacío, caer a demo para evitar página vacía
-      if (this.products.length === 0) {
-        console.warn('Moncatu: Firebase no tiene productos. Usando demo.');
-        if (typeof window !== 'undefined') window.__MONCATU_CATALOG_SOURCE__ = 'demo';
-        return this.applyDemoProducts(category, featured);
-      }
-
-      if (typeof window !== 'undefined') {
-        window.allProducts = this.products.slice();
-        window.__MONCATU_CATALOG_SOURCE__ = 'firebase';
-      }
-      
-      return this.products;
-    } catch (error) {
-      console.error('Error cargando productos:', error);
-      if (typeof window !== 'undefined') window.__MONCATU_CATALOG_SOURCE__ = 'demo';
-      return this.applyDemoProducts(category, featured);
-    }
+    if (typeof window !== 'undefined') window.__MONCATU_CATALOG_SOURCE__ = 'demo';
+    return this.applyDemoProducts(category, featured);
   }
 
   // Cargar un producto específico

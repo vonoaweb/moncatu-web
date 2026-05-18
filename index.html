@@ -221,8 +221,8 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 /* Hero */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--noche);position:relative;padding-top:34px}
 .hero-l{display:flex;flex-direction:column;justify-content:center;padding:110px 5rem 80px;z-index:2}
-.hero-eyebrow{font-size:.62rem;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--esm);display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem;animation:fadeup .7s .15s both}
-.hero-eyebrow::before{content:'';width:22px;height:1px;background:var(--esm)}
+.hero-eyebrow{font-size:.62rem;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--rosa);display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem;animation:fadeup .7s .15s both}
+.hero-eyebrow::before{content:'';width:22px;height:1px;background:var(--rosa)}
 .hero-mark{margin-bottom:1.8rem;animation:fadeup .8s .3s both}
 .hero-hdiv{width:44px;height:1px;background:rgba(255,255,255,.18);margin:.8rem 0 1.8rem;animation:fadeup .7s .45s both}
 .hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,6.5rem);font-weight:700;line-height:1.02;letter-spacing:.06em;color:var(--white);animation:fadeup .9s .55s both}
@@ -231,7 +231,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .hero-actions{display:flex;gap:.9rem;margin-top:2.4rem;flex-wrap:wrap;animation:fadeup .8s .85s both}
 .hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);animation:fadeup .7s .98s both;flex-wrap:wrap}
 .hstat-n{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--rosa);line-height:1}
-.hstat-l{font-size:.6rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:.25rem}
+.hstat-l{font-size:.6rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:.25rem}
 .hero-r{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hero-r-bg{position:absolute;inset:0;background:linear-gradient(145deg,#253545,#3B5469)}
 .hero-r-orb1{position:absolute;width:480px;height:480px;border-radius:50%;right:-120px;top:50%;transform:translateY(-50%);background:rgba(13,122,111,.1);border:1px solid rgba(13,122,111,.18)}
@@ -251,6 +251,22 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .floating-note{position:absolute;right:20px;bottom:20px;max-width:200px;background:var(--esm);color:white;padding:15px;box-shadow:0 18px 42px rgba(13,122,111,.25);animation:fadeup .8s .8s both; z-index:10;}
 .floating-note strong{display:block;font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1}
 .floating-note span{display:block;margin-top:8px;color:rgba(255,255,255,.72);font-size:.62rem;line-height:1.5;letter-spacing:.08em;text-transform:uppercase}
+
+/* Home Categories */
+.hc-sec{background:var(--white);padding:6rem 0;border-bottom:1px solid var(--borde)}
+.hc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.hc-card{display:block;text-decoration:none;group;border:1px solid var(--borde);border-radius:4px;overflow:hidden;transition:box-shadow .35s,transform .35s;background:var(--cream)}
+.hc-card:hover{box-shadow:0 12px 40px rgba(59,84,105,.1);transform:translateY(-4px);border-color:rgba(13,122,111,.25)}
+.hc-vis{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 50%,rgba(200,165,181,.15),transparent 60%),linear-gradient(135deg,#fffdfa,#ede9e3);border-bottom:1px solid var(--borde)}
+.hc-vis svg{width:60px;height:60px;stroke:var(--azul);fill:none;stroke-width:1.2;transition:transform .4s ease, stroke .4s ease}
+.hc-card:hover .hc-vis svg{transform:scale(1.1);stroke:var(--esm)}
+.hc-body{padding:1.5rem;text-align:center}
+.hc-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:.3rem}
+.hc-link{font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--esm);display:flex;align-items:center;justify-content:center;gap:.4rem}
+.hc-link::after{content:'→';transition:transform .3s}
+.hc-card:hover .hc-link::after{transform:translateX(4px)}
+@media(max-width:900px){.hc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.hc-grid{grid-template-columns:1fr}}
 
 /* Collection cards */
 .col-section{background:var(--cream);padding:6rem 0}
@@ -351,6 +367,16 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .cat-tab{font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);background:none;border:none;border-bottom:2px solid transparent;padding:1.1rem 1.5rem;white-space:nowrap;transition:color .2s,border-color .2s}
 .cat-tab:hover{color:var(--ink)}
 .cat-tab.on{color:var(--esm);border-bottom-color:var(--esm)}
+
+/* Sales Hook Banner */
+.sh-banner{background:linear-gradient(135deg,var(--noche),var(--azul));padding:1.8rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.sh-info{max-width:540px}
+.sh-badge{display:inline-block;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--esm);background:rgba(13,122,111,.15);padding:.25rem .6rem;border-radius:2px;margin-bottom:.6rem;border:1px solid rgba(13,122,111,.3)}
+.sh-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--white);margin-bottom:.4rem;line-height:1.1}
+.sh-info p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.8);line-height:1.4}
+.sh-info strong{color:var(--rosa);font-style:normal;font-weight:500}
+.sh-code{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.3);padding:.8rem 1.4rem;border-radius:2px;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--white);display:inline-block;white-space:nowrap}
+@media(max-width:768px){.sh-banner{padding:1.8rem 1.5rem;flex-direction:column;align-items:flex-start}}
 
 /* Category sections */
 .cat-section{padding:4.5rem 0;border-bottom:1px solid var(--borde)}
@@ -784,7 +810,8 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     </button>
     <ul class="nav-ul">
       <li><button id="nb-inicio" class="on" onclick="go('inicio')">Inicio</button></li>
-      <li><button class="nav-menu-trigger" type="button" id="collectionsBtn" aria-expanded="false" onclick="toggleMegaMenu()">Colecciones <span class="chev" aria-hidden="true"></span></button></li>
+      <li><button class="nav-menu-trigger" type="button" id="collectionsBtn" aria-expanded="false" onclick="toggleMegaMenu()">Joyería <span class="chev" aria-hidden="true"></span></button></li>
+      <li><button id="nb-ofertas" onclick="go('colecciones'); if(typeof loadColecciones==='function')loadColecciones('ofertas');" style="color:var(--rosa); font-weight:500;">Ofertas</button></li>
       <li><button id="nb-nosotros" onclick="go('nosotros')">Nosotros</button></li>
       <li><button id="nb-contacto" onclick="go('contacto')">Contacto</button></li>
     </ul>
@@ -798,7 +825,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   </nav>
 
   <!-- MEGA MENU -->
-  <div class="mega" id="mega" aria-label="Menú de colecciones">
+  <div class="mega" id="mega" aria-label="Menú de joyería">
     <div class="mega-grid">
       <section class="mega-panel">
         <p class="mega-kicker">Comprar por categoría</p>
@@ -874,7 +901,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
       <h1 class="hero-h1" style="font-size: clamp(2.8rem, 5vw, 5.5rem); letter-spacing: 0.02em;">MONCATU<em style="font-size: 0.8em; margin-top: -0.1em; display: block;">Joyería con Alma</em></h1>
       <p class="hero-sub" style="font-size: 1.15rem; max-width: 440px;">Piezas limitadas en plata .925 y piedras naturales. Diseño artesanal mexicano creado para destacar tu esencia.</p>
       <div class="hero-actions">
-        <button class="btn btn-esm" style="padding: 1.1rem 2.8rem; font-size: 0.75rem; letter-spacing: 0.2em; box-shadow: 0 8px 30px rgba(13,122,111,0.4); transform: translateY(-2px);" onclick="go('colecciones')">VER COLECCIÓN</button>
+        <button class="btn btn-esm" style="padding: 1.1rem 2.8rem; font-size: 0.75rem; letter-spacing: 0.2em; box-shadow: 0 8px 30px rgba(13,122,111,0.4); transform: translateY(-2px);" onclick="go('colecciones')">VER JOYERÍA</button>
         <button class="btn btn-white-ghost" style="padding: 1.1rem 2.5rem; font-size: 0.75rem; letter-spacing: 0.2em;" onclick="go('contacto')">PIEZA A MEDIDA</button>
       </div>
       <div class="hero-stats">
@@ -919,6 +946,46 @@ footer{background:var(--noche);padding:4rem 0 2rem}
       <span>Anillos</span><span class="gem">✦</span><span>Collares</span><span class="gem">✦</span><span>Pulseras</span><span class="gem">✦</span><span>Aretes</span><span class="gem">✦</span><span>Alta Joyería</span><span class="gem">✦</span><span>Envío Nacional</span><span class="gem">✦</span><span>Piezas Exclusivas</span><span class="gem">✦</span><span>Plata .925</span><span class="gem">✦</span>
     </div>
   </div>
+
+  <!-- CATEGORÍAS PRINCIPALES -->
+  <section class="hc-sec">
+    <div class="w">
+      <div class="rv" style="text-align: center; margin-bottom: 3.5rem;">
+        <p class="eyebrow" style="justify-content: center;">Descubre</p>
+        <h2 class="h2">Comprar por <em>categoría</em></h2>
+      </div>
+      <div class="hc-grid">
+        <a href="#" onclick="go('colecciones'); window.__moncatuActiveCat='anillos'; if(typeof loadColecciones==='function')loadColecciones('anillos'); return false;" class="hc-card rv">
+          <div class="hc-vis"><svg viewBox="0 0 48 48"><circle cx="24" cy="29" r="13"/><path d="M16 18h16l-5-7h-6l-5 7Z"/></svg></div>
+          <div class="hc-body">
+            <h3 class="hc-title">Anillos</h3>
+            <span class="hc-link">Ver diseños</span>
+          </div>
+        </a>
+        <a href="#" onclick="go('colecciones'); window.__moncatuActiveCat='collares'; if(typeof loadColecciones==='function')loadColecciones('collares'); return false;" class="hc-card rv" style="transition-delay:.08s">
+          <div class="hc-vis"><svg viewBox="0 0 48 48"><path d="M10 10c2 17 26 17 28 0"/><path d="M24 27v9"/><path d="m19 36 5 5 5-5"/></svg></div>
+          <div class="hc-body">
+            <h3 class="hc-title">Collares</h3>
+            <span class="hc-link">Ver diseños</span>
+          </div>
+        </a>
+        <a href="#" onclick="go('colecciones'); window.__moncatuActiveCat='aretes'; if(typeof loadColecciones==='function')loadColecciones('aretes'); return false;" class="hc-card rv" style="transition-delay:.16s">
+          <div class="hc-vis"><svg viewBox="0 0 48 48"><circle cx="17" cy="16" r="5"/><circle cx="31" cy="16" r="5"/><path d="M17 21v15M31 21v15"/><path d="M13 36h8M27 36h8"/></svg></div>
+          <div class="hc-body">
+            <h3 class="hc-title">Aretes</h3>
+            <span class="hc-link">Ver diseños</span>
+          </div>
+        </a>
+        <a href="#" onclick="go('colecciones'); window.__moncatuActiveCat='pulseras'; if(typeof loadColecciones==='function')loadColecciones('pulseras'); return false;" class="hc-card rv" style="transition-delay:.24s">
+          <div class="hc-vis"><svg viewBox="0 0 48 48"><ellipse cx="24" cy="25" rx="16" ry="10"/><path d="M12 19c5 4 19 4 24 0"/></svg></div>
+          <div class="hc-body">
+            <h3 class="hc-title">Pulseras</h3>
+            <span class="hc-link">Ver diseños</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- COLECCIONES PREVIEW (Dynamic from Medusa/Firebase) -->
   <section class="col-section">
@@ -973,7 +1040,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <div class="w">
       <div class="proc-head rv"><p class="eyebrow" style="justify-content:center">Cómo comprar</p><h2 class="h2" style="text-align:center">Tu <em>joya perfecta</em> en 4 pasos</h2></div>
       <div class="proc-grid">
-        <div class="proc-card rv"><div class="proc-n">01</div><div class="proc-ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l7 4v6L9 16 2 12V6Z" stroke="#0D7A6F" stroke-width="1.5"/></svg></div><div class="proc-name">Explora</div><div class="proc-txt">Navega nuestras colecciones y encuentra la pieza que más te guste.</div></div>
+        <div class="proc-card rv"><div class="proc-n">01</div><div class="proc-ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l7 4v6L9 16 2 12V6Z" stroke="#0D7A6F" stroke-width="1.5"/></svg></div><div class="proc-name">Explora</div><div class="proc-txt">Navega nuestra joyería y encuentra la pieza que más te guste.</div></div>
         <div class="proc-card rv" style="transition-delay:.08s"><div class="proc-n">02</div><div class="proc-ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 15l4-8 3 5 3-4 4-5" stroke="#0D7A6F" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="proc-name">Consulta</div><div class="proc-txt">Contáctanos por WhatsApp o email. Te asesoramos sin compromiso.</div></div>
         <div class="proc-card rv" style="transition-delay:.16s"><div class="proc-n">03</div><div class="proc-ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="#0D7A6F" stroke-width="1.5"/><circle cx="9" cy="9" r="2.5" fill="#0D7A6F" opacity=".35"/></svg></div><div class="proc-name">Confirma</div><div class="proc-txt">Elige tu pieza, confirma los detalles y realiza tu pedido de forma segura.</div></div>
         <div class="proc-card rv" style="transition-delay:.24s"><div class="proc-n">04</div><div class="proc-ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="#0D7A6F" stroke-width="1.5"/><path d="M5 9l3 3 5-5" stroke="#0D7A6F" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="proc-name">Recibe</div><div class="proc-txt">Tu joya llega con empaque premium, certificado de autenticidad y garantía.</div></div>
@@ -1015,7 +1082,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
         <p class="ft-desc">Joyería selecta con piezas únicas y exclusivas para ti.</p>
         <div class="ft-socs"><a href="https://www.instagram.com/moncatu_joya/" target="_blank" rel="noopener" class="ft-soc" title="Instagram">IG</a><button class="ft-soc" title="Facebook">FB</button><button class="ft-soc" title="TikTok">TT</button><a href="https://wa.me/5215644645574" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp">WA</a></div>
       </div>
-      <div class="ft-col"><h4>Colecciones</h4><ul class="ft-li"><li><button onclick="go('colecciones')">Anillos</button></li><li><button onclick="go('colecciones')">Collares</button></li><li><button onclick="go('colecciones')">Pulseras</button></li><li><button onclick="go('colecciones')">Aretes</button></li></ul></div>
+      <div class="ft-col"><h4>Joyería</h4><ul class="ft-li"><li><button onclick="go('colecciones')">Anillos</button></li><li><button onclick="go('colecciones')">Collares</button></li><li><button onclick="go('colecciones')">Pulseras</button></li><li><button onclick="go('colecciones')">Aretes</button></li></ul></div>
       <div class="ft-col"><h4>Políticas y Ayuda</h4><ul class="ft-li"><li><button onclick="go('contacto')">Envíos y Devoluciones</button></li><li><button onclick="go('contacto')">Garantía Moncatu</button></li><li><button onclick="go('contacto')">Preguntas Frecuentes</button></li><li><button onclick="go('contacto')">Cuidado de Joyería</button></li></ul></div>
       <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:contacto@moncatu.com" style="text-decoration:underline;">contacto@moncatu.com</a></li><li><a href="https://wa.me/5215644645574?text=Hola%20Moncatu!" target="_blank" style="text-decoration:underline;">WhatsApp</a></li><li><button onclick="go('contacto')">Agendar Cita Privada</button></li></ul></div>
     </div>
@@ -1027,8 +1094,8 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 <!-- ═════════════ PAGE: COLECCIONES ═════════════ -->
 <div class="page" id="page-colecciones">
   <div class="ph"><div class="w">
-    <div class="bc"><button onclick="go('inicio')">Inicio</button><span class="sep">/</span><span>Colecciones</span></div>
-    <h1 class="ph-title">Nuestras <em>colecciones</em></h1>
+    <div class="bc"><button onclick="go('inicio')">Inicio</button><span class="sep">/</span><span>Joyería</span></div>
+    <h1 class="ph-title">Nuestra <em>joyería</em></h1>
     <p class="ph-sub">Piezas únicas seleccionadas a mano en México. Filtra por categoría para encontrar la tuya.</p>
   </div></div>
   <div class="trust">
@@ -1045,7 +1112,20 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <button class="cat-tab" data-cat="collares">Collares</button>
     <button class="cat-tab" data-cat="pulseras">Pulseras</button>
     <button class="cat-tab" data-cat="aretes">Aretes</button>
+    <button class="cat-tab" data-cat="ofertas" style="color:var(--rosa)">Ofertas</button>
     <button class="cat-tab" data-jump="cat-bespoke">A Medida</button>
+  </div>
+
+  <!-- GANCHO DE VENTAS -->
+  <div class="sh-banner rv">
+    <div class="sh-info">
+      <span class="sh-badge">Oferta de Bienvenida</span>
+      <h3>10% OFF en tu primera joya Moncatu</h3>
+      <p>Aplica este código en el carrito y disfruta además de <strong>Envío Gratis</strong> a todo México en compras superiores a $3,000 MXN.</p>
+    </div>
+    <div class="sh-action">
+      <span class="sh-code">CÓDIGO: BIENVENIDA10</span>
+    </div>
   </div>
 
   <!-- ──── CATÁLOGO DINÁMICO (Medusa) ──── -->
@@ -1157,7 +1237,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <div class="psteps">
       <div class="pstep rv"><div class="pstep-n">01</div><div><div class="pstep-title">Consulta inicial</div><div class="pstep-desc">Todo comienza con una conversación. Entendemos tu visión, la ocasión y presupuesto. Por WhatsApp, email o videollamada — tú decides.</div><div class="pstep-time">30–60 min · Sin costo</div></div></div>
       <div class="pstep rv"><div class="pstep-n">02</div><div><div class="pstep-title">Selección de pieza</div><div class="pstep-desc">Te presentamos opciones que se ajusten a lo que buscas. Te enviamos fotos y detalles para que elijas con confianza.</div><div class="pstep-time">1–3 días</div></div></div>
-      <div class="pstep rv"><div class="pstep-n">03</div><div><div class="pstep-title">Detalles y personalización</div><div class="pstep-desc">Elegimos juntos los detalles finales: talla, acabado y empaque. Te compartimos fotos reales de las opciones disponibles.</div><div class="pstep-time">1–2 días</div></div></div>
+      <div class="pstep rv"><div class="pstep-n">03</div><div><div class="pstep-title">Graba tu joyería</div><div class="pstep-desc">Elegimos juntos los detalles finales: talla, acabado y empaque. Te compartimos fotos reales de las opciones disponibles.</div><div class="pstep-time">1–2 días</div></div></div>
       <div class="pstep rv"><div class="pstep-n">04</div><div><div class="pstep-title">Preparación y envío</div><div class="pstep-desc">Tu pieza es verificada, empacada con cuidado y enviada con seguimiento. Te compartimos el tracking para que la sigas.</div><div class="pstep-time">3–7 días hábiles</div></div></div>
       <div class="pstep rv"><div class="pstep-n">05</div><div><div class="pstep-title">Entrega y garantía</div><div class="pstep-desc">Tu joya viene con empaque Moncatu, certificado de autenticidad y garantía. Tu satisfacción es nuestra prioridad.</div><div class="pstep-time">Envío con tracking · Seguro incluido</div></div></div>
     </div>
@@ -1166,13 +1246,13 @@ footer{background:var(--noche);padding:4rem 0 2rem}
   <section class="cta-band"><div class="w"><div class="cta-in rv">
     <h2 class="cta-h">¿Lista para encontrar tu pieza ideal?</h2>
     <p class="cta-d">Agenda tu consulta gratuita y te ayudamos a encontrar tu joya perfecta.</p>
-    <div class="cta-acts"><button class="btn btn-white" onclick="go('contacto')">Agendar consulta</button><button class="btn btn-white-ghost" onclick="go('colecciones')">Ver colecciones</button></div>
+    <div class="cta-acts"><button class="btn btn-white" onclick="go('contacto')">Agendar consulta</button><button class="btn btn-white-ghost" onclick="go('colecciones')">Ver joyería</button></div>
   </div></div></section>
 
   <footer><div class="w">
     <div class="ft-grid">
       <div><div class="ft-logo"><svg width="26" height="29" viewBox="0 0 60 68" fill="none"><polygon points="30,3 57,24 30,45 3,24" stroke="white" stroke-width="3"/><polygon points="30,23 55,42 30,65 5,42" stroke="white" stroke-width="3"/></svg><div style="width:1px;height:20px;background:rgba(13,122,111,.5);margin:0 .35rem"></div><span class="ft-name">MONCATU</span></div><p class="ft-desc">Joyería selecta con piezas únicas y exclusivas.</p><div class="ft-socs"><a href="https://www.instagram.com/moncatu_joya/" target="_blank" rel="noopener" class="ft-soc" title="Instagram">IG</a><button class="ft-soc" title="Facebook">FB</button><button class="ft-soc" title="TikTok">TT</button><a href="https://wa.me/5215644645574" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp">WA</a></div></div>
-      <div class="ft-col"><h4>Navegar</h4><ul class="ft-li"><li><button onclick="go('inicio')">Inicio</button></li><li><button onclick="go('colecciones')">Colecciones</button></li><li><button onclick="go('nosotros')">Nosotros</button></li><li><button onclick="go('contacto')">Contacto</button></li></ul></div>
+      <div class="ft-col"><h4>Navegar</h4><ul class="ft-li"><li><button onclick="go('inicio')">Inicio</button></li><li><button onclick="go('colecciones')">Joyería</button></li><li><button onclick="go('nosotros')">Nosotros</button></li><li><button onclick="go('contacto')">Contacto</button></li></ul></div>
       <div class="ft-col"><h4>Información</h4><ul class="ft-li"><li><button onclick="go('nosotros')">Historia</button></li><li><button onclick="go('nosotros')">Proceso</button></li><li><button onclick="go('contacto')">FAQ</button></li></ul></div>
       <div class="ft-col"><h4>Contacto</h4><ul class="ft-li"><li><a href="mailto:contacto@moncatu.com">contacto@moncatu.com</a></li><li><button onclick="go('contacto')">Consultar</button></li></ul></div>
     </div>
