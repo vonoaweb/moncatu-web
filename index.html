@@ -2113,10 +2113,11 @@ async function confirmOrder(){
 
   try {
     var BACKEND_URL = (window.MONCATU_MEDUSA && window.MONCATU_MEDUSA.baseUrl) || '';
+    var pubKey = (window.MONCATU_MEDUSA && window.MONCATU_MEDUSA.publishableKey) || '';
     var shipping = cart.getShipping();
     var response = await fetch(BACKEND_URL + '/store/create-mercadopago-preference', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'x-publishable-api-key': pubKey },
       body: JSON.stringify({
         items: cart.items.map(function(item){
           return {

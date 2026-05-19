@@ -189,9 +189,10 @@ class CheckoutManager {
   async processMercadoPagoPayment(customerData) {
     const BACKEND_URL = (window.MONCATU_MEDUSA && window.MONCATU_MEDUSA.baseUrl) || '';
 
+    const pubKey = (window.MONCATU_MEDUSA && window.MONCATU_MEDUSA.publishableKey) || '';
     const response = await fetch(BACKEND_URL + '/store/create-mercadopago-preference', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'x-publishable-api-key': pubKey },
       body: JSON.stringify({
         items: this.cartData.items.map(item => ({
           title: item.name,
