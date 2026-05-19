@@ -665,9 +665,9 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .cart-icon:hover svg{stroke:var(--esm)}
 .cart-badge{position:absolute;top:-4px;right:-6px;background:var(--esm);color:var(--white);font-size:.5rem;font-weight:600;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:all .25s}
 .cart-badge.on{opacity:1;transform:scale(1)}
-.cart-drawer-overlay{position:fixed;inset:0;z-index:600;background:rgba(26,29,46,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-drawer-overlay{position:fixed;inset:0;z-index:600;background:rgba(26,29,46,.45);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .4s ease}
 .cart-drawer-overlay.on{opacity:1;pointer-events:all}
-.cart-drawer{position:fixed;top:0;right:0;bottom:0;z-index:601;width:420px;max-width:100%;background:var(--white);box-shadow:-8px 0 40px rgba(0,0,0,.15);transform:translateX(100%);transition:transform .35s;display:flex;flex-direction:column}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;z-index:601;width:420px;max-width:100%;background:var(--white);box-shadow:-8px 0 40px rgba(0,0,0,.15);transform:translateX(105%);transition:transform .4s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column}
 .cart-drawer.on{transform:translateX(0)}
 .cd-head{display:flex;justify-content:space-between;align-items:center;padding:1.5rem;border-bottom:1px solid var(--borde)}
 .cd-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--ink)}
@@ -1783,7 +1783,8 @@ function syncDrawer() {
   const container = document.getElementById('cd-items');
   const foot = document.getElementById('cd-foot');
   const empty = document.getElementById('cd-empty');
-  
+  updateBadge();
+
   if (!cart || cart.items.length === 0) {
     if (foot) foot.style.display = 'none';
     if (empty) empty.style.display = 'block';
@@ -2096,76 +2097,74 @@ async function syncMedusaCheckout(){
 
 function renderCkStep3(el){
   var total = cart.getFinalTotal();
-  var h = '<h2>Método de pago</h2><p class="ck-sub">Elige cómo deseas pagar tu pedido de $'+total.toLocaleString('es-MX')+' MXN.</p>';
-  h += '<div style="display:grid;gap:1rem">';
-  h += '<label style="display:flex;align-items:center;gap:1rem;padding:1rem;border:1.5px solid var(--borde);cursor:pointer;transition:border-color .2s" onclick="this.querySelector(\'input\').checked=true;document.querySelectorAll(\'.ck-pay-opt\').forEach(function(l){l.style.borderColor=\'var(--borde)\'});this.style.borderColor=\'var(--esm)\'" class="ck-pay-opt"><input type="radio" name="ck-pay" value="transfer" checked style="accent-color:var(--esm)"/><div><strong style="font-size:.82rem">Transferencia bancaria (SPEI)</strong><p style="font-size:.72rem;color:var(--ink3);margin-top:2px">Datos bancarios al confirmar. Procesamos tu pedido al recibir el pago.</p></div></label>';
-  h += '<label style="display:flex;align-items:center;gap:1rem;padding:1rem;border:1.5px solid var(--borde);cursor:pointer;transition:border-color .2s" onclick="this.querySelector(\'input\').checked=true;document.querySelectorAll(\'.ck-pay-opt\').forEach(function(l){l.style.borderColor=\'var(--borde)\'});this.style.borderColor=\'var(--esm)\'" class="ck-pay-opt"><input type="radio" name="ck-pay" value="oxxo" style="accent-color:var(--esm)"/><div><strong style="font-size:.82rem">Depósito en OXXO</strong><p style="font-size:.72rem;color:var(--ink3);margin-top:2px">Genera tu ficha de pago. Deposita en cualquier OXXO.</p></div></label>';
-  h += '<label style="display:flex;align-items:center;gap:1rem;padding:1rem;border:1.5px solid var(--borde);cursor:pointer;transition:border-color .2s" onclick="this.querySelector(\'input\').checked=true;document.querySelectorAll(\'.ck-pay-opt\').forEach(function(l){l.style.borderColor=\'var(--borde)\'});this.style.borderColor=\'var(--esm)\'" class="ck-pay-opt"><input type="radio" name="ck-pay" value="whatsapp" style="accent-color:var(--esm)"/><div><strong style="font-size:.82rem">Pagar vía WhatsApp</strong><p style="font-size:.72rem;color:var(--ink3);margin-top:2px">Te contactamos para coordinar el pago directamente.</p></div></label>';
+  var h = '<h2>Método de pago</h2><p class="ck-sub">Serás redirigido a Mercado Pago para completar tu pago de $'+total.toLocaleString('es-MX')+' MXN de forma segura.</p>';
+  h += '<div style="padding:1.5rem;border:1.5px solid var(--esm);border-radius:8px;background:rgba(0,87,183,.04);text-align:center">';
+  h += '<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--esm)" stroke-width="1.5" style="margin-bottom:.5rem"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>';
+  h += '<p style="font-size:.85rem;font-weight:600;color:var(--ink);margin-bottom:.3rem">Mercado Pago</p>';
+  h += '<p style="font-size:.72rem;color:var(--ink3)">Tarjeta de crédito/débito, OXXO, SPEI, Mercado Crédito y más.</p>';
   h += '</div>';
-  h += '<div class="ck-actions"><button class="ck-btn ck-btn-ghost" onclick="setCkStep(2)">← Atrás</button><button class="ck-btn ck-btn-primary" id="ck-confirm-btn" onclick="confirmOrder()">Confirmar pedido →</button></div>';
+  h += '<div class="ck-actions"><button class="ck-btn ck-btn-ghost" onclick="setCkStep(2)">← Atrás</button><button class="ck-btn ck-btn-primary" id="ck-confirm-btn" onclick="confirmOrder()">Pagar con Mercado Pago →</button></div>';
   el.innerHTML = h;
-  // Pre-select first option visual
-  var first = el.querySelector('.ck-pay-opt');
-  if(first) first.style.borderColor = 'var(--esm)';
 }
 
 async function confirmOrder(){
   var btn = document.getElementById('ck-confirm-btn');
-  if(btn){ btn.disabled=true; btn.innerHTML='<span class="ck-spinner"></span> Procesando...'; }
-  var payMethod = 'transfer';
-  var radios = document.querySelectorAll('input[name="ck-pay"]');
-  radios.forEach(function(r){ if(r.checked) payMethod = r.value; });
+  if(btn){ btn.disabled=true; btn.innerHTML='<span class="ck-spinner"></span> Redirigiendo a Mercado Pago...'; }
 
-  var orderId = 'MC-' + Date.now().toString(36).toUpperCase();
   try {
-    if(typeof MedusaCart !== 'undefined' && moncatuMedusaActive() && MedusaCart.savedCartId()){
-      try {
-        var providers = await MedusaCart.listPaymentProviders();
-        var pid = 'pp_system_default';
-        if(providers.length > 0) pid = providers[0].id;
-        var pc = await MedusaCart.createPaymentCollection();
-        await MedusaCart.initPaymentSession(pc.id, pid);
-        var result = await MedusaCart.completeCart();
-        if(result.success && result.order){
-          orderId = result.order.display_id || result.order.id || orderId;
+    var BACKEND_URL = (window.MONCATU_MEDUSA && window.MONCATU_MEDUSA.baseUrl) || '';
+    var shipping = cart.getShipping();
+    var response = await fetch(BACKEND_URL + '/store/create-mercadopago-preference', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: cart.items.map(function(item){
+          return {
+            title: item.name,
+            unit_price: item.price,
+            quantity: item.quantity,
+            picture_url: item.image,
+            description: item.size ? 'Talla: ' + item.size : ''
+          };
+        }),
+        payer: {
+          email: __ckData.email,
+          name: __ckData.name,
+          phone: __ckData.phone
+        },
+        shipping: {
+          cost: shipping,
+          address: { street: __ckData.street, zipCode: __ckData.zip }
         }
-      } catch(mErr){
-        console.warn('[Checkout] Medusa payment/complete:', mErr.message || mErr);
-      }
+      })
+    });
+
+    if (!response.ok) {
+      var err = await response.json();
+      throw new Error(err.error || 'Error creando preferencia de pago');
     }
-  } catch(e){ console.warn('[Checkout] Medusa order:', e); }
 
-  // Clear local cart
-  cart.items = [];
-  cart.saveCart();
-  updateBadge();
-  if(typeof MedusaCart !== 'undefined') MedusaCart.clearCart();
-
-  // Show confirmation
-  __ckData._orderId = orderId;
-  __ckData._payMethod = payMethod;
-  setCkStep(4);
+    var data = await response.json();
+    window.location.href = data.init_point;
+  } catch(e) {
+    console.error('[Checkout] Mercado Pago error:', e);
+    alert('Error al conectar con Mercado Pago. Por favor intenta de nuevo.');
+    if(btn){ btn.disabled=false; btn.innerHTML='Pagar con Mercado Pago →'; }
+  }
 }
 
 function renderCkStep4(el){
   var d = __ckData;
-  var pm = d._payMethod || 'transfer';
   var h = '<div class="ck-confirm">';
   h += '<div class="ck-confirm-icon">✓</div>';
   h += '<h2>¡Pedido confirmado!</h2>';
-  h += '<p>Gracias, '+d.name+'. Tu pedido ha sido registrado exitosamente.</p>';
-  h += '<div class="ck-order-id">Pedido: '+(d._orderId||'')+'</div>';
-  if(pm === 'transfer'){
-    h += '<div class="ck-pay-info"><h4>Datos para transferencia (SPEI)</h4><p><strong>Banco:</strong> BBVA</p><p><strong>CLABE:</strong> 012 320 0015 XXXXXXX</p><p><strong>Beneficiario:</strong> Moncatu MX</p><p><strong>Referencia:</strong> '+(d._orderId||'')+'</p><p style="margin-top:.5rem;font-size:.68rem;color:var(--esm)">Envía tu comprobante por WhatsApp para procesar tu envío.</p></div>';
-  } else if(pm === 'oxxo'){
-    h += '<div class="ck-pay-info"><h4>Depósito OXXO</h4><p>Te enviaremos la ficha de pago por WhatsApp y email en los próximos minutos.</p><p><strong>Referencia:</strong> '+(d._orderId||'')+'</p></div>';
-  }
-  var waMsg = 'Hola Moncatu! Acabo de hacer el pedido '+(d._orderId||'')+'. Mi nombre es '+d.name+'. '+(pm==='transfer'?'Pagaré por transferencia.':'');
-  h += '<div class="ck-actions" style="justify-content:center;margin-top:1.5rem"><a href="https://wa.me/5215644645574?text='+encodeURIComponent(waMsg)+'" class="ck-btn ck-btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Enviar comprobante por WhatsApp</a></div>';
+  h += '<p>Gracias, '+d.name+'. Tu pago fue procesado exitosamente a través de Mercado Pago.</p>';
+  h += '<div class="ck-pay-info" style="text-align:center;margin-top:1rem"><p style="font-size:.78rem;color:var(--ink3)">Recibirás un correo de confirmación en <strong>'+d.email+'</strong></p></div>';
+  var waMsg = 'Hola Moncatu! Acabo de completar mi pago por Mercado Pago. Mi nombre es '+d.name+'.';
+  h += '<div class="ck-actions" style="justify-content:center;margin-top:1.5rem"><a href="https://wa.me/5215644645574?text='+encodeURIComponent(waMsg)+'" class="ck-btn ck-btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>Contactar por WhatsApp</a></div>';
   h += '<button class="ck-btn ck-btn-ghost" style="max-width:200px;margin:1rem auto 0;display:block" onclick="go(\'inicio\')">Volver al inicio</button>';
   h += '</div>';
   el.innerHTML = h;
-  // Clear sidebar
   document.getElementById('ck-items').innerHTML = '<p style="text-align:center;color:var(--ink3);font-size:.78rem;padding:1rem 0">Pedido completado ✓</p>';
   document.getElementById('ck-totals').innerHTML = '';
 }
