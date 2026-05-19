@@ -248,7 +248,7 @@ class ProductManager {
           <div class="pcard-ov"></div>
           ${badges.join('')}
           <button class="pcard-wish" data-id="${product.id}">♡</button>
-          <button class="pcard-cta" onclick="window.productManager.showProductDetail('${product.id}')">Ver Detalles</button>
+          <button class="pcard-cta" onclick="if(typeof goProducto==='function'){goProducto('${product.id}')}else{window.productManager.showProductDetail('${product.id}')}">Ver Detalles</button>
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">${product.name}</h3>
@@ -280,19 +280,27 @@ class ProductManager {
     document.querySelectorAll('.btn-add-cart').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         e.stopPropagation();
-        const productId = e.currentTarget.dataset.productId;
+        const el = e.currentTarget;
+        const productId = el.dataset.productId;
+        const orig = el.textContent;
+        el.textContent = '✓ Agregado';
+        el.style.opacity = '.7';
+        el.style.pointerEvents = 'none';
         await this.handleAddToCart(productId);
+        setTimeout(() => { el.textContent = orig; el.style.opacity = ''; el.style.pointerEvents = ''; }, 1500);
       });
     });
 
     // Tarjetas de producto (ver detalle)
     document.querySelectorAll('.pcard').forEach(card => {
       card.addEventListener('click', (e) => {
-        // Evitar si se clickeó un botón
         if (e.target.closest('.btn-add-cart, .pcard-wish, .pcard-cta')) return;
-        
         const productId = card.dataset.id;
-        this.showProductDetail(productId);
+        if (typeof goProducto === 'function') {
+          goProducto(productId);
+        } else {
+          this.showProductDetail(productId);
+        }
       });
     });
 
@@ -314,9 +322,10 @@ class ProductManager {
       if (product.sizes && product.sizes.length > 0) {
         this.showSizeSelector(product);
       } else {
-        // Agregar directamente
         if (typeof cart !== 'undefined') {
           cart.addItem(product);
+          if (typeof updateBadge === 'function') updateBadge();
+          if (typeof syncDrawer === 'function') syncDrawer();
         }
       }
     } catch (error) {
@@ -370,6 +379,8 @@ class ProductManager {
         const size = btn.dataset.size;
         if (typeof cart !== 'undefined') {
           cart.addItem(product, size);
+          if (typeof updateBadge === 'function') updateBadge();
+          if (typeof syncDrawer === 'function') syncDrawer();
         }
         this.closeSizeSelector(modal);
       });
