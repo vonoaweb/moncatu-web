@@ -8,14 +8,13 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://js.stripe.com https://*.cloudfunctions.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://firebasestorage.googleapis.com https://vonoaweb.github.io https://placehold.co data: blob:; connect-src 'self' https://moncatu-backend-production.up.railway.app https://*.firebaseio.com https://*.googleapis.com https://api.stripe.com; frame-src https://js.stripe.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://sdk.mercadopago.com https://*.cloudfunctions.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://firebasestorage.googleapis.com https://vonoaweb.github.io https://placehold.co https://http2.mlstatic.com data: blob:; connect-src 'self' https://moncatu-backend-production.up.railway.app https://*.firebaseio.com https://*.googleapis.com https://api.mercadopago.com; frame-src https://sdk.mercadopago.com;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Checkout - Moncatu</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="cart-styles.css">
-  <script src="https://js.stripe.com/v3/"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
@@ -24,27 +23,27 @@
     <div class="checkout-container">
       <div class="checkout-form">
         <h1>Finalizar Compra</h1>
-        
+
         <form id="checkout-form">
           <h3>Información de Contacto</h3>
           <input type="email" name="email" placeholder="Email" required>
           <input type="text" name="name" placeholder="Nombre completo" required>
           <input type="tel" name="phone" placeholder="Teléfono" required>
-          
+
           <h3>Dirección de Envío</h3>
           <input type="text" name="street" placeholder="Calle y número" required>
           <input type="text" name="city" placeholder="Ciudad" required>
           <input type="text" name="state" placeholder="Estado" required>
           <input type="text" name="zipCode" placeholder="Código Postal" required>
-          
-          <button type="submit" class="btn-submit">Continuar al Pago</button>
+
+          <button type="submit" class="btn-submit">Pagar con Mercado Pago</button>
         </form>
       </div>
-      
+
       <div id="order-summary"></div>
     </div>
   </main>
-  
+
   <script src="moncatu-config.js"></script>
   <script src="firebase-config.js"></script>
   <script src="sanitize.js"></script>

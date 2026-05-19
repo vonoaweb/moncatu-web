@@ -1,9 +1,9 @@
 {
   "name": "moncatu-web",
-  "version": "2.0.0",
-  "description": "Moncatu e-commerce — GitHub Pages frontend + Medusa backend on Railway",
+  "version": "2.1.0",
+  "description": "Moncatu e-commerce — GitHub Pages frontend + Medusa backend on Railway + Mercado Pago",
   "private": true,
   "dependencies": {
-    "stripe": "^14.0.0"
+    "mercadopago": "^2.0.0"
   }
 }
