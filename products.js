@@ -66,6 +66,19 @@ function moncatuDemoCatalog() {
       stone: "Amatista",
       images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Collar+Aurora"],
       description: "Collar de plata .925 con hermoso dije de amatista."
+    },
+    {
+      id: "prod_local_7",
+      name: "Aretes Creciente",
+      category: "aretes",
+      price: 1690,
+      material: "Plata .925",
+      stone: "—",
+      finish: "Pulido espejo",
+      // TODO: reemplazar por foto real con fondo de marca → img/earrings_creciente.png
+      images: ["https://placehold.co/1000x1000/EDE9E3/3B5469?text=Aretes+Creciente"],
+      description: "Aretes colgantes en plata .925 con forma de media luna pulida a espejo. Diseño envolvente y ligero, perfectos para el día a día o una noche especial.",
+      featured: true
     }
   ];
 }
