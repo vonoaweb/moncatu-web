@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+  <channel>
+    <title>Moncatu Joyería</title>
+    <link>https://moncatu.com</link>
+    <description>Joyería artesanal mexicana en plata Ley .925 y piedras naturales.</description>
+    <item>
+      <g:id>A001</g:id>
+      <g:title>Aretes de Plata Forma de U</g:title>
+      <g:description>Aretes finos de Plata Ley 925 con Dijes para Mujer | Joyería de Moda para Bodas, Fiestas y Compromisos</g:description>
+      <g:link>https://moncatu.com/#producto/A001</g:link>
+      <g:image_link>https://moncatu.com/img/a001-1.webp</g:image_link>
+      <g:additional_image_link>https://moncatu.com/img/a001-2.webp</g:additional_image_link>
+      <g:additional_image_link>https://moncatu.com/img/a001-3.webp</g:additional_image_link>
+      <g:price>349.00 MXN</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Moncatu</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Apparel &amp; Accessories &gt; Jewelry &gt; Earrings</g:google_product_category>
+      <g:product_type>Joyería &gt; Aretes</g:product_type>
+      <g:material>Plata Ley .925</g:material>
+    </item>
+  </channel>
+</rss>

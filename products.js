@@ -3,83 +3,61 @@
 const MONCATU_IMG_BASE = 'https://vonoaweb.github.io/moncatu-web/img';
 
 function moncatuDemoCatalog() {
+  // ─────────────────────────────────────────────────────────────
+  // CATÁLOGO REAL DE MONCATU
+  // Agrega cada pieza real aquí. Campos por producto:
+  //   id / sku  : código único (ej. "A001")
+  //   name      : nombre que se muestra
+  //   category  : anillos | collares | pulseras | aretes | sets
+  //   price     : precio en MXN (número, sin símbolo)
+  //   material  : ej. "Plata Ley .925"
+  //   finish    : (opcional) acabado, ej. "Pulido espejo"
+  //   stone     : (opcional) piedra; usa "—" o quítalo si no aplica
+  //   stock     : unidades disponibles
+  //   images    : rutas en /img (la 1ª es la principal)
+  //   description: descripción / texto de venta
+  //   featured  : true para marcarlo "Nuevo" y destacarlo
+  // ─────────────────────────────────────────────────────────────
   return [
     {
-      id: "prod_local_1",
-      name: "Anillo Constelación",
-      category: "anillos",
-      price: 2450,
-      material: "Plata .925",
-      stone: "Zafiro Blanco",
-      images: ["https://vonoaweb.github.io/moncatu-web/img/ring_constelacion.png"],
-      description: "Anillo de plata .925 con detalles de zafiro blanco inspirado en las constelaciones.",
-      featured: true
-    },
-    {
-      id: "prod_local_2",
-      name: "Collar Eclipse",
-      category: "collares",
-      price: 3200,
-      material: "Plata .925",
-      stone: "Ónice",
-      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Collar+Eclipse"],
-      description: "Elegante collar de plata .925 con piedra ónice central.",
-      featured: true
-    },
-    {
-      id: "prod_local_3",
-      name: "Pulsera Alba",
-      category: "pulseras",
-      price: 1800,
-      material: "Plata .925",
-      stone: "Cuarzo Rosa",
-      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Pulsera+Alba"],
-      description: "Delicada pulsera con cuarzo rosa engarzado en plata .925."
-    },
-    {
-      id: "prod_local_4",
-      name: "Aretes Gota",
+      id: "A001",
+      sku: "A001",
+      name: "Aretes de Plata Forma de U",
       category: "aretes",
-      price: 1500,
-      material: "Plata .925",
-      stone: "—",
-      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Aretes+Gota"],
-      description: "Aretes minimalistas en forma de gota, plata .925 pulida."
-    },
-    {
-      id: "prod_local_5",
-      name: "Anillo Solsticio",
-      category: "anillos",
-      price: 2800,
-      material: "Oro rosado 18k",
-      stone: "Turmalina",
-      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Anillo+Solsticio"],
-      description: "Anillo bañado en oro rosado 18k con turmalina central.",
-      featured: true
-    },
-    {
-      id: "prod_local_6",
-      name: "Collar Aurora",
-      category: "collares",
-      price: 2600,
-      material: "Plata .925",
-      stone: "Amatista",
-      images: ["https://placehold.co/600x600/EDE9E3/3B5469?text=Collar+Aurora"],
-      description: "Collar de plata .925 con hermoso dije de amatista."
-    },
-    {
-      id: "prod_local_7",
-      name: "Aretes Creciente",
-      category: "aretes",
-      price: 1690,
-      material: "Plata .925",
-      stone: "—",
+      price: 349,
+      material: "Plata Ley .925",
       finish: "Pulido espejo",
-      // TODO: reemplazar por foto real con fondo de marca → img/earrings_creciente.png
-      images: ["https://placehold.co/1000x1000/EDE9E3/3B5469?text=Aretes+Creciente"],
-      description: "Aretes colgantes en plata .925 con forma de media luna pulida a espejo. Diseño envolvente y ligero, perfectos para el día a día o una noche especial.",
+      stock: 1,
+      images: [
+        "img/a001-1.webp",
+        "img/a001-2.webp",
+        "img/a001-3.webp"
+      ],
+      description: "Aretes finos de Plata Ley 925 con Dijes para Mujer | Joyería de Moda para Bodas, Fiestas y Compromisos",
       featured: true
-    }
+    },
+
+    // ── Inventario cargado desde el spreadsheet (sin foto todavía → active:false = ocultos).
+    //    Para publicar una pieza: pon sus fotos reales en images[] y cambia active a true.
+    { id: "A002", sku: "A002", name: "Dije de Moissanita Corte Esmeralda", category: "collares", price: 750, material: "Moissanita", color: "Transparente", stock: 2, active: false, images: ["img/placeholder.webp"], description: "Dije de moissanita con corte esmeralda, pieza única de Moncatu. Brillo y claridad de alta joyería para tu collar favorito." },
+    { id: "A003", sku: "A003", name: "Collar de Circonia Rectangular Multicolor", category: "collares", price: 200, material: "Circonia", color: "Multicolor", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Collar de circonia multicolor con dije rectangular. Pieza única, ideal para dar color a cualquier outfit. Joyería de moda para mujer — Moncatu." },
+    { id: "A004", sku: "A004", name: "Aretes de Circonia Multicolor", category: "aretes", price: 150, material: "Circonia", color: "Multicolor", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Aretes de circonia multicolor, pieza única. Joyería de moda para mujer, perfectos para fiestas y eventos." },
+    { id: "A005", sku: "A005", name: "Aretes de Moissanita con Plata (2 Certificados)", category: "aretes", price: 560, material: "Moissanita y plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Aretes de moissanita engastada en plata .925, con dos certificados. Alta joyería para ocasiones especiales — pieza premium de Moncatu." },
+    { id: "A006", sku: "A006", name: "Conjunto de Circonia: Pulsera, Aretes, Collar y Anillo", category: "sets", price: 250, material: "Circonia", color: "Multicolor", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Conjunto completo de circonia multicolor: pulsera, aretes, collar y anillo. Pieza única, regalo ideal para mujer." },
+    { id: "A007", sku: "A007", name: "Anillo Dratini de Plata (Unitalla)", category: "anillos", price: 150, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Anillo de plata .925 diseño Dratini, talla ajustable. Pieza única y original de Moncatu." },
+    { id: "A008", sku: "A008", name: "Pulsera Gruesa de Acero Inoxidable", category: "pulseras", price: 290, material: "Acero inoxidable", color: "Oro", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Pulsera gruesa de acero inoxidable tono oro. Resistente, no se oxida, ideal para uso diario." },
+    { id: "A009", sku: "A009", name: "Pulsera Irregular Dorada Diezi", category: "pulseras", price: 260, material: "Acero inoxidable", color: "Oro", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Pulsera irregular tono oro en acero inoxidable. Diseño moderno que no se decolora." },
+    { id: "A010", sku: "A010", name: "Pulsera Irregular Plateada Diezi", category: "pulseras", price: 260, material: "Acero inoxidable", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Pulsera irregular tono plata en acero inoxidable. Diseño moderno y resistente." },
+    { id: "A011", sku: "A011", name: "Aretes Colgantes de Grulla de Plata", category: "aretes", price: 550, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Aretes colgantes con figura de grulla en plata .925. Pieza premium, elegante y única de Moncatu." },
+    { id: "A012", sku: "A012", name: "Cadena Doble Capa de Plata", category: "collares", price: 170, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Collar de plata .925 en doble capa. Diseño en capas, ligero y versátil." },
+    { id: "A013", sku: "A013", name: "Anillo Happy Face Esmaltado", category: "anillos", price: 350, material: "Plata .925", color: "Oro", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Anillo Happy Face esmaltado tono oro en plata .925. Divertido y con estilo." },
+    { id: "A014", sku: "A014", name: "Collar Silbato Antiestrés de Plata", category: "collares", price: 150, material: "Metal", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Collar con dije de silbato antiestrés tono plata. Funcional y original." },
+    { id: "A015", sku: "A015", name: "Collar Silbato Antiestrés Oro", category: "collares", price: 150, material: "Metal", color: "Oro", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Collar con dije de silbato antiestrés tono oro. Funcional y original." },
+    { id: "A016", sku: "A016", name: "Collar Jamsa (Mano de Fátima)", category: "collares", price: 450, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Collar Jamsa (mano de Fátima) en plata .925. Símbolo de protección, pieza única de Moncatu." },
+    { id: "A017", sku: "A017", name: "Cruz Loretto de Plata", category: "collares", price: 600, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Dije Cruz de Loretto en plata .925. Pieza clásica y significativa." },
+    { id: "A018", sku: "A018", name: "Collar Cadena de Plata .925 (65 cm)", category: "collares", price: 245, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Cadena de plata .925 de 65 cm. Clásica y versátil para usar sola o con dijes." },
+    { id: "A019", sku: "A019", name: "Anillo de Plata Antiestrés de Bolitas", category: "anillos", price: 150, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Anillo antiestrés de bolitas en plata .925. Giratorio, ideal para relajar." },
+    { id: "A020", sku: "A020", name: "Anillo de Plata Antiestrés Desplazable", category: "anillos", price: 150, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Anillo antiestrés desplazable en plata .925. Movimiento relajante, pieza única." }
   ];
 }
 

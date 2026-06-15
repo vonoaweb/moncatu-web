@@ -8,18 +8,100 @@
 </script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://sdk.mercadopago.com https://*.cloudfunctions.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://firebasestorage.googleapis.com https://vonoaweb.github.io https://placehold.co https://http2.mlstatic.com data: blob:; connect-src 'self' https://moncatu-backend-production.up.railway.app https://*.firebaseio.com https://*.googleapis.com https://api.mercadopago.com; frame-src https://sdk.mercadopago.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://sdk.mercadopago.com https://*.cloudfunctions.net https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://firebasestorage.googleapis.com https://vonoaweb.github.io https://placehold.co https://http2.mlstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com data: blob:; connect-src 'self' https://moncatu-backend-production.up.railway.app https://*.firebaseio.com https://*.googleapis.com https://api.mercadopago.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://sdk.mercadopago.com;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Moncatu | Joyería con Alma y Diseño Exclusivo</title>
+<title>Moncatu | Joyería de Plata .925 Hecha a Mano en México</title>
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg?v=2">
-<meta name="description" content="Joyería artesanal mexicana en plata .925 y piedras naturales. Diseños exclusivos creados para destacar tu esencia."/>
-<meta property="og:title" content="Moncatu | Joyería con Alma y Diseño Exclusivo"/>
-<meta property="og:description" content="Joyería artesanal mexicana en plata .925 y piedras naturales."/>
+
+<!-- ════════ Google Analytics 4 (GA4) ════════
+     Pega tu ID de medición abajo (formato G-XXXXXXXXXX). Lo encuentras en:
+     Google Analytics > Administrar > Flujos de datos > Web > ID de medición.
+     Mientras diga G-XXXXXXXXXX no carga nada (no rompe el sitio). -->
+<script>
+  window.MONCATU_GA_ID = 'G-XXXXXXXXXX';
+  (function () {
+    var id = window.MONCATU_GA_ID;
+    if (!id || id.indexOf('G-XXXX') === 0) return; // sin ID real → no carga
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', id);
+  })();
+</script>
+<meta name="description" content="Joyería artesanal mexicana en plata Ley .925 y piedras naturales. Aretes, collares, anillos y pulseras de diseño exclusivo, hechos a mano en México. Envíos a todo el país."/>
+<link rel="canonical" href="https://moncatu.com/"/>
+
+<!-- Verificación de Google Search Console:
+     Search Console > Agregar propiedad > Etiqueta HTML. Quita el comentario de
+     la línea de abajo y pega tu código en content. -->
+<!-- <meta name="google-site-verification" content="PEGA_AQUI_TU_CODIGO_DE_SEARCH_CONSOLE"/> -->
+
+<!-- Open Graph (Facebook / WhatsApp / Instagram) -->
+<meta property="og:site_name" content="Moncatu"/>
+<meta property="og:title" content="Moncatu | Joyería de Plata .925 Hecha a Mano en México"/>
+<meta property="og:description" content="Joyería artesanal mexicana en plata Ley .925 y piedras naturales. Diseños exclusivos para destacar tu esencia."/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://vonoaweb.github.io/moncatu-web/"/>
-<meta property="og:image" content="https://vonoaweb.github.io/moncatu-web/img/ring_constelacion.png"/>
+<meta property="og:url" content="https://moncatu.com/"/>
+<meta property="og:image" content="https://moncatu.com/img/og-cover.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:locale" content="es_MX"/>
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Moncatu | Joyería de Plata .925 Hecha a Mano en México"/>
+<meta name="twitter:description" content="Joyería artesanal mexicana en plata Ley .925 y piedras naturales."/>
+<meta name="twitter:image" content="https://moncatu.com/img/og-cover.jpg"/>
+
+<!-- ════════ Datos estructurados para Google (JSON-LD) ════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Moncatu",
+  "url": "https://moncatu.com",
+  "logo": "https://moncatu.com/img/logo.png",
+  "description": "Joyería artesanal mexicana en plata Ley .925 y piedras naturales.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Guadalajara",
+    "addressRegion": "Jalisco",
+    "addressCountry": "MX"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Aretes de Plata Forma de U",
+  "image": [
+    "https://moncatu.com/img/a001-1.webp",
+    "https://moncatu.com/img/a001-2.webp",
+    "https://moncatu.com/img/a001-3.webp"
+  ],
+  "description": "Aretes finos de Plata Ley 925 con Dijes para Mujer | Joyería de Moda para Bodas, Fiestas y Compromisos",
+  "sku": "A001",
+  "mpn": "A001",
+  "brand": { "@type": "Brand", "name": "Moncatu" },
+  "material": "Plata Ley .925",
+  "category": "Aretes",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://moncatu.com/#producto/A001",
+    "priceCurrency": "MXN",
+    "price": "349.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": { "@type": "Organization", "name": "Moncatu" }
+  }
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ── RESET ── */

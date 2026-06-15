@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://moncatu.com/sitemap.xml
