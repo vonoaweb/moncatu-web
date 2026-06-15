@@ -29,9 +29,8 @@ function moncatuDemoCatalog() {
       finish: "Pulido espejo",
       stock: 1,
       images: [
-        "img/a001-1.webp",
-        "img/a001-2.webp",
-        "img/a001-3.webp"
+        "img/a001-madera.webp",
+        "img/a001-blanco.webp"
       ],
       description: "Aretes finos de Plata Ley 925 con Dijes para Mujer | Joyería de Moda para Bodas, Fiestas y Compromisos",
       featured: true
