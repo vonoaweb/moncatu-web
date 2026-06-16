@@ -2328,6 +2328,42 @@ function moncatuImgZoomOut(box){
   img.style.transformOrigin = 'center center';
 }
 
+/* Compartir producto: usa la página /producto/<id>.html (con preview OG por producto) */
+function moncatuShare(id){
+  var url = 'https://moncatu.com/producto/' + id + '.html';
+  var name = (document.getElementById('pp-bc-name') || {}).textContent || 'Moncatu';
+  var text = name + ' | Moncatu Joyería';
+  if (navigator.share) {
+    navigator.share({ title: name, text: text, url: url }).catch(function(){});
+  } else {
+    moncatuShareFallback(url, text);
+  }
+}
+function moncatuShareFallback(url, text){
+  var enc = encodeURIComponent;
+  var prev = document.getElementById('moncatu-share-pop'); if (prev) prev.remove();
+  var pop = document.createElement('div');
+  pop.id = 'moncatu-share-pop';
+  pop.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(26,29,46,.55);display:flex;align-items:center;justify-content:center;padding:20px';
+  pop.innerHTML = '<div style="background:#fff;border-radius:10px;padding:24px;max-width:340px;width:100%;text-align:center;font-family:DM Sans,sans-serif">'
+    + '<h3 style="margin:0 0 16px;font-size:1rem;font-family:Playfair Display,serif">Compartir</h3>'
+    + '<div style="display:flex;flex-direction:column;gap:10px">'
+    + '<a href="https://wa.me/?text=' + enc(text + ' ' + url) + '" target="_blank" rel="noopener" style="padding:12px;border-radius:6px;background:#25D366;color:#fff;text-decoration:none">WhatsApp</a>'
+    + '<a href="https://www.facebook.com/sharer/sharer.php?u=' + enc(url) + '" target="_blank" rel="noopener" style="padding:12px;border-radius:6px;background:#1877F2;color:#fff;text-decoration:none">Facebook</a>'
+    + '<a href="https://twitter.com/intent/tweet?text=' + enc(text) + '&url=' + enc(url) + '" target="_blank" rel="noopener" style="padding:12px;border-radius:6px;background:#1C1C1C;color:#fff;text-decoration:none">X (Twitter)</a>'
+    + '<button id="moncatu-share-copy" style="padding:12px;border-radius:6px;background:#EDE9E3;border:none;cursor:pointer;font-family:inherit">Copiar enlace</button>'
+    + '</div>'
+    + '<button id="moncatu-share-close" style="margin-top:14px;background:none;border:none;color:#767676;cursor:pointer;font-size:.8rem">Cerrar</button>'
+    + '</div>';
+  document.body.appendChild(pop);
+  pop.addEventListener('click', function(e){ if (e.target === pop) pop.remove(); });
+  document.getElementById('moncatu-share-close').onclick = function(){ pop.remove(); };
+  document.getElementById('moncatu-share-copy').onclick = function(){
+    if (navigator.clipboard) navigator.clipboard.writeText(url);
+    this.textContent = '✓ Enlace copiado';
+  };
+}
+
 function goProducto(productId){
   if(!productId) { go('inicio'); return; }
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
@@ -2393,6 +2429,7 @@ async function renderProductPage(productId){
     infoHtml += '<div style="display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem">';
     infoHtml += '<button class="btn btn-esm" style="width:100%;padding:.9rem;font-size:.75rem;letter-spacing:.12em" onclick="addToCart(\'' + p.id + '\');this.textContent=\'✓ Agregado\';var b=this;setTimeout(function(){b.textContent=\'AÑADIR AL CARRITO\'},2000)">AÑADIR AL CARRITO</button>';
     infoHtml += '<a href="https://wa.me/5215644645574?text=' + encodeURIComponent(waMsg) + '" target="_blank" rel="noopener" class="btn" style="width:100%;padding:.9rem;font-size:.75rem;letter-spacing:.12em;background:#25D366;color:white;border:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>CONSULTAR POR WHATSAPP</a>';
+    infoHtml += '<button class="btn" style="width:100%;padding:.85rem;font-size:.72rem;letter-spacing:.12em;background:transparent;border:1.5px solid var(--borde2);color:var(--ink2);display:flex;align-items:center;justify-content:center;gap:.5rem;cursor:pointer" onclick="moncatuShare(\'' + p.id + '\')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>COMPARTIR</button>';
     infoHtml += '</div>';
     infoHtml += '<div style="display:flex;gap:1rem;margin-top:1.2rem;font-size:.65rem;color:var(--ink3)"><span>🛡 Compra segura</span><span>✓ Certificado</span><span>📦 Garantía</span></div>';
     infoHtml += '<div style="margin-top:2rem"><h3 style="font-size:.85rem;font-weight:600;margin-bottom:.6rem">Opiniones de clientas ★★★★★</h3>' + reviewsHtml + '</div>';

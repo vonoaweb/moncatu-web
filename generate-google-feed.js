@@ -184,6 +184,81 @@ ${extraImgs}      <g:price>${escapeXml(p.price)}</g:price>
   return xml;
 }
 
+// ── Páginas de producto para compartir (preview OG por producto) + sitemap ──
+function shortDesc(s) {
+  s = String(s || '').replace(/\s+/g, ' ').trim();
+  return s.length > 160 ? s.slice(0, 157) + '…' : s;
+}
+function ogImageFor(p) {
+  const jpg = (p.id || '').toLowerCase() + '-og.jpg';
+  if (fs.existsSync(path.join(__dirname, 'img', jpg))) return `${FRONTEND_URL}/img/${jpg}`;
+  return p.images[0];
+}
+function buildSharePage(p) {
+  const amount = (String(p.price).match(/[\d.]+/) || ['0'])[0];
+  const name = `${p.title} — Moncatu`;
+  const desc = shortDesc(p.description);
+  const img = ogImageFor(p);
+  const canon = `${FRONTEND_URL}/producto/${p.id}.html`;
+  const spa = `/#producto/${p.id}`;
+  const e = escapeXml;
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>${e(name)}</title>
+<meta name="description" content="${e(desc)}"/>
+<link rel="canonical" href="${e(canon)}"/>
+<meta property="og:site_name" content="Moncatu"/>
+<meta property="og:type" content="product"/>
+<meta property="og:title" content="${e(name)}"/>
+<meta property="og:description" content="${e(desc)}"/>
+<meta property="og:image" content="${e(img)}"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="1200"/>
+<meta property="og:url" content="${e(canon)}"/>
+<meta property="product:price:amount" content="${e(amount)}"/>
+<meta property="product:price:currency" content="MXN"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="${e(name)}"/>
+<meta name="twitter:description" content="${e(desc)}"/>
+<meta name="twitter:image" content="${e(img)}"/>
+<meta http-equiv="refresh" content="0;url=${e(spa)}"/>
+<script>location.replace(${JSON.stringify(spa)});</script>
+</head>
+<body style="font-family:Arial,Helvetica,sans-serif;background:#F8F5F1;color:#1C1C1C;text-align:center;padding:40px 20px">
+<img src="${e(img)}" alt="${e(p.title)}" style="max-width:340px;width:100%;border-radius:8px"/>
+<h1 style="font-weight:600">${e(p.title)}</h1>
+<p style="max-width:520px;margin:0 auto 16px">${e(desc)}</p>
+<p style="font-size:1.4rem;color:#3B5469"><strong>$${e(amount)} MXN</strong></p>
+<p><a href="${e(spa)}" style="display:inline-block;background:#0D7A6F;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none">Ver en Moncatu →</a></p>
+</body>
+</html>
+`;
+}
+function generateSharePages(normProducts) {
+  const dir = path.join(__dirname, 'producto');
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  const urls = [];
+  normProducts.forEach((p) => {
+    fs.writeFileSync(path.join(dir, `${p.id}.html`), buildSharePage(p), 'utf-8');
+    urls.push(`${FRONTEND_URL}/producto/${p.id}.html`);
+  });
+  console.log(`[Share] ${urls.length} páginas generadas en /producto`);
+  return urls;
+}
+function generateSitemap(productUrls) {
+  const today = new Date().toISOString().slice(0, 10);
+  const all = [FRONTEND_URL + '/'].concat(productUrls);
+  const body = all.map((u, i) =>
+    `  <url>\n    <loc>${escapeXml(u)}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${i === 0 ? 'daily' : 'weekly'}</changefreq>\n    <priority>${i === 0 ? '1.0' : '0.8'}</priority>\n  </url>`
+  ).join('\n');
+  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`, 'utf-8');
+  console.log(`[Sitemap] ${all.length} URLs`);
+}
+
 async function main() {
   console.log('[Google Feed] Buscando productos en Medusa (Railway)...');
   let products = await fetchProductsFromMedusa();
@@ -217,6 +292,11 @@ async function main() {
 
   fs.writeFileSync(OUTPUT_FILE, buildXml(products), 'utf-8');
   console.log(`[Google Feed] Feed generado: ${OUTPUT_FILE} (${products.length} items)`);
+
+  // Páginas de producto para compartir (preview OG) + sitemap con esas URLs
+  const norm = products.map(normalize);
+  const shareUrls = generateSharePages(norm);
+  generateSitemap(shareUrls);
 }
 
 main();
