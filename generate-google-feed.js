@@ -137,7 +137,7 @@ function normalize(p) {
     id,
     title,
     description,
-    link: `${FRONTEND_URL}/#producto/${encodeURIComponent(p.id || id)}`,
+    link: `${FRONTEND_URL}/producto/${encodeURIComponent(p.id || id)}.html`,
     images: imgs,
     price: `${priceNum.toFixed(2)} MXN`,
     availability,
@@ -200,7 +200,7 @@ function buildSharePage(p) {
   const desc = shortDesc(p.description);
   const img = ogImageFor(p);
   const canon = `${FRONTEND_URL}/producto/${p.id}.html`;
-  const spa = `/#producto/${p.id}`;
+  const spa = `/?producto=${p.id}`;
   const e = escapeXml;
   return `<!DOCTYPE html>
 <html lang="es">
@@ -224,8 +224,7 @@ function buildSharePage(p) {
 <meta name="twitter:title" content="${e(name)}"/>
 <meta name="twitter:description" content="${e(desc)}"/>
 <meta name="twitter:image" content="${e(img)}"/>
-<meta http-equiv="refresh" content="0;url=${e(spa)}"/>
-<script>location.replace(${JSON.stringify(spa)});</script>
+<script>/* redirige a humanos; los crawlers (sin JS) leen el preview de arriba */ location.replace(${JSON.stringify(spa)});</script>
 </head>
 <body style="font-family:Arial,Helvetica,sans-serif;background:#F8F5F1;color:#1C1C1C;text-align:center;padding:40px 20px">
 <img src="${e(img)}" alt="${e(p.title)}" style="max-width:340px;width:100%;border-radius:8px"/>

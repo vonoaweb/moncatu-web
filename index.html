@@ -93,7 +93,7 @@
   "category": "Aretes",
   "offers": {
     "@type": "Offer",
-    "url": "https://moncatu.com/#producto/A001",
+    "url": "https://moncatu.com/producto/A001.html",
     "priceCurrency": "MXN",
     "price": "349.00",
     "availability": "https://schema.org/InStock",
@@ -120,7 +120,7 @@
   "category": "Aretes",
   "offers": {
     "@type": "Offer",
-    "url": "https://moncatu.com/#producto/A021",
+    "url": "https://moncatu.com/producto/A021.html",
     "priceCurrency": "MXN",
     "price": "349.00",
     "availability": "https://schema.org/InStock",
@@ -1642,10 +1642,9 @@ function go(page, opts){
   }
   if(!opts.skipHash){
     var newHash = page === 'inicio' ? '' : '#'+page;
-    if(window.location.hash !== newHash){
-      try{ history.replaceState(null,'',window.location.pathname+window.location.search+newHash); }
-      catch(_){ window.location.hash = newHash; }
-    }
+    // Siempre vuelve al path raíz (sale de /producto/<id>.html si venía de ahí)
+    try{ history.replaceState(null,'','/'+newHash); }
+    catch(_){ window.location.hash = newHash; }
   }
   window.scrollTo(0,0);
   setTimeout(initReveal,60);
@@ -1659,6 +1658,14 @@ function go(page, opts){
 
 /* Al cargar: respeta el hash de la URL (ej. /index.html#colecciones) */
 (function initRoute(){
+  // Producto vía path: /producto/<id>.html redirige a /?producto=<id>
+  var qp = new URLSearchParams(window.location.search).get('producto');
+  if(qp){
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', function(){ goProducto(qp); });
+    } else { goProducto(qp); }
+    return;
+  }
   var hash = (window.location.hash || '').replace('#','');
   if(!hash) return;
   var lower = hash.toLowerCase();
@@ -2370,10 +2377,9 @@ function goProducto(productId){
   document.getElementById('page-producto').classList.add('on');
   document.querySelectorAll('.nav-ul li button, .nav-ul li .nav-menu-trigger').forEach(function(b){b.classList.remove('on')});
   closeMegaMenu();
-  var newHash = '#producto/' + productId;
-  if(window.location.hash !== newHash){
-    try{ history.replaceState(null,'',window.location.pathname+window.location.search+newHash); } catch(_){}
-  }
+  // Muestra la URL compartible (con preview OG propio) en la barra de direcciones
+  try{ history.replaceState(null,'','/producto/'+productId+'.html'); }
+  catch(_){ window.location.hash = '#producto/'+productId; }
   window.scrollTo(0,0);
   renderProductPage(productId);
 }
