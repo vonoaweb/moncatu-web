@@ -57,7 +57,12 @@ function moncatuDemoCatalog() {
     { id: "A017", sku: "A017", name: "Cruz Loretto de Plata", category: "collares", price: 600, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Dije Cruz de Loretto en plata .925. Pieza clásica y significativa." },
     { id: "A018", sku: "A018", name: "Collar Cadena de Plata .925 (65 cm)", category: "collares", price: 245, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Cadena de plata .925 de 65 cm. Clásica y versátil para usar sola o con dijes." },
     { id: "A019", sku: "A019", name: "Anillo de Plata Antiestrés de Bolitas", category: "anillos", price: 150, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Anillo antiestrés de bolitas en plata .925. Giratorio, ideal para relajar." },
-    { id: "A020", sku: "A020", name: "Anillo de Plata Antiestrés Desplazable", category: "anillos", price: 150, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Anillo antiestrés desplazable en plata .925. Movimiento relajante, pieza única." }
+    { id: "A020", sku: "A020", name: "Anillo de Plata Antiestrés Desplazable", category: "anillos", price: 150, material: "Plata .925", color: "Plata", stock: 1, active: false, images: ["img/placeholder.webp"], description: "Anillo antiestrés desplazable en plata .925. Movimiento relajante, pieza única." },
+
+    // ── Producto publicado con fotos reales (visible) ──
+    { id: "A021", sku: "A021", name: "Aretes Pequeños de Plata .925", category: "aretes", price: 349, material: "Plata .925", finish: "Cierre tipo click · Hipoalergénico", color: "Plateado con detalle dorado", stock: 1, active: true, featured: true,
+      images: ["img/a021-1.webp", "img/a021-2.webp", "img/a021-modelo.webp"],
+      description: "Presentamos los Aretes Moncatu de Plata 925, el accesorio perfecto para elevar cualquier atuendo. Estos aretes son ideales para quienes buscan elegancia y sencillez en su estilo diario. Su diseño pequeño y clásico ofrece un toque discreto, ideal para cualquier ocasión, desde una reunión informal hasta un evento especial. El cierre de tipo click asegura una sujeción cómoda y fiable, permitiendo que los lleves puestos durante todo el día sin preocupaciones. Además, su material hipoalergénico los hace aptos para todo tipo de piel, garantizando comodidad sin irritaciones. La atemporalidad de su estilo asegura que sean una inversión valiosa en tu colección de accesorios. Los Aretes Moncatu son una excelente elección para quienes valoran la calidad y el buen gusto." }
   ];
 }
 

@@ -21,5 +21,22 @@
       <g:product_type>Joyería &gt; Aretes</g:product_type>
       <g:material>Plata Ley .925</g:material>
     </item>
+    <item>
+      <g:id>A021</g:id>
+      <g:title>Aretes Pequeños de Plata .925</g:title>
+      <g:description>Presentamos los Aretes Moncatu de Plata 925, el accesorio perfecto para elevar cualquier atuendo. Estos aretes son ideales para quienes buscan elegancia y sencillez en su estilo diario. Su diseño pequeño y clásico ofrece un toque discreto, ideal para cualquier ocasión, desde una reunión informal hasta un evento especial. El cierre de tipo click asegura una sujeción cómoda y fiable, permitiendo que los lleves puestos durante todo el día sin preocupaciones. Además, su material hipoalergénico los hace aptos para todo tipo de piel, garantizando comodidad sin irritaciones. La atemporalidad de su estilo asegura que sean una inversión valiosa en tu colección de accesorios. Los Aretes Moncatu son una excelente elección para quienes valoran la calidad y el buen gusto.</g:description>
+      <g:link>https://moncatu.com/#producto/A021</g:link>
+      <g:image_link>https://moncatu.com/img/a021-1.webp</g:image_link>
+      <g:additional_image_link>https://moncatu.com/img/a021-2.webp</g:additional_image_link>
+      <g:additional_image_link>https://moncatu.com/img/a021-modelo.webp</g:additional_image_link>
+      <g:price>349.00 MXN</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Moncatu</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Apparel &amp; Accessories &gt; Jewelry &gt; Earrings</g:google_product_category>
+      <g:product_type>Joyería &gt; Aretes</g:product_type>
+      <g:material>Plata .925</g:material>
+    </item>
   </channel>
 </rss>
