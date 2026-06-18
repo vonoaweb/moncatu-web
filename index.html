@@ -163,12 +163,18 @@ html{font-size:16px;scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:#F8F5F1;color:#1C1C1C;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 button{font-family:inherit;cursor:pointer}
 a{color:inherit;text-decoration:none}
+/* ── Accesibilidad: foco visible por teclado + utilidades ── */
+:focus-visible{outline:2px solid var(--esm);outline-offset:2px;border-radius:2px}
+.nl-input:focus-visible,.fg input:focus-visible,.fg textarea:focus-visible,.fg select:focus-visible,.ck-field input:focus-visible,.ck-field select:focus-visible{outline:2px solid var(--esm);outline-offset:1px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:8px;top:-60px;z-index:9999;background:var(--esm);color:#fff;padding:10px 16px;border-radius:4px;font-size:.82rem;transition:top .2s}
+.skip-link:focus{top:8px}
 
 /* ── TOKENS ── */
 :root{
   --ink:#1C1C1C;        /* 16.5:1 on cream ✅ */
   --ink2:#4A4A4A;       /* 7.5:1 ✅ */
-  --ink3:#767676;       /* 4.5:1 ✅ WCAG AA minimum */
+  --ink3:#6B6B6B;       /* ~4.9:1 sobre crema ✅ WCAG AA */
   --cream:#F8F5F1;
   --cream2:#EDE9E3;
   --azul:#3B5469;
@@ -243,7 +249,7 @@ a{color:inherit;text-decoration:none}
 .fcard-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;color:var(--azul);font-size:.72rem;font-weight:600}
 .fcard-meta small{color:var(--ink3);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
 .curated{height:100%;background:linear-gradient(160deg,rgba(26,29,46,.98),rgba(59,84,105,.96));color:white;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
-.curated .mega-kicker{color:var(--rosa)}
+.curated .mega-kicker{color:#A23A66}
 .curated h3{font-family:'Playfair Display',serif;font-size:2rem;line-height:1.02;font-weight:700}
 .curated h3 em{display:block;color:var(--rosa);font-style:italic;font-weight:500}
 .curated>div>p{margin-top:14px;color:rgba(255,255,255,.68);font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.55}
@@ -500,7 +506,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 .nl-input:focus{border-color:rgba(255,255,255,.7)}
 .nl-btn{font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;background:var(--white);color:var(--noche);border:none;border-radius:2px;padding:.8rem 1.8rem;transition:opacity .2s}
 .nl-btn:hover{opacity:.88}
-.nl-note{font-size:.6rem;color:rgba(255,255,255,.45);margin-top:.9rem}
+.nl-note{font-size:.6rem;color:rgba(255,255,255,.72);margin-top:.9rem}
 
 /* ════════════════════════════════════════
    PAGE 2 — COLECCIONES
@@ -933,6 +939,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 </style>
 </head>
 <body>
+<a href="#page-inicio" class="skip-link">Saltar al contenido</a>
 
 <!-- ══ TOPLINE BAR ══ -->
 <div class="topline" aria-label="Beneficios de compra">
@@ -965,7 +972,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <ul class="nav-ul">
       <li><button id="nb-inicio" class="on" onclick="go('inicio')">Inicio</button></li>
       <li><button class="nav-menu-trigger" type="button" id="collectionsBtn" aria-expanded="false" onclick="toggleMegaMenu()">Joyería <span class="chev" aria-hidden="true"></span></button></li>
-      <li><button id="nb-ofertas" onclick="go('colecciones'); if(typeof loadColecciones==='function')loadColecciones('ofertas');" style="color:var(--rosa); font-weight:500;">Ofertas</button></li>
+      <li><button id="nb-ofertas" onclick="go('colecciones'); if(typeof loadColecciones==='function')loadColecciones('ofertas');" style="color:#A23A66; font-weight:600;">Ofertas</button></li>
       <li><button id="nb-nosotros" onclick="go('nosotros')">Nosotros</button></li>
       <li><button id="nb-contacto" onclick="go('contacto')">Contacto</button></li>
     </ul>
@@ -1039,7 +1046,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
 
 
 <!-- ═════════════ PAGE: INICIO ═════════════ -->
-<div class="page on" id="page-inicio">
+<div class="page on" id="page-inicio" role="main" tabindex="-1">
 
   <!-- HERO -->
   <section class="hero">
@@ -1219,7 +1226,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <div class="w"><div class="nl-inner rv">
       <h2 class="nl-title">Únete a nuestro círculo exclusivo</h2>
       <p class="nl-sub">Recibe <strong style="color:var(--rosa)">10% de descuento</strong> en tu primera compra, acceso anticipado a nuevas colecciones e historias de diseño.</p>
-      <div class="nl-form"><input class="nl-input" type="email" placeholder="Ingresa tu email" id="nle" style="font-family:'DM Sans',sans-serif;"/><button class="nl-btn" id="nlb" style="background:var(--esm); color:var(--white);">Suscribirme</button></div>
+      <div class="nl-form"><input class="nl-input" type="email" placeholder="Ingresa tu email" id="nle" aria-label="Correo electrónico" style="font-family:'DM Sans',sans-serif;"/><button class="nl-btn" id="nlb" style="background:var(--esm); color:var(--white);">Suscribirme</button></div>
       <p class="nl-note" style="color: rgba(255,255,255,0.6);">Al suscribirte aceptas nuestras políticas de privacidad. Sin spam, garantizado.</p>
     </div></div>
   </section>
@@ -1265,7 +1272,7 @@ footer{background:var(--noche);padding:4rem 0 2rem}
     <button class="cat-tab" data-cat="collares">Collares</button>
     <button class="cat-tab" data-cat="pulseras">Pulseras</button>
     <button class="cat-tab" data-cat="aretes">Aretes</button>
-    <button class="cat-tab" data-cat="ofertas" style="color:var(--rosa)">Ofertas</button>
+    <button class="cat-tab" data-cat="ofertas" style="color:#A23A66">Ofertas</button>
   </div>
 
   <!-- GANCHO DE VENTAS -->
@@ -1457,18 +1464,18 @@ footer{background:var(--noche);padding:4rem 0 2rem}
           <div class="form-success" id="fok"><div class="form-success-t">¡Mensaje enviado! ✓</div><div class="form-success-d">Te contactaremos en menos de 24h. ¡Gracias!</div></div>
           <form id="ctf">
             <div class="f2">
-              <div class="fg"><label>Nombre *</label><input type="text" placeholder="Tu nombre" required/></div>
-              <div class="fg"><label>Email *</label><input type="email" placeholder="tu@email.com" required/></div>
+              <div class="fg"><label for="ct-nombre">Nombre *</label><input id="ct-nombre" type="text" placeholder="Tu nombre" required/></div>
+              <div class="fg"><label for="ct-email">Email *</label><input id="ct-email" type="email" placeholder="tu@email.com" required/></div>
             </div>
             <div class="f2">
-              <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+52 33 XXXX XXXX"/></div>
-              <div class="fg"><label>Tipo de pieza *</label><select required><option value="">Seleccionar...</option><option>Anillo</option><option>Collar</option><option>Pulsera</option><option>Aretes</option><option>Set completo</option><option>Diseño personalizado</option></select></div>
+              <div class="fg"><label for="ct-tel">Teléfono / WhatsApp</label><input id="ct-tel" type="tel" placeholder="+52 33 XXXX XXXX"/></div>
+              <div class="fg"><label for="ct-tipo">Tipo de pieza *</label><select id="ct-tipo" required><option value="">Seleccionar...</option><option>Anillo</option><option>Collar</option><option>Pulsera</option><option>Aretes</option><option>Set completo</option><option>Diseño personalizado</option></select></div>
             </div>
             <div class="f2">
-              <div class="fg"><label>Presupuesto</label><select><option value="">Seleccionar...</option><option>$1,500 – $3,000 MXN</option><option>$3,000 – $6,000 MXN</option><option>$6,000 – $12,000 MXN</option><option>Más de $12,000 MXN</option></select></div>
-              <div class="fg"><label>Ocasión</label><select><option value="">Seleccionar...</option><option>Anillo de compromiso</option><option>Regalo especial</option><option>Uso personal</option><option>Aniversario</option><option>Otro</option></select></div>
+              <div class="fg"><label for="ct-presupuesto">Presupuesto</label><select id="ct-presupuesto"><option value="">Seleccionar...</option><option>$1,500 – $3,000 MXN</option><option>$3,000 – $6,000 MXN</option><option>$6,000 – $12,000 MXN</option><option>Más de $12,000 MXN</option></select></div>
+              <div class="fg"><label for="ct-ocasion">Ocasión</label><select id="ct-ocasion"><option value="">Seleccionar...</option><option>Anillo de compromiso</option><option>Regalo especial</option><option>Uso personal</option><option>Aniversario</option><option>Otro</option></select></div>
             </div>
-            <div class="fg"><label>Tu idea *</label><textarea placeholder="Cuéntanos qué buscas: tipo de pieza, estilo, ocasión, presupuesto..." required></textarea></div>
+            <div class="fg"><label for="ct-idea">Tu idea *</label><textarea id="ct-idea" placeholder="Cuéntanos qué buscas: tipo de pieza, estilo, ocasión, presupuesto..." required></textarea></div>
             <div style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap">
               <button type="submit" class="btn btn-esm">Enviar solicitud →</button>
               <span style="font-size:.62rem;color:var(--ink3)">* Obligatorios. Respondemos en &lt;24h.</span>
@@ -2214,11 +2221,11 @@ function renderCkStep2(el){
   var d = __ckData;
   var h = '<h2>Información de envío</h2><p class="ck-sub">Ingresa tus datos para preparar el envío.</p>';
   h += '<form id="ck-form" onsubmit="submitCkForm(event)">';
-  h += '<div class="ck-form-row"><div class="ck-field"><label>Email *</label><input type="email" id="ck-email" value="'+d.email+'" required placeholder="tu@email.com"/></div><div class="ck-field"><label>Nombre completo *</label><input type="text" id="ck-name" value="'+d.name+'" required placeholder="María García"/></div></div>';
-  h += '<div class="ck-form-row"><div class="ck-field"><label>Teléfono / WhatsApp *</label><input type="tel" id="ck-phone" value="'+d.phone+'" required placeholder="+52 33 1234 5678"/></div></div>';
-  h += '<div class="ck-form-row full"><div class="ck-field"><label>Calle y número *</label><input type="text" id="ck-street" value="'+d.street+'" required placeholder="Av. Chapultepec 123"/></div></div>';
-  h += '<div class="ck-form-row"><div class="ck-field"><label>Ciudad *</label><input type="text" id="ck-city" value="'+d.city+'" required placeholder="Guadalajara"/></div><div class="ck-field"><label>Estado *</label><input type="text" id="ck-state" value="'+d.state+'" required placeholder="Jalisco"/></div></div>';
-  h += '<div class="ck-form-row"><div class="ck-field"><label>Código Postal *</label><input type="text" id="ck-zip" value="'+d.zip+'" required placeholder="44100"/></div><div class="ck-field"><label>País</label><input type="text" id="ck-country" value="'+d.country+'" readonly/></div></div>';
+  h += '<div class="ck-form-row"><div class="ck-field"><label for="ck-email">Email *</label><input type="email" id="ck-email" value="'+d.email+'" required placeholder="tu@email.com"/></div><div class="ck-field"><label for="ck-name">Nombre completo *</label><input type="text" id="ck-name" value="'+d.name+'" required placeholder="María García"/></div></div>';
+  h += '<div class="ck-form-row"><div class="ck-field"><label for="ck-phone">Teléfono / WhatsApp *</label><input type="tel" id="ck-phone" value="'+d.phone+'" required placeholder="+52 33 1234 5678"/></div></div>';
+  h += '<div class="ck-form-row full"><div class="ck-field"><label for="ck-street">Calle y número *</label><input type="text" id="ck-street" value="'+d.street+'" required placeholder="Av. Chapultepec 123"/></div></div>';
+  h += '<div class="ck-form-row"><div class="ck-field"><label for="ck-city">Ciudad *</label><input type="text" id="ck-city" value="'+d.city+'" required placeholder="Guadalajara"/></div><div class="ck-field"><label for="ck-state">Estado *</label><input type="text" id="ck-state" value="'+d.state+'" required placeholder="Jalisco"/></div></div>';
+  h += '<div class="ck-form-row"><div class="ck-field"><label for="ck-zip">Código Postal *</label><input type="text" id="ck-zip" value="'+d.zip+'" required placeholder="44100"/></div><div class="ck-field"><label for="ck-country">País</label><input type="text" id="ck-country" value="'+d.country+'" readonly/></div></div>';
   h += '<div class="ck-actions"><button type="button" class="ck-btn ck-btn-ghost" onclick="setCkStep(1)">← Atrás</button><button type="submit" class="ck-btn ck-btn-primary">Continuar al pago →</button></div>';
   h += '</form>';
   el.innerHTML = h;
