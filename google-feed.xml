@@ -38,5 +38,39 @@
       <g:product_type>Joyería &gt; Aretes</g:product_type>
       <g:material>Plata .925</g:material>
     </item>
+    <item>
+      <g:id>A022</g:id>
+      <g:title>Anillo Samurái de Plata .925 para Hombre</g:title>
+      <g:description>Descubre el Anillo Moncatu Samurai, una pieza de joyería que combina modernidad y tradición en un diseño exclusivo para hombres. Fabricado en plata 925, este anillo no solo destaca por su calidad superior, sino también por su estilo único que evoca la fuerza y la valentía del samurái. El Anillo Moncatu Samurai es ideal para aquellos que buscan un accesorio que complemente su personalidad fuerte y decidida. Su diseño en moda contemporánea se adapta perfectamente a diversas ocasiones, ya sea para una cita especial o para realzar tu día a día con un toque sofisticado. Cada detalle de este anillo ha sido cuidadosamente elaborado, asegurando una experiencia de uso cómoda y duradera. La pureza del metal 925 garantiza que lleves contigo una pieza que resalta la elegancia sin sacrificar la resistencia. Este anillo no solo es un accesorio, sino una declaración de estilo personal que resuena con hombres de todas las edades.</g:description>
+      <g:link>https://moncatu.com/producto/A022.html</g:link>
+      <g:image_link>https://moncatu.com/img/a022-1.webp</g:image_link>
+      <g:additional_image_link>https://moncatu.com/img/a022-2.webp</g:additional_image_link>
+      <g:additional_image_link>https://moncatu.com/img/a022-modelo.webp</g:additional_image_link>
+      <g:price>349.00 MXN</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Moncatu</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Apparel &amp; Accessories &gt; Jewelry &gt; Rings</g:google_product_category>
+      <g:product_type>Joyería &gt; Anillos</g:product_type>
+      <g:material>Plata .925</g:material>
+    </item>
+    <item>
+      <g:id>A023</g:id>
+      <g:title>Aretes Largos Ave Paloma de Plata .925</g:title>
+      <g:description>Los aretes Moncatu en plata 925 son la elección ideal para quienes buscan complementar su estilo con una pieza clásica y atemporal. Diseñados cuidadosamente, su forma de paloma evoca elegancia y sofisticación en cada uso. La plata 925 garantiza durabilidad y un acabado brillante, convirtiéndolos en un imprescindible en cualquier colección de joyería fina. Estos aretes largos son perfectos tanto para una ocasión especial como para el uso diario, asegurando que cada conjunto se vea elegante. Además, su diseño hipoalergénico los hace aptos para todo tipo de piel, brindando comodidad y seguridad en cada momento. La simplicidad de su estilo permite que los aretes Moncatu se integren fácilmente a diferentes looks, desde el más casual hasta el más formal. Sorprende a esa persona especial con un detalle que no solo embellece, sino que también expresa un mensaje de amor y aprecio.</g:description>
+      <g:link>https://moncatu.com/producto/A023.html</g:link>
+      <g:image_link>https://moncatu.com/img/a023-1.webp</g:image_link>
+      <g:additional_image_link>https://moncatu.com/img/a023-2.webp</g:additional_image_link>
+      <g:additional_image_link>https://moncatu.com/img/a023-modelo.webp</g:additional_image_link>
+      <g:price>1449.00 MXN</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>Moncatu</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Apparel &amp; Accessories &gt; Jewelry &gt; Earrings</g:google_product_category>
+      <g:product_type>Joyería &gt; Aretes</g:product_type>
+      <g:material>Plata .925</g:material>
+    </item>
   </channel>
 </rss>
